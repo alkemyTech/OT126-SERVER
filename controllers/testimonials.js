@@ -10,9 +10,9 @@ const remove = async (req, res, next) => {
 };
 
 module.exports = {
-  getAll,
+  /* getAll,
   getById,
   create,
-  update,
+  update, */
   remove
 };
