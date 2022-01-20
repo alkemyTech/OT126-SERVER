@@ -7,6 +7,12 @@ const remove = async (id) => {
   return data;
 };
 
+const create = async (body) => {
+  const data = await db.Testimonials.create(body);
+  return data;
+};
+
 module.exports = {
-  remove
+  create,
+  remove,
 };

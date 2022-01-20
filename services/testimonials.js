@@ -4,6 +4,12 @@ const remove = async (id) => {
   await testimonialsRepo.remove(id);
 };
 
+const create = async (body) =>{
+  await testimonialsRepo.create(body);
+};
+
 module.exports = {
-  remove
+  create,
+  remove,
+
 };
