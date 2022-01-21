@@ -8,7 +8,6 @@
     "db": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -22,10 +21,6 @@
     "sequelize": "^6.11.0"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.3.0",
-    "standard": "^16.0.4"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
+    "sequelize-cli": "^6.3.0"
   }
 }
