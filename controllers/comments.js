@@ -1,14 +1,24 @@
-const commentsService = require('../services/comments');
+const commentsServices = require('../services/comments')
 
-const remove = async (req, res, next) => {
+const getAll = async (req, res, next) => {
   try {
-    await commentsService.remove(req.params.id);
-    res.status(200).json({ msg: `Comment ${req.params.id} removed succesfully` });
+    const response = await commentsServices.getAll()
+    return res.status(200).json({ data: [response] })
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
+
+/* const remove = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    await commentsServices.remove(id)
+    res.status(200).json({ message: 'the comments was delete succesfully!' })
+  } catch (error) {
+    next(error)
+  }
+} */
 
 module.exports = {
-  remove
-};
+  getAll
+}

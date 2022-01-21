@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -22,10 +22,10 @@ module.exports = {
       content: 'Soy Presidente de la Asociación Civil Bomberos Voluntarios Los Ralos y la Asociación Civil Encuentro. Ambas instituciones desarrollan actividades de asistencia y bien comun.',
       createdAt: new Date(),
       updatedAt: new Date()
-    }], {});
+    }], {})
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Testimonials', null, {});
+    await queryInterface.bulkDelete('Testimonials', null, {})
   }
-};
+}

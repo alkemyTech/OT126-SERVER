@@ -1,9 +1,13 @@
-const commentsRepository = require('../repositories/comments');
+const commentsRepository = require('../repositories/comments')
 
-const remove = async (id) => {
+const getAll = async () => {
+  const response = await commentsRepository.getAll()
+  return response
+}
+/* const remove = async (id) => {
   await commentsRepository.remove(id);
-};
+}; */
 
 module.exports = {
-  remove
-};
+  getAll
+}
