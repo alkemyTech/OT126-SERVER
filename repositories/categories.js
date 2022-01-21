@@ -23,7 +23,6 @@ const getAll = async (id) => {
 
 const getById = async (id) => {
   const category = await db.Categories.findById(id)
-  return category.length === 0 ? null : category[0]
 } */
 
 // create, update, remove, getAll, getById, getByName
