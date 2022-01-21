@@ -10,6 +10,6 @@ router.delete('/:id', authMiddleware.isAdmin, testimonialsController.remove)
 router.post('/', [
   check('name', 'don´t forget the name').not().isEmpty(),
   check('content', 'don´t forget the content').not().isEmpty()
-], authMiddleware.isAdmin, testimonialsController.create)
+], /* authMiddleware.isAdmin,  */ testimonialsController.create)
 
 module.exports = router
