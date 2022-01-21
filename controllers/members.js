@@ -2,7 +2,6 @@ const membersService = require('../services/members')
 
 const create = async (req, res, next) => {
   try {
-    console.log(req.body)
     const member = await membersService.create(req.body)
     if (!member) {
       const error = new Error('Can\'t create new member')
