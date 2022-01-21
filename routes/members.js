@@ -1,9 +1,11 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
-const membersController = require('../controllers/members');
-const authMiddleware = require('../middlewares/auth');
+const router = express.Router()
+const membersController = require('../controllers/members')
+const authMiddleware = require('../middlewares/auth')
+const { createReqValidation } = require('../middlewares/members-validations')
 
-router.delete('/:id', authMiddleware.isAuth, membersController.remove);
+router.post('/', authMiddleware.isAdmin, createReqValidation, membersController.create)
+router.delete('/:id', authMiddleware.isAuth, membersController.remove)
 
-module.exports = router;
+module.exports = router
