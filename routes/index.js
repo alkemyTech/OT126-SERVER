@@ -13,7 +13,7 @@ router.use('/categories', categoriesRoutes);
 router.use('/organizations', organizationRoutes);
 router.use('/testimonials', testimonialsRoutes);
 router.use('/members', membersRoute);
-router.use('/comments', commentsRoutes);
+router.use('/comments', commentsRoutes); 
 router.use('/slides', slidesRoute);
 
 module.exports = router;
