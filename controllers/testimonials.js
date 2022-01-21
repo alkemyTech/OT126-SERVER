@@ -1,18 +1,18 @@
-const testimonialsService = require('../services/testimonials');
+const testimonialsService = require('../services/testimonials')
 
 const remove = async (req, res, next) => {
   try {
-    await testimonialsService.remove(req.params.id);
-    res.status(200).json({ msg: `Testimonial ${req.params.id} removed succesfully` });
+    await testimonialsService.remove(req.params.id)
+    res.status(200).json({ msg: `Testimonial ${req.params.id} removed succesfully` })
   } catch (e) {
-    next(e);
+    next(e)
   }
-};
+}
 
 module.exports = {
-  getAll,
+  /* getAll,
   getById,
   create,
-  update,
+  update, */
   remove
-};
+}
