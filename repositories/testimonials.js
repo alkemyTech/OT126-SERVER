@@ -8,8 +8,7 @@ const remove = async (id) => {
 }
 
 const create = async (body) => {
-  const data = await db.Testimonials.create(body)
-  return data
+  await db.Testimonials.create(body)
 }
 
 module.exports = {
