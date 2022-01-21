@@ -16,7 +16,7 @@ const content = body('content')
 
 const image = body('image')
     .isString().withMessage('the field must be string')
-    .notEmpty().withMessage('the field must not be empty')
+
 ;
 
 
