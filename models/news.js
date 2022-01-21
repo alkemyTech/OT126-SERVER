@@ -1,6 +1,6 @@
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   class News extends Model {
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate (models) {
       // News.belongsTo(models.Category, {as: 'category'});
     }
   }
@@ -30,13 +30,13 @@ module.exports = (sequelize, DataTypes) => {
     categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
+    }
   }, {
     sequelize,
     modelName: 'News',
     deletedAt: 'deletedAt',
     paranoid: true,
-    timestamps: true,
-  });
-  return News;
-};
+    timestamps: true
+  })
+  return News
+}
