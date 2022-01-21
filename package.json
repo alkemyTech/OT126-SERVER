@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "db": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
+    "db": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "lint": "npx standard --fix"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
@@ -22,6 +23,10 @@
     "sequelize": "^6.11.0"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.3.0"
+    "sequelize-cli": "^6.3.0",
+    "standard": "^16.0.4"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
