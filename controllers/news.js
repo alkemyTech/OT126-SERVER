@@ -4,7 +4,7 @@ const create = async (req, res, next) => {
   try {
     // @TO-DO body validations (name, content, image)
     const noveltyCreated = await newsService.create(req.body)
-    res.status(201).json({ msg: 'Novelty created succesfully', obj: noveltyCreated })
+    res.status(201).json({ msg: 'Novelty created succesfully', data: noveltyCreated })
   } catch (error) {
     next(error)
   }
