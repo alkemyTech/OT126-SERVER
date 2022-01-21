@@ -14,7 +14,15 @@ const getAll = async () => {
   return data
 }
 
+const getById = async (id) => {
+  const data = await db.Slides.findOne({
+    where: { id }
+  })
+  return data
+}
+
 module.exports = {
   remove,
-  getAll
+  getAll,
+  getById
 }

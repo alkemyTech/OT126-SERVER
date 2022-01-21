@@ -8,7 +8,12 @@ const getAll = async (req, res) => {
   return await slidesRepository.getAll()
 }
 
+const getById = async (id) => {
+  return await slidesRepository.getById(id)
+}
+
 module.exports = {
   remove,
-  getAll
+  getAll,
+  getById
 }

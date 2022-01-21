@@ -19,7 +19,22 @@ const getAll = async (req, res, next) => {
   }
 }
 
+const getById = async (req, res, next) => {
+  try {
+    const data = await slidesService.getById(req.params.id)
+
+    if (data) {
+      res.status(200).json({ data: data })
+    } else {
+      res.status(400).json({ msg: 'ID not found' })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   remove,
-  getAll
+  getAll,
+  getById
 }
