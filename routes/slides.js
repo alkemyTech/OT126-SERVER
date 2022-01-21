@@ -7,5 +7,6 @@ const router = express.Router()
 router.delete('/:id', authMiddleware.isAdmin, slidesController.remove)
 router.get('/', slidesController.getAll)
 router.get('/:id', slidesController.getById)
+router.post('/create', slidesController.create)
 
 module.exports = router

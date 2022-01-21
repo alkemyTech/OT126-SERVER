@@ -21,8 +21,20 @@ const getById = async (id) => {
   return data
 }
 
+const create = async (imageUrl, text, order, organizationId) => {
+  const data = await db.Slides.create({
+    imageUrl,
+    text,
+    order,
+    organizationId
+  })
+  console.log(data)
+  return data
+}
+
 module.exports = {
   remove,
   getAll,
-  getById
+  getById,
+  create
 }

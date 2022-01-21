@@ -12,8 +12,13 @@ const getById = async (id) => {
   return await slidesRepository.getById(id)
 }
 
+const create = async (imageUrl, text, order, organizationId) => {
+  return await slidesRepository.create(imageUrl, text, order, organizationId)
+}
+
 module.exports = {
   remove,
   getAll,
-  getById
+  getById,
+  create
 }

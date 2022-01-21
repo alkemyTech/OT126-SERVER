@@ -26,7 +26,25 @@ const getById = async (req, res, next) => {
     if (data) {
       res.status(200).json({ data: data })
     } else {
-      res.status(400).json({ msg: 'ID not found' })
+      res.status(400).json({ msg: 'Something went wrong, please try again later' })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+const create = async (req, res, next) => {
+  try {
+    const { imageUrl, text, order, organizationId } = req.body
+
+    const data = await slidesService.create(imageUrl, text, order, organizationId)
+
+    console.log(data)
+
+    if (data) {
+      res.status(200).json({ data: data })
+    } else {
+      res.status(400).json({ msg: 'error' })
     }
   } catch (error) {
     next(error)
@@ -36,5 +54,6 @@ const getById = async (req, res, next) => {
 module.exports = {
   remove,
   getAll,
-  getById
+  getById,
+  create
 }
