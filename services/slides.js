@@ -1,14 +1,9 @@
-const slidesRepository = require('../repositories/slides')
+const slidesRepository = require('../repositories/slides');
 
 const remove = async (id) => {
-  await slidesRepository.remove(id)
-}
-
-const getAll = async (req, res) => {
-  return await slidesRepository.getAll()
-}
+  await slidesRepository.remove(id);
+};
 
 module.exports = {
-  remove,
-  getAll
-}
+  remove
+};
