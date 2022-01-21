@@ -1,8 +1,8 @@
 const db = require('../models')
 
-const create = async (news) => {
-  const newsCreated = await db.News.create(news)
-  return newsCreated
+const create = async (novelty) => {
+  const noveltyCreated = await db.News.create(novelty)
+  return noveltyCreated
 }
 
 module.exports = {
