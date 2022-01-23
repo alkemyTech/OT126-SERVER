@@ -57,10 +57,10 @@ const update = async (req, res, next) => {
 
     const data = await slidesService.update(req.params.id, imageUrl, text, order, organizationId)
 
-    if (data) {
+    if (data[0]) {
       res.status(200).json({ msg: `Slide ${req.params.id} updated succesfully` })
     } else {
-      res.status(400).json({ msg: 'There were problems trying to update this slide' })
+      res.status(400).json({ msg: 'There were problems trying to update this slide, check if this slide exist' })
     }
   } catch (error) {
     next(error)
