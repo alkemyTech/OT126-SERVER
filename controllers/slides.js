@@ -42,9 +42,9 @@ const create = async (req, res, next) => {
     console.log(data)
 
     if (data) {
-      res.status(200).json({ data: data })
+      res.status(200).json({ msg: 'Slide created succesfully', data: data })
     } else {
-      res.status(400).json({ msg: 'error' })
+      res.status(400).json({ msg: 'There were problems trying to create this slide' })
     }
   } catch (error) {
     next(error)
