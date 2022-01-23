@@ -32,9 +32,22 @@ const create = async (imageUrl, text, order, organizationId) => {
   return data
 }
 
+const update = async (id, imageUrl, text, order, organizationId) => {
+  const data = await db.Slides.update({
+    imageUrl,
+    text,
+    order,
+    organizationId
+  }, {
+    where: { id }
+  })
+  return data
+}
+
 module.exports = {
   remove,
   getAll,
   getById,
-  create
+  create,
+  update
 }

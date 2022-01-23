@@ -51,9 +51,26 @@ const create = async (req, res, next) => {
   }
 }
 
+const update = async (req, res, next) => {
+  try {
+    const { imageUrl, text, order, organizationId } = req.body
+
+    const data = await slidesService.update(req.params.id, imageUrl, text, order, organizationId)
+
+    if (data) {
+      res.status(200).json({ msg: `Slide ${req.params.id} updated succesfully` })
+    } else {
+      res.status(400).json({ msg: 'There were problems trying to update this slide' })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   remove,
   getAll,
   getById,
-  create
+  create,
+  update
 }

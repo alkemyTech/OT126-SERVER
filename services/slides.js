@@ -16,9 +16,14 @@ const create = async (imageUrl, text, order, organizationId) => {
   return await slidesRepository.create(imageUrl, text, order, organizationId)
 }
 
+const update = async (id, imageUrl, text, order, organizationId) => {
+  return await slidesRepository.update(id, imageUrl, text, order, organizationId)
+}
+
 module.exports = {
   remove,
   getAll,
   getById,
-  create
+  create,
+  update
 }
