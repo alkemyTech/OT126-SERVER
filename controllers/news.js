@@ -9,6 +9,16 @@ const create = async (req, res, next) => {
   }
 }
 
+const remove = async (req, res, next) => {
+  try {
+    await newsService.remove(req.params.id)
+    res.status(200).json({ msg: 'Novelty removed succesfully' })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
-  create
+  create,
+  remove
 }
