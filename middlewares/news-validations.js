@@ -32,7 +32,13 @@ const remove = [
   executeValidation
 ]
 
+const getById = [
+  idParam.exists().withMessage('param required'),
+  executeValidation
+]
+
 module.exports = {
   create,
-  remove
+  remove,
+  getById
 }

@@ -18,7 +18,17 @@ const remove = async (req, res, next) => {
   }
 }
 
+const getById = async (req, res, next) => {
+  try {
+    const novelty = await newsService.getById(req.params.id)
+    res.status(200).json({ data: novelty })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   create,
-  remove
+  remove,
+  getById
 }
