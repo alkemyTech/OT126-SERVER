@@ -1,7 +1,7 @@
 const categoriesRepository = require('../repositories/categories')
 
 const create = async (category) => {
-  const uniqueName = await categoriesRepository.findByName(category.name) != null
+  const uniqueName = await categoriesRepository.findByName(category.name)
 
   if (uniqueName) {
     const error = new Error(`Name: ${category.name}, is not unique`)

@@ -5,8 +5,8 @@ const create = async (category) => {
 }
 
 const findByName = async (name) => {
-  const categories = await db.Categories.findAll({ where: { name } })
-  return categories.length === 0 ? null : categories[0]
+  const categories = await db.Categories.findOne({ where: { name } })
+  return categories === null ? null : categories
 }
 
 const remove = async (id) => {
