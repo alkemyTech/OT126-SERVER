@@ -9,5 +9,6 @@ const authMiddleware = require('../middlewares/auth')
 router.post('/', authMiddleware.isAdmin, newsValidations.create, newsController.create)
 router.delete('/:id', authMiddleware.isAdmin, newsValidations.remove, newsController.remove)
 router.get('/:id', authMiddleware.isAdmin, newsValidations.getById, newsController.getById)
+router.put('/:id', authMiddleware.isAdmin, newsValidations.update, newsController.update)
 
 module.exports = router

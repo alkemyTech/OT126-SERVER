@@ -32,8 +32,20 @@ const getById = async (id) => {
   return novelty
 }
 
+const update = async (id, noveltyToUpdate) => {
+  const newsUpdatedCount = await newsRepository.update(id, noveltyToUpdate)
+  if (newsUpdatedCount <= 0) {
+    const error = new Error(`Novelty with id ${id} not found`)
+    error.status = 404
+    throw error
+  }
+  const noveltyUpdated = await newsRepository.getById(id)
+  return noveltyUpdated
+}
+
 module.exports = {
   create,
   remove,
-  getById
+  getById,
+  update
 }

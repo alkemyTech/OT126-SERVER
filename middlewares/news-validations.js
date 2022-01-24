@@ -37,8 +37,17 @@ const getById = [
   executeValidation
 ]
 
+const update = [
+  name.exists().withMessage('param required'),
+  content.exists().withMessage('param required'),
+  image.exists().withMessage('param required'),
+  body('categoryId').not().exists().withMessage('forbidden access'),
+  executeValidation
+]
+
 module.exports = {
   create,
   remove,
-  getById
+  getById,
+  update
 }
