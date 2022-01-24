@@ -1,33 +1,24 @@
-const { body,  } = require('express-validator');
+const { body } = require('express-validator')
 const { executeValidation } = require('./validation-index.js')
 
-
-//validation params
+// validation params
 
 const name = body('name')
-    .isString().withMessage('the field must be string')
-    .notEmpty().withMessage('the field must not be empty')
-;
+  .isString().withMessage('the field must be string')
+  .notEmpty().withMessage('the field must not be empty')
 
 const content = body('content')
-    .isString().withMessage('the field must be string')
-    .notEmpty().withMessage('the field must not be empty')
-;
+  .isString().withMessage('the field must be string')
+  .notEmpty().withMessage('the field must not be empty')
 
 const image = body('image')
-    .isString().withMessage('the field must be string')
-    
-;
+  .isString().withMessage('the field must be string')
 
+// validators
 
-//validators
-
-const createReqValidation = [ 
-    name.exists().withMessage('field must be required'),
-    content.exists().withMessage('field must be required'),
-    image, executeValidation ];
+const createReqValidation = [name, content, image, executeValidation]
 
 module.exports = {
-    createReqValidation,
-    
+  createReqValidation
+
 }
