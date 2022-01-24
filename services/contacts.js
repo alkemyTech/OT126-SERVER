@@ -5,6 +5,12 @@ const create = async (contact) => {
   return newContact
 }
 
+const getAll = async () => {
+  const contacts = await contactsRepository.getAll()
+  return contacts
+}
+
 module.exports = {
-  create
+  create,
+  getAll
 }

@@ -40,7 +40,12 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+<<<<<<< HEAD
 package-lock.json
+=======
+package.lock.json
+
+>>>>>>> dev
 # TypeScript v1 declaration files
 typings/
 
