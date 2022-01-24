@@ -27,14 +27,10 @@ const getById = async (id) => {
 
 // create, update, remove, getAll, getById, getByName
 module.exports = {
-<<<<<<< HEAD
-  remove
-=======
   create,
   remove,
   /* update,
   getAll,
   getById, */
   findByName
->>>>>>> dev
 }
