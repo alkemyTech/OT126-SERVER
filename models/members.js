@@ -1,8 +1,8 @@
-const { Model } = require('sequelize');
+const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   class Members extends Model {
-    static associate(models) {
+    static associate (models) {
 
     }
   }
@@ -46,6 +46,6 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Members',
     tableName: 'members',
     paranoid: true
-  });
-  return Members;
-};
+  })
+  return Members
+}
