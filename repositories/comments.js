@@ -8,10 +8,15 @@ const getAll = async () => {
   console.log(response)
   return response
 }
+const create = async (data) => {
+  const response = await db.Comments.create(data)
+  return response
+}
 /* const remove = async (id) => {
   await db.Comments.destroy({ where: { id } });
 } */
 
 module.exports = {
-  getAll
+  getAll,
+  create
 }

@@ -9,19 +9,19 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
-        references: {
+      /*   references: {
           model: 'Users',
           key: 'id'
-        },
+        }, */
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
       novelty_id: {
         type: Sequelize.INTEGER,
-        references: {
+      /*   references: {
           model: 'News',
           key: 'id'
-        },
+        }, */
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
