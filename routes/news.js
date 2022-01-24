@@ -7,5 +7,6 @@ const newsValidations = require('../middlewares/news-validations')
 const authMiddleware = require('../middlewares/auth')
 
 router.post('/', authMiddleware.isAdmin, newsValidations.create, newsController.create)
+router.get('/', authMiddleware.isAuth, newsController.getAll)
 
 module.exports = router

@@ -13,6 +13,12 @@ const create = async (noveltyToCreate) => {
   return noveltyCreated
 }
 
+const getAll = async () => {
+  const news = await newsRepository.getAll()
+  return news
+}
+
 module.exports = {
-  create
+  create,
+  getAll
 }
