@@ -9,8 +9,9 @@ const image = check('image', 'Must be input a image')
   .notEmpty()
   .trim()
 
-const id= param('id', 'Must be input id in the params. ')
-const updateReqValidation = [id,name, image,executeValidation]
+const id = param('id', 'Must be input id the member in the params.')
+  .isInt()
+const updateReqValidation = [id, name, image,executeValidation]
 
 
 module.exports = {

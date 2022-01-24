@@ -8,7 +8,11 @@ const getById = async (id)=>{
   return await membersRepository.getById(id);
 }
 
+const update = async (id, body) => {
+  return await membersRepository.update(id, body)
+} 
 module.exports = {
   remove,
-  getById
+  getById,
+  update
 };
