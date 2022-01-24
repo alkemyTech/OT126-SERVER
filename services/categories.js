@@ -20,18 +20,8 @@ const remove = async (id) => {
   await categoriesRepository.remove(id)
 }
 
-const update = async (id) => {
-  return 0
-}
-
-const getById = async (id) => {
-  return 0
-}
-
 module.exports = {
   create,
   remove,
-  update,
-  getAll,
-  getById
+  getAll
 }

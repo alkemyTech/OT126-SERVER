@@ -17,19 +17,9 @@ const remove = async (id) => {
   await db.Categories.destroy({ where: { id } })
 }
 
-const update = async (id) => {
-  return 0
-}
-
-const getById = async (id) => {
-  return await db.Categories.findById(id)
-}
-
 module.exports = {
   create,
   remove,
-  update,
   getAll,
-  getById,
   findByName
 }
