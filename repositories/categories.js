@@ -10,7 +10,7 @@ const findByName = async (name) => {
 }
 
 const getAll = async () => {
-  return await db.Categories.findAll({ attributes: ['name'] })
+  return await db.Categories.findAll()
 }
 
 const remove = async (id) => {
