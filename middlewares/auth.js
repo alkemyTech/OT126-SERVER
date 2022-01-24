@@ -1,20 +1,20 @@
 const isAdmin = async (req, res, next) => {
   // not implemented
-  next();
-};
+  next()
+}
 
 const isAuth = async (req, res, next) => {
   // not implemented
-  next();
-};
+  next()
+}
 
 const isOwnUser = async (req, res, next) => {
   // not implemented
-  next();
-};
+  next()
+}
 
 module.exports = {
   isAdmin,
   isAuth,
   isOwnUser
-};
+}

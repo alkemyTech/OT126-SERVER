@@ -18,6 +18,7 @@ const image = body('image')
   .isLength({ min: 1, max: 1234 }).withMessage('length range: 1-1234')
   .exists().withMessage('param required')
 
+
 const idParam = param('id')
   .isInt().withMessage('must be an integer')
   .exists().withMessage('param required')
