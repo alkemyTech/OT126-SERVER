@@ -18,7 +18,7 @@ exports.contacts = [
     .isLength({ min: 10, max: 200 }).withMessage('must have content'),
 
   body('email')
-    .exists().withMessage('Required parameter')
+    .exists().withMessage('Email parameter is required')
     .isEmail().withMessage('Please insert a valid email'),
   executeValidation
 
