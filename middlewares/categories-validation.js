@@ -1,7 +1,7 @@
 const { body } = require('express-validator')
 const { executeValidation } = require('./validation-index')
 
-exports.categories = [
+exports.createValidationCategory = [
   body('name')
     .exists()
     .isString().withMessage('name has to be a string')
