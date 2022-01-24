@@ -6,23 +6,21 @@ const { executeValidation } = require('./validation-index')
 const name = body('name')
   .isString().withMessage('must be a string')
   .notEmpty().withMessage('cannot be empty')
+  .exists().withMessage('param required')
 
 const content = body('content')
   .isString().withMessage('must be a string')
   .notEmpty().withMessage('cannot be empty')
+  .exists().withMessage('param required')
 
 const image = body('image')
   .isString().withMessage('must be a string')
   .isLength({ min: 1, max: 1234 }).withMessage('length range: 1-1234')
+  .exists().withMessage('param required')
 
 // Validations
 
-const create = [
-  name.exists().withMessage('param required'),
-  content.exists().withMessage('param required'),
-  image.exists().withMessage('param required'),
-  executeValidation
-]
+const create = [name, content, image, executeValidation]
 
 module.exports = {
   create
