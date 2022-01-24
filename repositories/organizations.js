@@ -7,6 +7,14 @@ const update = async (id, body) => {
   return data
 }
 
+const getById = async (id) => {
+  const data = await db.Organization.findByPk(id, {
+    attributes: ['name', 'image', 'phone', 'address']
+  })
+  return data
+}
+
 module.exports = {
-  update
+  update,
+  getById
 }
