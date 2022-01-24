@@ -1,4 +1,3 @@
-const { where } = require('sequelize/dist');
 const db = require('../models');
 
 const remove = async (id) => {
@@ -10,7 +9,7 @@ const getById = async (id) => {
 }
 
 const update = async (id, body) => {
-  await db.Members.update({body, where:{id}})
+    return await db.Members.update(body, { where: { id }})
 }
 module.exports = {
   remove,
