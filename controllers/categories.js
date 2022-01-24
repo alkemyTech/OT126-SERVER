@@ -9,7 +9,7 @@ const remove = async (req, res, next) => {
   }
 }
 
-const createCategory = async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
     const category = await categoriesService.create(req.body)
     res.status(200).json({ msg: `Category ${req.body.name} create succesfully`, data: category })
@@ -19,6 +19,6 @@ const createCategory = async (req, res, next) => {
 }
 
 module.exports = {
-  createCategory,
+  create,
   remove
 }
