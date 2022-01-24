@@ -18,6 +18,14 @@ const image = body('image')
 const idParam = param('id')
   .isInt().withMessage('must be an integer')
 
+const categoryId = body('categoryId')
+  .custom(value => {
+    if ((typeof value === 'number' && value > 0) || value === null) {
+      return true
+    }
+    throw new Error('must be an integer greater than 0 or null')
+  })
+
 // Validations
 
 const create = [
@@ -41,7 +49,7 @@ const update = [
   name.exists().withMessage('param required'),
   content.exists().withMessage('param required'),
   image.exists().withMessage('param required'),
-  body('categoryId').not().exists().withMessage('forbidden access'),
+  categoryId,
   executeValidation
 ]
 

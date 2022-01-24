@@ -33,6 +33,14 @@ const getById = async (id) => {
 }
 
 const update = async (id, noveltyToUpdate) => {
+  if (noveltyToUpdate.categoryId) {
+    const categorySelected = await categoriesRepository.getById(noveltyToUpdate.categoryId)
+    if (categorySelected === null) {
+      const error = new Error(`Category with id ${noveltyToUpdate.categoryId} not found. Novelty not updated`)
+      error.status = 400
+      throw error
+    }
+  }
   const newsUpdatedCount = await newsRepository.update(id, noveltyToUpdate)
   if (newsUpdatedCount <= 0) {
     const error = new Error(`Novelty with id ${id} not found`)
