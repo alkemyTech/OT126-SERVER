@@ -9,6 +9,23 @@ const remove = async (req, res, next) => {
   }
 };
 
+const getById = async(req,res,next) =>{
+  try {
+    const member = await membersService.getById(req.params.id);
+    if(!member){
+      const error = new Error(`Member with id ${req.params.id} not found`)
+      error.status(404)
+      throw error
+    }
+    return res.status(200).json({data: member }); 
+  } catch (error) {
+    next(error);
+    
+  }
+}
+
 module.exports = {
-  remove
+  remove,
+  
+  getById
 };
