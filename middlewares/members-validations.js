@@ -5,7 +5,11 @@ const name = check('name', 'Must be input a name valid')
   .notEmpty()
   .trim()
 
-const createReqValidation = [name, executeValidation]
+const image = check('image', 'Must be input a image')
+  .notEmpty()
+  .trim()
+
+const createReqValidation = [name, image, executeValidation]
 
 module.exports = {
   createReqValidation
