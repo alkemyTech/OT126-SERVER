@@ -10,7 +10,7 @@ exports.contacts = [
 
   body('phone')
     .optional()
-    .isInt().withMessage('Insert a valid phone'),
+    .isMobilePhone('pt-BR').withMessage('Insert a valid phone'),
 
   body('message')
     .optional()
