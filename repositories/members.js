@@ -5,11 +5,11 @@ const remove = async (id) => {
 };
 
 const getById = async (id) => { 
-  await db.Members.findAll({where: id})
+  return await db.Members.findByPk( id )
 }
 
 const update = async (id, body) => {
-    return await db.Members.update(body, { where: { id }})
+  return await db.Members.update(body, { where: { id }})
 }
 module.exports = {
   remove,

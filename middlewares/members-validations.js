@@ -1,5 +1,5 @@
 const { check, param } = require('express-validator')
-const executeValidation = require('./validation-index')
+const {executeValidation} = require('./validation-index')
 
 const name = check('name', 'Must be input a name valid')
   .notEmpty()

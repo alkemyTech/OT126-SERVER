@@ -5,7 +5,7 @@ const remove = async (id) => {
 };
 
 const getById = async (id)=>{
-  return await membersRepository.getById(id);
+  return await membersRepository.getById(id);  
 }
 
 const update = async (id, body) => {
