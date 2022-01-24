@@ -8,6 +8,7 @@ const organizationRoutes = require('./organizations')
 const membersRoute = require('./members')
 const commentsRoutes = require('./comments')
 const slidesRoute = require('./slides')
+const backofficeRoute = require('./backoffice')
 const newsRoutes = require('./news')
 
 router.use('/categories', categoriesRoutes)
@@ -16,6 +17,7 @@ router.use('/testimonials', testimonialsRoutes)
 router.use('/members', membersRoute)
 router.use('/comments', commentsRoutes)
 router.use('/slides', slidesRoute)
+router.use('/backoffice', backofficeRoute)
 router.use('/news', newsRoutes)
 
 module.exports = router
