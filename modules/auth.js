@@ -9,10 +9,9 @@ function createToken (payload) {
 
 /* verifyToken return a payload object with userId,  
     creation time "iat" and expiry time "exp" */
-function verifyToken (token) {
-
-    const payload = jwt.verify(token, process.env.JWT_PASS)  
-    return payload 
+function verifyToken (tokenUser) {
+    const payload = jwt.verify(tokenUser, token.secret)  
+    return payload
 }
 
 module.exports = {
