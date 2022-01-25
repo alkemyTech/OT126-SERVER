@@ -8,36 +8,10 @@ const remove = async (req, res, next) => {
     next(error);
   }
 };
-
-const getById = async(req,res,next) =>{
-  try {
-    const member = await membersService.getById(req.params.id);
-
-    if(!member){
-      const error = new Error(`Member with id ${req.params.id} not found`)
-      error.status = 404
-      throw error
-    }
-
-    return res.status(200).json({data: member }); 
-  } catch (error) {
-    next(error);
-    
-  }
-}
-
 const update = async(req, res, next) => {
   try {
-    const member = await membersService.getById(req.params.id)
-
-    if(!member){
-      const error = new Error(`Member with id ${req.params.id} not found`)
-      error.status = 404
-      throw error
-    }
-    
-   const newMember = await membersService.update(member.id, req.body)
-   res.status(201).json({data: newMember, msg:`The member ${req.params.id} was updated succesfully`})
+    const member = await membersService.update(req.params.id, req.body)
+    res.status(201).json({msg:`The member ${req.params.id} was updated succesfully`})
   } catch (error) {
     next(error)
   }
@@ -46,5 +20,5 @@ const update = async(req, res, next) => {
 module.exports = {
   remove,
   update,
-  getById
+  
 };
