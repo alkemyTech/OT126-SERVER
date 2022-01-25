@@ -1,34 +1,31 @@
 const jwt = require('jsonwebtoken')
-const usersController = require('../controllers/users')
+const userRepository = require('../repositories/users')
 const isAdmin = async (req, res, next) => {
   // not implemented
   next()
 }
 
 const isAuth = async (req, res, next) => {
-  const authHeader = req.headers.authorization
-  const token = authHeader && authHeader.split(' ')[1]
-  if (!token) {
-    const error = new Error('Please provided a token Bearer in authorization.')
-    error.status = 403
-    throw error
-  }
   try {
-    const decodedToken = jwt.verify(token, process.env.PASS_JWT)
+    const token = getToken(req)
+    if (!token) {
+      const error = new Error('Please provided a token Bearer in authorization.')
+      error.status = 403
+      throw error
+    }
+    const decodedToken = verifyToken(token)
     if (!decodedToken) {
       const error = new Error('The token provided isn\'t valid.')
       error.status = 403
       throw error
     }
-    const user = await usersController.getById(decodedToken.userId)
-    // for verify that user exist and role equals
-    if (user && user.roleId === decodedToken.roleId) {
-      req.user = user
-      next()
+    const user = await userRepository.getById(decodedToken.userId)
+    if (!user) {
+      const error = new Error('Not found user with token provided.')
+      error.status = 403
+      throw error
     }
-    const error = new Error('Not found user with token provided.')
-    error.status = 403
-    throw error
+    next()
   } catch (error) {
     next(error)
   }
@@ -39,6 +36,15 @@ const isOwnUser = async (req, res, next) => {
   next()
 }
 
+const getToken = async (req) => {
+  const authToken = req.headers.authorization
+  // authHeader && authHeader.split(' ')[1]
+  const token = authToken && authToken.startsWith('Bearer ').split(' ')[1]
+  return token
+}
+const verifyToken = async (token) => {
+  return jwt.verify(token, process.env.PASS_JWT)
+}
 module.exports = {
   isAdmin,
   isAuth,
