@@ -14,4 +14,4 @@ module.exports = {
   remove,
   create,
   getAll
-};
+}
