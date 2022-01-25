@@ -9,9 +9,7 @@ const getAll = async (req, res) => {
 }
 
 const getById = async (id) => {
-  if (id) {
-    return await slidesRepository.getById(id)
-  }
+  return await slidesRepository.getById(id)
 }
 
 module.exports = {
