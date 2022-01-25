@@ -23,11 +23,7 @@ const getById = async (req, res, next) => {
   try {
     const data = await slidesService.getById(req.params.id)
 
-    if (data) {
-      res.status(200).json({ data: data })
-    } else {
-      res.status(400).json({ msg: 'ID not found' })
-    }
+    res.status(200).json({ data: data })
   } catch (error) {
     next(error)
   }
