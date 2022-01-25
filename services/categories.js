@@ -33,7 +33,7 @@ const remove = async (id) => {
 }
 
 const update = async ({ id }, category) => {
-  const findCategory = await categoriesRepository.findById(id)
+  const findCategory = await categoriesRepository.getById(id)
 
   if (!findCategory) {
     const error = new Error(`Id: ${id}, has not been assigned any category`)
@@ -47,7 +47,7 @@ const update = async ({ id }, category) => {
 
   await categoriesRepository.update(id, category)
 
-  return await categoriesRepository.findById(id)
+  return await categoriesRepository.getById(id)
 }
 
 module.exports = {

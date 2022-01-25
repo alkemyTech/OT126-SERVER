@@ -20,7 +20,7 @@ const update = async (id, category) => {
   return await db.Categories.update(category, { where: { id } })
 }
 
-const findById = async (id) => {
+const getById = async (id) => {
   return await db.Categories.findByPk(id)
 }
 
@@ -30,5 +30,5 @@ module.exports = {
   getAll,
   findByName,
   update,
-  findById
+  getById
 }
