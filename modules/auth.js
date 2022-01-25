@@ -4,13 +4,12 @@ const jwt = require('jsonwebtoken')
 function createToken (user) {
     const payload = {
         userId: user.id,
-        roleId: user.roleId,
     }
     return jwt.sign(payload, process.env.JWT_PASS, {expiresIn:'1h'})
     
 }  
 
-/* verifyToken return a payload object with userId, roleId, 
+/* verifyToken return a payload object with userId,  
     creation time "iat" and expiry time "exp" */
 function verifyToken (token) {
 
