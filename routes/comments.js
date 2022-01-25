@@ -2,7 +2,7 @@ const express = require("express");
 const commentsRouter = express.Router();
 const commentsController = require("../controllers/comments");
 const commentsMiddleware = require("../middlewares/comments-validations");
-const siMyComents = require("../middlewares/");
+/* const siMyComents = require("../middlewares/"); */
 
 commentsRouter.get("/", commentsController.getAll);
 commentsRouter.post(
@@ -13,7 +13,7 @@ commentsRouter.post(
 
 commentsRouter.put(
   "/:id",
-  authMiddleware.isOwnComment,
+/*   authMiddleware.isOwnComment, */
   commentsController.update
 );
 

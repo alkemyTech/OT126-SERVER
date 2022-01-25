@@ -24,17 +24,18 @@ const create = async ({ user_id, novelty_id, body }) => {
 const getById = async (id) => {
   const response = await db.Comment.findByPk(id);
   return response;
-};
-const update = async (id, { body }) => {
-  const comments = await commentsRepository.getById(id);
+}
+const update = async (req) => {
+  const comments = await commentsRepository.getById(req.params.id);
+  console.log(comments);
   if (!comments) {
     const error = new Error("Comment not found");
     error.status = 409;
     throw error;
   }
-  await commentsRepository.update({ body }, id);
+  await commentsRepository.update(req.body, req.params.id);
 
-  return await commentsRepository.getById(id);
+  return await commentsRepository.getById(req.params.id);
 };
 
 module.exports = {
@@ -42,4 +43,4 @@ module.exports = {
   create,
   getById,
   update
-};
+}

@@ -31,10 +31,10 @@ const create = async (req, res, next) => {
 };
 const update = async (req, res, next) => {
   try {
-    const response = await commentsServices.update(req.params.id, req.body);
+    const response = await commentsServices.update(req);
     res.status(200).json({
       success: true,
-      msg: `commets ${req.params.id} is updated succesfully`,
+      msg: `comments ${req.params.id} is updated succesfully`,
       Comment: response,
     });
   } catch (error) {

@@ -15,16 +15,20 @@ const create = async (data) => {
 /* const remove = async (id) => {
   await db.Comments.destroy({ where: { id } });
 } */
+const getById = async (id) => {
+  return await db.Comments.findByPk(id);
+};
 const update = async (data, id) => {
-  const response = await db.Comment.update(data, {
+  return  await db.Comments.update(data, {
     where: {
       id,
     },
   });
-  return response;
-};
+}
+
 module.exports = {
   getAll,
   create,
-  update
+  update,
+  getById
 };
