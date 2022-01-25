@@ -6,7 +6,6 @@ const remove = async (id) => {
   })
   return data
 }
-<<<<<<< HEAD
 
 const getAll = async () => {
   const data = await db.Slides.findAll({
@@ -26,9 +25,4 @@ module.exports = {
   remove,
   getAll,
   getById
-=======
-
-module.exports = {
-  remove
->>>>>>> 55335a2ed76c4c242a882ec58bea8e5673facc60
 }

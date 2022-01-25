@@ -8,7 +8,6 @@ const remove = async (req, res, next) => {
     next(error)
   }
 }
-<<<<<<< HEAD
 
 const getAll = async (req, res, next) => {
   try {
@@ -34,9 +33,4 @@ module.exports = {
   remove,
   getAll,
   getById
-=======
-
-module.exports = {
-  remove
->>>>>>> 55335a2ed76c4c242a882ec58bea8e5673facc60
 }
