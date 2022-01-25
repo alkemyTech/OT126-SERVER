@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-/* const authModule = require('../modules/auth') */
+const authModule = require('../modules/auth')
 const usersRepository = require('../repositories/users')
 
 const login = async (credentials) => {
@@ -17,18 +17,18 @@ const login = async (credentials) => {
     throw error
   } // code waiting for an error handler
 
-/*   const token = getToken(user)
-  return token */
+  const token = getToken(user)
+  return token
 }
 
 module.exports = {
   login
 }
 
-/* function getToken (user) {
+function getToken (user) {
   const tokenPayload = {
     userId: user.id
   }
   const token = authModule.createToken(tokenPayload)
   return token
-} */
+}
