@@ -21,8 +21,17 @@ const getById = async (id) => {
   return novelty
 }
 
+/**
+ * @return {number} Return number of rows updated.
+ */
+const update = async (id, novelty) => {
+  const [rowsUpdatedCount] = await db.News.update(novelty, { where: { id: id } })
+  return rowsUpdatedCount
+}
+
 module.exports = {
   create,
   remove,
-  getById
+  getById,
+  update
 }

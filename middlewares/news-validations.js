@@ -22,6 +22,14 @@ const idParam = param('id')
   .isInt().withMessage('must be an integer')
   .exists().withMessage('param required')
 
+const categoryId = body('categoryId')
+  .custom(value => {
+    if ((typeof value === 'number' && value > 0) || value === null) {
+      return true
+    }
+    throw new Error('must be an integer greater than 0 or null')
+  })
+
 // Validations
 
 const create = [name, content, image, executeValidation]
@@ -30,8 +38,11 @@ const remove = [idParam, executeValidation]
 
 const getById = [idParam, executeValidation]
 
+const update = [name, content, image, categoryId, executeValidation]
+
 module.exports = {
   create,
   remove,
-  getById
+  getById,
+  update
 }
