@@ -1,10 +1,20 @@
-const express = require('express');
+const express = require("express");
+const commentsRouter = express.Router();
+const commentsController = require("../controllers/comments");
+const commentsMiddleware = require("../middlewares/comments-validations");
+const siMyComents = require("../middlewares/");
 
-const router = express.Router();
+commentsRouter.get("/", commentsController.getAll);
+commentsRouter.post(
+  "/",
+  commentsMiddleware.validateComments,
+  commentsController.create
+);
 
-/* const commentsController = require('../controllers/comments');
-const commentsMiddleware = require('../middlewares/comments');
+commentsRouter.put(
+  "/:id",
+  authMiddleware.isOwnComment,
+  commentsController.update
+);
 
-router.delete('/:id', commentsMiddleware.isOwnComment, commentsController.remove); */
-
-module.exports = router;
+module.exports = commentsRouter;
