@@ -9,28 +9,17 @@ const findByName = async (name) => {
   return categories === null ? null : categories
 }
 
+const getAll = async () => {
+  return await db.Categories.findAll(({ attributes: ['id', 'name'] }))
+}
+
 const remove = async (id) => {
   await db.Categories.destroy({ where: { id } })
 }
 
-/* const update = async (id) => {
-  return 0
-}
-
-const getAll = async (id) => {
-  return 0
-}
-
-const getById = async (id) => {
-  const category = await db.Categories.findById(id)
-} */
-
-// create, update, remove, getAll, getById, getByName
 module.exports = {
   create,
   remove,
-  /* update,
   getAll,
-  getById, */
   findByName
 }

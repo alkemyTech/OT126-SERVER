@@ -11,26 +11,16 @@ const create = async (category) => {
   return await categoriesRepository.create(category)
 }
 
+const getAll = async () => {
+  return await categoriesRepository.getAll()
+}
+
 const remove = async (id) => {
   await categoriesRepository.remove(id)
 }
 
-/* const update = async (id) => {
-  return 0
-}
-
-const getAll = async (id) => {
-  return 0
-}
-
-const getById = async (id) => {
-  return 0
-} */
-
 module.exports = {
   create,
-  remove
-  /* update,
-  getAll,
-  getById */
+  remove,
+  getAll
 }
