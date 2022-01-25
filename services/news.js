@@ -22,7 +22,18 @@ const remove = async (id) => {
   }
 }
 
+const getById = async (id) => {
+  const novelty = await newsRepository.getById(id)
+  if (novelty === null) {
+    const error = new Error(`Novelty with id ${id} not found`)
+    error.status = 404
+    throw error
+  }
+  return novelty
+}
+
 module.exports = {
   create,
-  remove
+  remove,
+  getById
 }

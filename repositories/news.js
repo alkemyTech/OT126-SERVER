@@ -13,7 +13,16 @@ const remove = async (id) => {
   return rowsRemovedCount
 }
 
+/**
+ * @return {number} Return object entity or null.
+ */
+const getById = async (id) => {
+  const novelty = await db.News.findByPk(id, { attributes: { exclude: ['deletedAt'] } })
+  return novelty
+}
+
 module.exports = {
   create,
-  remove
+  remove,
+  getById
 }
