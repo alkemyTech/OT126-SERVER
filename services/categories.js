@@ -21,11 +21,7 @@ const create = async (category) => {
 }
 
 const getAll = async () => {
-  const categories = await categoriesRepository.getAll()
-  return categories.map((data) => {
-    const { id, name } = data.dataValues
-    return { id, name }
-  })
+  return await categoriesRepository.getAll()
 }
 
 const remove = async (id) => {
