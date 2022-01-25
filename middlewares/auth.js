@@ -38,7 +38,7 @@ const isOwnUser = async (req, res, next) => {
     if (payload.userId == idParm) return next()
 
     const { roleId } = user.dataValues
-    const roleUser = await rolesRepository.getNameById(roleId)
+    const roleUser = await rolesRepository.getRoleById(roleId)
 
     if (roleUser.name === 'Admin') return next()
 

@@ -1,9 +1,9 @@
 const db = require('../models')
 
-const getNameById = async (id) => {
+const getRoleById = async (id) => {
   return await db.Roles.findOne({ where: { id } })
 }
 
 module.exports = {
-  getNameById
+  getRoleById
 }
