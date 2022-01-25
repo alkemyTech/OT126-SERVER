@@ -26,6 +26,6 @@ module.exports = {
     },
     token: {
         secret: process.env.JWT_PASS,
-        expiresIn: '1h'
+        expiresIn: '1d'
     }
 }
