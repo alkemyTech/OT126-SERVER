@@ -1,10 +1,11 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
-const organizationController = require('../controllers/organizations');
-const authMiddleware = require('../middlewares/auth');
+const organizationController = require('../controllers/organizations')
+const authMiddleware = require('../middlewares/auth')
 
-router.put('/public', authMiddleware.isAdmin, organizationController.update);
+router.put('/public', authMiddleware.isAdmin, organizationController.update)
+router.get('/public', authMiddleware.isAuth, organizationController.getById)
 
-module.exports = router;
+module.exports = router

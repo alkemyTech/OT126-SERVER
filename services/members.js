@@ -1,9 +1,9 @@
-const membersRepository = require('../repositories/members');
+const membersRepository = require('../repositories/members')
 
 const remove = async (id) => {
-  await membersRepository.remove(id);
-};
+  await membersRepository.remove(id)
+}
 
 module.exports = {
   remove
-};
+}
