@@ -5,7 +5,6 @@ const getAll = async () => {
     order: [['createdAt', 'DESC']],
     attributes: ['body']
   })
-  console.log(response)
   return response
 }
 const create = async (data) => {

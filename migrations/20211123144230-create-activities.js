@@ -34,10 +34,6 @@ module.exports = {
     })
   },
   down: async (queryInterface, Sequelize) => {
-<<<<<<< HEAD
-    await queryInterface.dropTable('activities')
-=======
     await queryInterface.dropTable('Activities')
->>>>>>> 55335a2ed76c4c242a882ec58bea8e5673facc60
   }
 }

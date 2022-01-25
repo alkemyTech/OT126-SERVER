@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const authModule = require('../modules/auth')
+/* const authModule = require('../modules/auth') */
 const usersRepository = require('../repositories/users')
 
 const login = async (credentials) => {
