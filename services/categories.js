@@ -16,7 +16,13 @@ const remove = async (id) => {
 }
 
 const getById = async (id) => {
-  return await categoriesRepository.getById(id)
+  const category = await categoriesRepository.getById(id)
+  if (!category){
+    const error = new Error('The category does not exist')
+    error.status = 404
+    throw error
+  }
+  return category
 } 
 
 module.exports = {
