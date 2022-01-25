@@ -1,8 +1,17 @@
-const membersRepository = require('../repositories/members');
+const membersRepository = require('../repositories/members')
 
+const create = async (body) => {
+  const member = await membersRepository.create(body)
+  if (!member) {
+    const error = new Error('Can\'t create new member')
+    error.status = 400
+    throw error
+  }
+  return member
+}
 const remove = async (id) => {
-  await membersRepository.remove(id);
-};
+  await membersRepository.remove(id)
+}
 
 const update = async (id, body) => {
   const member = await membersRepository.update(id, body)
@@ -13,7 +22,13 @@ const update = async (id, body) => {
   }
   return member
 } 
+
+const getAll = async () => {
+  return await membersRepository.getAll()
+}
 module.exports = {
+  create,
   remove,
+  getAll,
   update
-};
+}
