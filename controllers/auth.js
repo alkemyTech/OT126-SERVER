@@ -16,8 +16,42 @@ const login = async (req, res, next) => {
   }
 }
 
+const getAll = async (req, res, next) => {
+  try {
+    const data = await authService.getAll()
+
+    if (data) {
+      res.status(200).json({ data: data })
+    } else {
+      res.status(400).json({ msg: 'Something went wrong. Please try again later.' })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+const create = async (req, res, next) => {
+  try {
+    const result = await authService.getAll()
+
+    const data = await authService.create(req.body)
+
+    const emailMatch = result.find(value => value.email === req.body.email)
+
+    if (data && !emailMatch) {
+      res.status(200).json({ msg: 'User registration successfully. Please login.', data: data/* , token: token */ })
+    } else {
+      res.status(400).json({ msg: 'Something went wrong. User registration failed.' })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
-  login
+  login,
+  getAll,
+  create
 }
 
 function normalizeError (error) {

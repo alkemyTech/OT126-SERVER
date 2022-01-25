@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const authModule = require('../modules/auth')
+/* const authModule = require('../modules/auth') */
 const usersRepository = require('../repositories/users')
 
 const login = async (credentials) => {
@@ -17,18 +17,36 @@ const login = async (credentials) => {
     throw error
   } // code waiting for an error handler
 
-  const token = getToken(user)
-  return token
+  /* const token = getToken(user)
+  return token */
+}
+
+const getAll = async () => {
+  return await usersRepository.getAll()
+}
+
+const create = async (body) => {
+  const user = await usersRepository.getAll()
+
+  const emailMatch = user.find(value => value.email === body.email)
+  if (emailMatch) {
+    return false
+  } else {
+    return await usersRepository.create(body)
+  }
 }
 
 module.exports = {
-  login
+  login,
+  getAll,
+  create
 }
 
-function getToken (user) {
+/* function getToken (user) {
   const tokenPayload = {
     userId: user.id
   }
   const token = authModule.createToken(tokenPayload)
   return token
 }
+ */

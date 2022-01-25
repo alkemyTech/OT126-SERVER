@@ -8,12 +8,12 @@ const getAll = async () => {
   return data
 }
 
-const create = async (firstName, lastName, email, password) => {
+const create = async (body) => {
   const data = await Models.Users.create({
-    firstName: firstName.trim(),
-    lastName: lastName.trim(),
-    email: email.trim(),
-    password: bcrypt.hashSync(password, 12)
+    firstName: body.firstName.trim(),
+    lastName: body.lastName.trim(),
+    email: body.email.trim(),
+    password: bcrypt.hashSync(body.password, 12)
   })
 
   return data
