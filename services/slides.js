@@ -22,7 +22,7 @@ const update = async (id, body) => {
     return data
   }
   const error = new Error('ID not found')
-  error.status = 404
+  error.status = 400
   throw error
 }
 
