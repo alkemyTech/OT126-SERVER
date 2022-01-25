@@ -10,7 +10,7 @@ const commentsRoutes = require('./comments')
 const slidesRoute = require('./slides')
 const backofficeRoute = require('./backoffice')
 const newsRoutes = require('./news')
-const usersRoutes = require('./users')
+const authRoutes = require('./auth')
 
 router.use('/categories', categoriesRoutes)
 router.use('/organizations', organizationRoutes)
@@ -20,6 +20,6 @@ router.use('/comments', commentsRoutes)
 router.use('/slides', slidesRoute)
 router.use('/backoffice', backofficeRoute)
 router.use('/news', newsRoutes)
-router.use('/auth', usersRoutes)
+router.use('/auth', authRoutes)
 
 module.exports = router
