@@ -1,11 +1,11 @@
-const db = require('../models');
+const db = require('../models')
 
 const remove = async (id) => {
   const data = await db.Testimonials.destroy({
     where: { id }
-  });
-  return data;
-};
+  })
+  return data
+}
 
 
 const update = async (id, body) => {
@@ -26,3 +26,4 @@ module.exports = {
   remove,
   getById,
 };
+

@@ -1,8 +1,8 @@
-const testimonialsRepo = require('../repositories/testimonials');
+const testimonialsRepo = require('../repositories/testimonials')
 
 const remove = async (id) => {
-  await testimonialsRepo.remove(id);
-};
+  await testimonialsRepo.remove(id)
+}
 
 const update = async (id, body) => {
   const rowsCount = await testimonialsRepo.update(id, body);
@@ -18,4 +18,4 @@ const update = async (id, body) => {
 module.exports = {
   update,
   remove
-};
+}

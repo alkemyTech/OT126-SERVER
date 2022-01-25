@@ -24,12 +24,12 @@ const isOwnComment = async (req, res, next) => {
     // const adminRole = await rolesServices.getByName('Admin');
     // if (user.dataValues.roleId === adminRole.id) next();
     // throw new Error('Access denied');
-    next();
+    next()
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
 
 module.exports = {
   isOwnComment
-};
+}
