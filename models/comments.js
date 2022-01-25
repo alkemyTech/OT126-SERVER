@@ -15,13 +15,16 @@ module.exports = (sequelize, DataTypes) => {
   Comments.init(
     {
       user_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       novelty_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       body: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
       }
     },
     {

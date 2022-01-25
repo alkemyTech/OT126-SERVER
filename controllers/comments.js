@@ -9,7 +9,7 @@ const getAll = async (req, res, next) => {
   }
 }
 
-/* const remove = async (req, res, next) => {
+const remove = async (req, res, next) => {
   try {
     const { id } = req.params
     await commentsServices.remove(id)
@@ -17,7 +17,7 @@ const getAll = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-} */
+}
 const create = async (req, res, next) => {
   try {
     const response = await commentsServices.create(req.body)
@@ -32,5 +32,6 @@ const create = async (req, res, next) => {
 
 module.exports = {
   getAll,
-  create
+  create,
+  remove
 }
