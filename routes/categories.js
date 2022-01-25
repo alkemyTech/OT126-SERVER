@@ -8,6 +8,7 @@ const { createValidationCategory, updateValidationCategory } = require('../middl
 
 router.get('/', authMiddleware.isAdmin, categoriesController.getAll)
 router.post('/', authMiddleware.isAdmin, createValidationCategory, categoriesController.create)
+router.get('/:id', authMiddleware.isAdmin, categoriesController.getById)
 router.put('/:id', authMiddleware.isAdmin, updateValidationCategory, categoriesController.update)
 router.delete('/:id', authMiddleware.isAdmin, categoriesController.remove)
 
