@@ -27,8 +27,18 @@ const getAll = async (req, res, next) => {
   }
 }
 
+const update = async (req, res, next) => {
+  try {
+    const category = await categoriesService.update(req.params, req.body)
+    res.status(200).json({ msg: `The member ${req.params.id} was updated succesfully`, data: category })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   create,
   remove,
-  getAll
+  getAll,
+  update
 }
