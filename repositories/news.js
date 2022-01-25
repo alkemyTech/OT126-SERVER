@@ -29,9 +29,15 @@ const update = async (id, novelty) => {
   return rowsUpdatedCount
 }
 
+const getAll = async () => {
+  const news = await db.News.findAll({ attributes: ['id', 'name'] })
+  return news
+}
+
 module.exports = {
   create,
   remove,
   getById,
-  update
+  update,
+  getAll
 }

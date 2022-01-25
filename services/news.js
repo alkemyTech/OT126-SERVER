@@ -51,9 +51,15 @@ const update = async (id, noveltyToUpdate) => {
   return noveltyUpdated
 }
 
+const getAll = async () => {
+  const news = await newsRepository.getAll()
+  return news
+}
+
 module.exports = {
   create,
   remove,
   getById,
-  update
+  update,
+  getAll
 }

@@ -36,9 +36,19 @@ const update = async (req, res, next) => {
   }
 }
 
+const getAll = async (req, res, next) => {
+  try {
+    const news = await newsService.getAll()
+    res.status(200).json({ data: news })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   create,
   remove,
   getById,
-  update
+  update,
+  getAll
 }
