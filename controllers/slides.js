@@ -53,12 +53,11 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { imageUrl, text, order, organizationId } = req.body
-
-    const data = await slidesService.update(req.params.id, imageUrl, text, order, organizationId)
+    const data = await slidesService.update(req.params.id, req.body)
+    const findOne = await slidesService.getById(req.params.id)
 
     if (data[0]) {
-      res.status(200).json({ msg: `Slide ${req.params.id} updated succesfully` })
+      res.status(200).json({ msg: `Slide ${req.params.id} updated succesfully`, data: findOne })
     } else {
       res.status(400).json({ msg: 'There were problems trying to update this slide, check if this slide exist' })
     }
