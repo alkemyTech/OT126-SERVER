@@ -13,6 +13,16 @@ const create = async (noveltyToCreate) => {
   return noveltyCreated
 }
 
+const remove = async (id) => {
+  const newsRemovedCount = await newsRepository.remove(id)
+  if (newsRemovedCount <= 0) {
+    const error = new Error(`Novelty with id ${id} not found`)
+    error.status = 404
+    throw error
+  }
+}
+
 module.exports = {
-  create
+  create,
+  remove
 }

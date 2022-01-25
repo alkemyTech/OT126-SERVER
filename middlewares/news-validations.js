@@ -1,4 +1,4 @@
-const { body } = require('express-validator')
+const { body, param } = require('express-validator')
 const { executeValidation } = require('./validation-index')
 
 // Common params
@@ -18,10 +18,18 @@ const image = body('image')
   .isLength({ min: 1, max: 1234 }).withMessage('length range: 1-1234')
   .exists().withMessage('param required')
 
+
+const idParam = param('id')
+  .isInt().withMessage('must be an integer')
+  .exists().withMessage('param required')
+
 // Validations
 
 const create = [name, content, image, executeValidation]
 
+const remove = [idParam, executeValidation]
+
 module.exports = {
-  create
+  create,
+  remove
 }
