@@ -1,10 +1,11 @@
 const userRepository = require('../repositories/users')
 const { verifyToken } = require('../modules/auth')
+const rolesRepository = require('../repositories/roles')
 
 const getTokenPayload = async (req) => {
   const authToken = req.headers.authorization
   const token = authToken && authToken.startsWith('Bearer ') && authToken.split(' ')[1]
-  if (!token){
+  if (!token) {
     const error = new Error('Please provided a token Bearer in authorization')
     error.status = 403
     throw error
@@ -24,7 +25,7 @@ const isAuth = async (req, res, next) => {
 
 const isOwnUser = async (req, res, next) => {
   try {
-    const idParm = req.params.id    
+    const idParm = req.params.id
     const payload = getTokenPayload(req)
     const user = await userRepository.getById(payload.userId)
 
@@ -34,14 +35,16 @@ const isOwnUser = async (req, res, next) => {
       throw error
     }
 
-    if(payload.userId == idParm) return next()
+    if (payload.userId == idParm) return next()
 
-    if(user.roleID === 2) return next()
+    const { roleId } = user.dataValues
+    const roleUser = await rolesRepository.getNameById(roleId)
+
+    if (roleUser.name === 'Admin') return next()
 
     const error = new Error('Its not authorized')
     error.status = 403
     throw error
-
   } catch (error) {
     next(error)
   }
