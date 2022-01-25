@@ -18,7 +18,17 @@ const create = async (req, res, next) => {
   }
 }
 
+const getById = async (req, res, next) => {
+  try {
+    const category = await categoriesService.getById(req.params.id)
+    res.status(200).json({ data: category })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   create,
-  remove
+  remove,
+  getById
 }

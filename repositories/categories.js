@@ -13,24 +13,13 @@ const remove = async (id) => {
   await db.Categories.destroy({ where: { id } })
 }
 
-/* const update = async (id) => {
-  return 0
-}
-
-const getAll = async (id) => {
-  return 0
-}
-
 const getById = async (id) => {
-  const category = await db.Categories.findById(id)
-} */
+  return await db.Categories.findByPk(id)
+} 
 
-// create, update, remove, getAll, getById, getByName
 module.exports = {
   create,
   remove,
-  /* update,
-  getAll,
-  getById, */
-  findByName
+  findByName,
+  getById
 }
