@@ -1,13 +1,22 @@
 const categoriesRepository = require('../repositories/categories')
 
-const create = async (category) => {
-  const uniqueName = await categoriesRepository.findByName(category.name)
+// general function to verify the name
+const uniqueName = async (name) => {
+  const result = await categoriesRepository.findByName(name)
 
-  if (uniqueName) {
-    const error = new Error(`Name: ${category.name}, is not unique`)
+  if (result) {
+    const error = new Error(`Name: ${name}, is not unique`)
     error.status = 400
-    throw error
+    return error
   }
+  return false
+}
+
+const create = async (category) => {
+  // every name must be unique
+  const error = await uniqueName(category.name)
+  if (error) throw error
+
   return await categoriesRepository.create(category)
 }
 
@@ -19,8 +28,27 @@ const remove = async (id) => {
   await categoriesRepository.remove(id)
 }
 
+const update = async ({ id }, category) => {
+  const findCategory = await categoriesRepository.getById(id)
+
+  if (!findCategory) {
+    const error = new Error(`Id: ${id}, has not been assigned any category`)
+    error.status = 400
+    throw error
+  }
+
+  // every name must be unique
+  const error = await uniqueName(category.name)
+  if (error) throw error
+
+  await categoriesRepository.update(id, category)
+
+  return await categoriesRepository.getById(id)
+}
+
 module.exports = {
   create,
   remove,
-  getAll
+  getAll,
+  update
 }

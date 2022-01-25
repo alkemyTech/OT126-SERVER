@@ -5,8 +5,7 @@ const create = async (category) => {
 }
 
 const findByName = async (name) => {
-  const categories = await db.Categories.findOne({ where: { name } })
-  return categories === null ? null : categories
+  return await db.Categories.findOne({ where: { name } })
 }
 
 const getAll = async () => {
@@ -17,9 +16,19 @@ const remove = async (id) => {
   await db.Categories.destroy({ where: { id } })
 }
 
+const update = async (id, category) => {
+  return await db.Categories.update(category, { where: { id } })
+}
+
+const getById = async (id) => {
+  return await db.Categories.findByPk(id)
+}
+
 module.exports = {
   create,
   remove,
   getAll,
-  findByName
+  findByName,
+  update,
+  getById
 }
