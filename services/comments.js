@@ -4,11 +4,11 @@ const getAll = async () => {
   const response = await commentsRepository.getAll()
   return response
 }
-const create = async ({ user_id, novelty_id, body }) => {
+const create = async ( data ) => {
   const response = await commentsRepository.create({
-    user_id,
-    novelty_id,
-    body
+    user_id: data.user_id,
+    novelty_id: data.novelty_id,
+    body: data.body
   })
 
   if (!response) {
