@@ -8,6 +8,6 @@ const { createReqValidation } = require('../middlewares/members-validations')
 
 router.post('/', authMiddleware.isAuth, createReqValidation, membersController.create)
 router.delete('/:id', authMiddleware.isAuth, membersController.remove)
-router.get('/', membersController.getAll);
+router.get('/', membersController.getAll)
 
 module.exports = router
