@@ -21,14 +21,13 @@ const getById = async (id) => {
   return data
 }
 
-const create = async (imageUrl, text, order, organizationId) => {
+const create = async (body) => {
   const data = await db.Slides.create({
-    imageUrl,
-    text,
-    order,
-    organizationId
+    imageUrl: body.imageUrl,
+    text: body.text,
+    order: body.order,
+    organizationId: body.organizationId
   })
-  console.log(data)
   return data
 }
 

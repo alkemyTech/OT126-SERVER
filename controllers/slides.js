@@ -35,11 +35,7 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { imageUrl, text, order, organizationId } = req.body
-
-    const data = await slidesService.create(imageUrl, text, order, organizationId)
-
-    console.log(data)
+    const data = await slidesService.create(req.body)
 
     if (data) {
       res.status(200).json({ msg: 'Slide created succesfully', data: data })
