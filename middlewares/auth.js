@@ -9,10 +9,9 @@ const isAdmin = async (req, res, next) => {
 const isAuth = async (req, res, next) => {
   try {
     const token = getTokenPayload(req)
-    if (!await userRepository.getById(token.userId)) {
-      const error = new Error('Not found user with token provided.')
-      error.status = 403
-      throw error
+    const user = await userRepository.getById(token.userId)
+    if (!user) {
+      return res.status(403).json({ error: 'Not found user with token provided.' })
     }
     next()
   } catch (error) {
