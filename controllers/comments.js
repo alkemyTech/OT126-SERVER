@@ -9,7 +9,7 @@ const getAll = async (req, res, next) => {
   }
 }
 
-/* const remove = async (req, res, next) => {
+const remove = async (req, res, next) => {
   try {
     const { id } = req.params
     await commentsServices.remove(id)
@@ -17,8 +17,9 @@ const getAll = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-} */
+}
 
 module.exports = {
-  getAll
+  getAll,
+  remove
 }

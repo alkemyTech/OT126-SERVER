@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 const {
   Model
 } = require('sequelize')
+=======
+const { Model } = require('sequelize')
+>>>>>>> 90f77bf67b912255d2b99bc1e9a67b4ed2725e94
 
 module.exports = (sequelize, DataTypes) => {
   class News extends Model {
@@ -10,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      // News.belongsTo(models.Category, {as: 'category'});
+      News.belongsTo(models.Categories, { as: 'category' })
     }
   }
 
@@ -29,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     categoryId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,

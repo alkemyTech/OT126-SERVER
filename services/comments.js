@@ -4,10 +4,11 @@ const getAll = async () => {
   const response = await commentsRepository.getAll()
   return response
 }
-/* const remove = async (id) => {
-  await commentsRepository.remove(id);
-}; */
+const remove = async (id) => {
+  await commentsRepository.remove(id)
+}
 
 module.exports = {
-  getAll
+  getAll,
+  remove
 }
