@@ -27,6 +27,7 @@ const getAll = async (req, res, next) => {
   }
 }
 
+
 const update = async (req, res, next) => {
   try {
     const category = await categoriesService.update(req.params, req.body)
