@@ -8,7 +8,8 @@ const login = async (req, res, next) => {
       data: { ok: true, token }
     })
   } catch (error) { // special catch
-    res.status(error.status || 500).json({
+    normalizeError(error)
+    res.status(error.status).json({
       errors: [error.message],
       data: { ok: false }
     })
@@ -17,4 +18,9 @@ const login = async (req, res, next) => {
 
 module.exports = {
   login
+}
+
+function normalizeError (error) {
+  error.status = error.status || 500
+  error.message = error.status >= 500 ? 'Internal Server Error' : error.message
 }
