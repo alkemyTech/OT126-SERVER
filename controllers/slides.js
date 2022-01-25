@@ -37,11 +37,7 @@ const create = async (req, res, next) => {
   try {
     const data = await slidesService.create(req.body)
 
-    if (data) {
-      res.status(200).json({ msg: 'Slide created succesfully', data: data })
-    } else {
-      res.status(400).json({ msg: 'There were problems trying to create this slide' })
-    }
+    res.status(200).json({ msg: 'Slide created succesfully', data: data })
   } catch (error) {
     next(error)
   }
