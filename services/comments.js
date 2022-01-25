@@ -4,13 +4,9 @@ const getAll = async () => {
   const response = await commentsRepository.getAll();
   return response;
 };
-const create = async ({ user_id, novelty_id, body }) => {
-  const response = await commentsRepository.create({
-    user_id,
-    novelty_id,
-    body,
-  });
-
+const create = async (data) => {
+  const response = await commentsRepository.create(data)  
+ 
   if (!response) {
     const error = new Error("there was an error in comment creation");
     error.status = 403;
