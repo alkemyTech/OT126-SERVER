@@ -7,8 +7,8 @@ const getAll = async () => {
   return data
 }
 
-const create = async (body) => {
-  const data = await Models.Users.create(body)
+const create = async (user) => {
+  const data = await Models.Users.create(user)
 
   return data
 }
