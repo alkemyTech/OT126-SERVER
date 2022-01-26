@@ -8,8 +8,13 @@ const create = async (body) => {
   await testimonialsRepo.create(body)
 }
 
-module.exports = {
-  create,
-  remove
+const getAll = async () => {
+  const testimonials = await testimonialsRepo.getAll()
+  return testimonials
+}
 
+module.exports = {
+  remove,
+  create,
+  getAll,
 }

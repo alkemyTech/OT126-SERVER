@@ -7,11 +7,12 @@ const remove = async (id) => {
   return data
 }
 
-const create = async (body) => {
-  await db.Testimonials.create(body)
+const getAll = async () => {
+  const data = await db.Testimonials.findAll()
+  return data
 }
 
 module.exports = {
-  create,
-  remove
+  remove,
+  getAll,
 }

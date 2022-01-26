@@ -23,5 +23,10 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: 'mysql'
-  }
+  },
+ token: {
+        secret: process.env.JWT_PASS,
+        expiresIn: '1d'
+    }
+
 }

@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/auth')
 const testimonialsController = require('../controllers/testimonials')
 
 router.delete('/:id', authMiddleware.isAdmin, testimonialsController.remove)
-
 router.post('/', /* authMiddleware.isAdmin,  */ createReqValidation, testimonialsController.create)
+router.get('/', /*authMiddleware.isAut,*/ testimonialsController.getAll )
 
 module.exports = router

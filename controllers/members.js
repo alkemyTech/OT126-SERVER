@@ -1,5 +1,13 @@
 const membersService = require('../services/members')
 
+const create = async (req, res, next) => {
+  try {
+    const member = await membersService.create(req.body)
+    res.status(201).json({ msg: `The member ${member.name} was create succesfully`, data: member })
+  } catch (error) {
+    next(error)
+  }
+}
 const remove = async (req, res, next) => {
   try {
     await membersService.remove(req.params.id)
@@ -8,7 +16,26 @@ const remove = async (req, res, next) => {
     next(error)
   }
 }
+const update = async(req, res, next) => {
+  try {
+    const member = await membersService.update(req.params.id, req.body)
+    res.status(201).json({msg:`The member ${req.params.id} was updated succesfully`})
+  } catch (error) {
+    next(error)
+  }
+}
 
+const getAll = async (req, res, next) => {
+  try {
+    const data = await membersService.getAll()
+    res.status(200).json({ data })
+  } catch (error) {
+    next(error)
+  }
+}
 module.exports = {
-  remove
+  remove,
+  update,
+  create,
+  getAll
 }

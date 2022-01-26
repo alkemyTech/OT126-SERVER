@@ -17,12 +17,17 @@ const create = async (req, res, next) => {
     next(e)
   }
 }
+const getAll = async (req, res, next) => {
+  try {
+    const testimonials = await testimonialsService.getAll()
+    res.status(200).json({ data: testimonials })
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports = {
-  /* getAll,
-  getById,
-  update,
-  */
   remove,
+  getAll,
   create
 }
