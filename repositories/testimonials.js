@@ -7,7 +7,6 @@ const remove = async (id) => {
   return data
 }
 
-
 const update = async (id, body) => {
   const rowsUpdated = await db.Testimonials.update(body,{
     where: { id }
@@ -15,6 +14,11 @@ const update = async (id, body) => {
   return rowsUpdated;
 }
 
+const getAll = async () => {
+  const data = await db.Testimonials.findAll()
+  return data
+}
+  
 const getById = async (id) => {
   const testimonial = await db.Testimonials.findByPk(id)
   return testimonial
@@ -25,5 +29,6 @@ module.exports = {
   update,
   remove,
   getById,
+  getAll,
 };
 

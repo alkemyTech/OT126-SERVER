@@ -15,7 +15,14 @@ const update = async (id, body) => {
   return testimonialUpdated
 }
 
+const getAll = async () => {
+  const testimonials = await testimonialsRepo.getAll()
+  return testimonials
+}
+
 module.exports = {
+  remove,
+  getAll,
   update,
-  remove
+
 }

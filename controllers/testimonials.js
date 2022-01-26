@@ -19,7 +19,17 @@ const update = async (req, res, next) => {
   
 }
 
+const getAll = async (req, res, next) => {
+  try {
+    const testimonials = await testimonialsService.getAll()
+    res.status(200).json({ data: testimonials })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   update,
   remove
+  getAll,
 }
