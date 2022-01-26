@@ -10,9 +10,17 @@ const remove = async (req, res, next) => {
 }
 
 const getAll = async (req, res, next) => {
+  const pageNumber = Number.parseInt(req.query.page)
+  const size = 2
+  let page = 1
   try {
-    const testimonials = await testimonialsService.getAll()
-    res.status(200).json({ data: testimonials })
+    if (pageNumber > 1 && !Number.isNaN(pageNumber)) {
+      page = pageNumber
+    }
+    const testimonials = await testimonialsService.getAllWithPagination(page, size)
+
+    // const testimonials = await testimonialsService.getAll()
+    res.status(200).json({ data: testimonials.rows, lastPage: Math.ceil(testimonials.count / size), hasNextPage: (size * page) < testimonials.count, hasPreviousPage: page > 1 })
   } catch (error) {
     next(error)
   }
@@ -20,5 +28,5 @@ const getAll = async (req, res, next) => {
 
 module.exports = {
   remove,
-  getAll,
+  getAll
 }

@@ -9,7 +9,13 @@ const getAll = async () => {
   return testimonials
 }
 
+const getAllWithPagination = async (page, size) => {
+  const testimonials = await testimonialsRepo.getAllWithPagination(page, size)
+  return testimonials
+}
+
 module.exports = {
   remove,
   getAll,
+  getAllWithPagination
 }

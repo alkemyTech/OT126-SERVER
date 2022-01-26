@@ -12,7 +12,16 @@ const getAll = async () => {
   return data
 }
 
+const getAllWithPagination = async (page, size) => {
+  const data = await db.Testimonials.findAndCountAll({
+    limit: size,
+    offset: (page - 1) * size
+  })
+  return data
+}
+
 module.exports = {
   remove,
   getAll,
+  getAllWithPagination
 }
