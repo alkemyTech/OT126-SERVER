@@ -17,8 +17,11 @@ const image = body('image')
 // validators
 
 const createReqValidation = [name, content, image, executeValidation]
+const updateReqValidation = [ name, content, image, executeValidation ];
 
 module.exports = {
-  createReqValidation
+  updateReqValidation,
+  createReqValidation,
 
 }
+

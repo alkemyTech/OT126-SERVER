@@ -7,6 +7,18 @@ const remove = async (id) => {
 const create = async (body) => {
   await testimonialsRepo.create(body)
 }
+  
+const update = async (id, body) => {
+  const rowsCount = await testimonialsRepo.update(id, body);
+
+  if(rowsCount[0] == 0){
+    throw new Error(`Testimonial ${id} don't exist`)
+  };
+
+  const testimonialUpdated = await testimonialsRepo.getById(id)
+  return testimonialUpdated
+
+}
 
 const getAll = async () => {
   const testimonials = await testimonialsRepo.getAll()
@@ -17,4 +29,6 @@ module.exports = {
   remove,
   create,
   getAll,
+  update,
+
 }
