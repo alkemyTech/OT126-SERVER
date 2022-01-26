@@ -11,6 +11,7 @@ const slidesRoute = require('./slides')
 const contactsRoute = require('./contacts')
 const backofficeRoute = require('./backoffice')
 const newsRoutes = require('./news')
+const authRoutes = require('./auth')
 
 router.use('/categories', categoriesRoutes)
 router.use('/organizations', organizationRoutes)
@@ -21,5 +22,6 @@ router.use('/slides', slidesRoute)
 router.use('/contacts', contactsRoute)
 router.use('/backoffice', backofficeRoute)
 router.use('/news', newsRoutes)
+router.use('/auth', authRoutes)
 
 module.exports = router
