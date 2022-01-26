@@ -28,6 +28,16 @@ const remove = async (id) => {
   await categoriesRepository.remove(id)
 }
 
+const getById = async (id) => {
+  const category = await categoriesRepository.getById(id)
+  if (!category) {
+    const error = new Error('The category does not exist')
+    error.status = 404
+    throw error
+  }
+  return category
+}
+
 const update = async ({ id }, category) => {
   const findCategory = await categoriesRepository.getById(id)
 
@@ -49,6 +59,7 @@ const update = async ({ id }, category) => {
 module.exports = {
   create,
   remove,
+  getById,
   getAll,
   update
 }
