@@ -33,12 +33,7 @@ const create = async (imageUrl, text, order, organizationId) => {
 }
 
 const update = async (id, body) => {
-  const data = await db.Slides.update({
-    imageUrl: body.imageUrl,
-    text: body.text,
-    order: body.order,
-    organizationId: body.organizationId
-  }, {
+  const data = await db.Slides.update(body, {
     where: { id }
   })
   return data

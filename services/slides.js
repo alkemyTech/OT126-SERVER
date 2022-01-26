@@ -18,12 +18,13 @@ const create = async (imageUrl, text, order, organizationId) => {
 
 const update = async (id, body) => {
   const data = await slidesRepository.update(id, body)
-  if (data[0]) {
-    return data
+  const updates = await slidesRepository.getById(id)
+  if (!data[0]) {
+    const error = new Error('ID not found')
+    error.status = 400
+    throw error
   }
-  const error = new Error('ID not found')
-  error.status = 400
-  throw error
+  return { data, updates }
 }
 
 module.exports = {

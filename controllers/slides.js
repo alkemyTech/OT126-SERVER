@@ -53,10 +53,9 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    await slidesService.update(req.params.id, req.body)
-    const findOne = await slidesService.getById(req.params.id)
+    const data = await slidesService.update(req.params.id, req.body)
 
-    res.status(200).json({ msg: `Slide ${req.params.id} updated succesfully`, data: findOne })
+    res.status(200).json({ msg: `Slide ${req.params.id} updated succesfully`, data: data.updates })
   } catch (error) {
     next(error)
   }
