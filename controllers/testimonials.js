@@ -20,5 +20,5 @@ const getAll = async (req, res, next) => {
 
 module.exports = {
   remove,
-  getAll
+  getAll,
 }
