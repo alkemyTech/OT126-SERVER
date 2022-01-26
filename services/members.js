@@ -29,6 +29,8 @@ const getAll = async () => {
 module.exports = {
   create,
   remove,
+
   getAll,
   update
+
 }

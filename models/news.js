@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-const {
-  Model
-} = require('sequelize')
-=======
 const { Model } = require('sequelize')
->>>>>>> 90f77bf67b912255d2b99bc1e9a67b4ed2725e94
 
 module.exports = (sequelize, DataTypes) => {
   class News extends Model {

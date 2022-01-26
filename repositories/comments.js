@@ -5,7 +5,10 @@ const getAll = async () => {
     order: [['createdAt', 'DESC']],
     attributes: ['body']
   })
-  console.log(response)
+  return response
+}
+const create = async (data) => {
+  const response = await db.Comments.create(data)
   return response
 }
 /* const remove = async (id) => {
@@ -13,5 +16,6 @@ const getAll = async () => {
 } */
 
 module.exports = {
-  getAll
+  getAll,
+  create
 }

@@ -19,13 +19,13 @@ const remove = async (req, res, next) => {
 const update = async(req, res, next) => {
   try {
     const member = await membersService.update(req.params.id, req.body)
-    res.status(201).json({msg:`The member ${req.params.id} was updated succesfully`})
+    res.status(201).json({msg:'The member ${req.params.id} was updated succesfully'})
   } catch (error) {
     next(error)
   }
 }
 
-const getAll= async(req, res, next) => {
+const getAll = async (req, res, next) => {
   try {
     const data = await membersService.getAll()
     res.status(200).json({ data })
