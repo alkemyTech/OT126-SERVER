@@ -24,10 +24,10 @@ module.exports = {
       image: '',
       createdAt: new Date(),
       updatedAt: new Date()
-    }], {});
+    }], {})
   },
 
   down: async (queryInterface, Sequelize) => {
 
   }
-};
+}
