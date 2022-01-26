@@ -37,7 +37,6 @@ const update = async (req, res, next) => {
       msg: `comments ${req.params.id} is updated succesfully`,
       Comment: response,
     });
-
   } catch (error) {
     next(error)
   }
@@ -49,4 +48,5 @@ module.exports = {
   remove,
   update
 };
+
 
