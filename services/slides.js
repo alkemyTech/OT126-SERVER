@@ -13,12 +13,7 @@ const getById = async (id) => {
 }
 
 const create = async (body) => {
-  if (body) {
-    return await slidesRepository.create(body)
-  }
-  const error = new Error('There were problems trying to create this slide')
-  error.status = 400
-  throw error
+  return await slidesRepository.create(body)
 }
 
 module.exports = {

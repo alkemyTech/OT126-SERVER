@@ -22,12 +22,7 @@ const getById = async (id) => {
 }
 
 const create = async (body) => {
-  const data = await db.Slides.create({
-    imageUrl: body.imageUrl,
-    text: body.text,
-    order: body.order,
-    organizationId: body.organizationId
-  })
+  const data = await db.Slides.create(body)
   return data
 }
 
