@@ -9,6 +9,28 @@ const remove = async (req, res, next) => {
   }
 }
 
+const getAll = async (req, res, next) => {
+  try {
+    const data = await slidesService.getAll()
+
+    res.status(200).json({ data: data })
+  } catch (error) {
+    next(error)
+  }
+}
+
+const getById = async (req, res, next) => {
+  try {
+    const data = await slidesService.getById(req.params.id)
+
+    res.status(200).json({ data: data })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
-  remove
+  remove,
+  getAll,
+  getById
 }
