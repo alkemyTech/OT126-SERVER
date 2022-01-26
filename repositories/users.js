@@ -1,5 +1,4 @@
 const Models = require('../models/index')
-const bcrypt = require('bcrypt')
 
 const getAll = async () => {
   const data = await Models.Users.findAll({
@@ -8,13 +7,8 @@ const getAll = async () => {
   return data
 }
 
-const create = async (body) => {
-  const data = await Models.Users.create({
-    firstName: body.firstName.trim(),
-    lastName: body.lastName.trim(),
-    email: body.email.trim(),
-    password: bcrypt.hashSync(body.password, 12)
-  })
+const create = async (user) => {
+  const data = await Models.Users.create(user)
 
   return data
 }

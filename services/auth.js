@@ -26,14 +26,20 @@ const getAll = async () => {
 }
 
 const create = async (body) => {
-  const user = await usersRepository.getAll()
-
-  const emailMatch = user.find(value => value.email === body.email)
-  if (emailMatch) {
-    return false
-  } else {
-    return await usersRepository.create(body)
+  const user = {
+    firstName: body.firstName,
+    lastName: body.lastName,
+    email: body.email,
+    password: bcrypt.hashSync(body.password, 12)
   }
+  const register = await usersRepository.create(user)
+
+  if (register) {
+    return register
+  }
+  const error = new Error('Something went wrong. User registration failed.')
+  error.status = 400
+  throw error
 }
 
 module.exports = {

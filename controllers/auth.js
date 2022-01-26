@@ -32,17 +32,9 @@ const getAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const result = await authService.getAll()
-
     const data = await authService.create(req.body)
 
-    const emailMatch = result.find(value => value.email === req.body.email)
-
-    if (data && !emailMatch) {
-      res.status(200).json({ msg: 'User registration successfully. Please login.', data: data/* , token: token */ })
-    } else {
-      res.status(400).json({ msg: 'Something went wrong. User registration failed.' })
-    }
+    res.status(200).json({ msg: 'User registration successfully. Please login.', data: data/* , token: token */ })
   } catch (error) {
     next(error)
   }
