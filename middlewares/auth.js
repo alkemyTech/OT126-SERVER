@@ -14,11 +14,19 @@ const getTokenPayload = async (req) => {
 }
 
 const isAdmin = async (req, res, next) => {
-  const { roleId } = req.user
-  if (roleId === 2) {
-    next()
-  } else {
-    res.status(403).json({ error: 'Unauthorized access' })
+  try {
+    const token = getTokenPayload(req)
+    const user = await userRepository.getById(token.userId)
+    const roleUser = await user.getRole()
+    if (roleUser.name.toLowerCase() === 'admin') {
+      next()
+    } else {
+      const error = new Error('Role admin required')
+      error.status = 403
+      throw error
+    }
+  } catch (error) {
+    next(error)
   }
 }
 
