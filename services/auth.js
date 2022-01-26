@@ -21,8 +21,31 @@ const login = async (credentials) => {
   return token
 }
 
+const getAll = async () => {
+  return await usersRepository.getAll()
+}
+
+const create = async (body) => {
+  const user = {
+    firstName: body.firstName,
+    lastName: body.lastName,
+    email: body.email,
+    password: bcrypt.hashSync(body.password, 12)
+  }
+  const register = await usersRepository.create(user)
+
+  if (register) {
+    return register
+  }
+  const error = new Error('Something went wrong. User registration failed.')
+  error.status = 400
+  throw error
+}
+
 module.exports = {
-  login
+  login,
+  getAll,
+  create
 }
 
 function getToken (user) {
