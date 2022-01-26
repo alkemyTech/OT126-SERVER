@@ -30,6 +30,6 @@ const getAll = async (req, res, next) => {
 
 module.exports = {
   update,
-  remove
+  remove,
   getAll,
 }
