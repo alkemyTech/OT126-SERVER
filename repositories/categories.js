@@ -24,6 +24,7 @@ const update = async (id, category) => {
   return await db.Categories.update(category, { where: { id } })
 }
 
+// create, update, remove, getAll, getById, getByName
 module.exports = {
   create,
   remove,
