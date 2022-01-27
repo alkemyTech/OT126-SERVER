@@ -12,10 +12,6 @@ module.exports = {
       },
       novelty_id: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'News',
-          key: 'id'
-        },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
