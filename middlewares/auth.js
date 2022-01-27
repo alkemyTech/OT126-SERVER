@@ -2,7 +2,7 @@ const userRepository = require('../repositories/users')
 const { verifyToken } = require('../modules/auth')
 const rolesRepository = require('../repositories/roles')
 
-const getTokenPayload = async (req) => {
+const getTokenPayload = (req) => {
   const authToken = req.headers.authorization
   const token = authToken && authToken.startsWith('Bearer ') && authToken.split(' ')[1]
   if (!token) {
