@@ -6,8 +6,6 @@ const update = async (id, body, token) => {
     
     const payload = await getTokenPayload(token)
     body.password = await checkPasswords(body, payload)
-
-
     const rowCounts = await usersRepository.update(id, body)
 
     if (rowCounts <= 0){
@@ -33,7 +31,6 @@ const checkPasswords = async (body, payload) => {
           throw error
         } 
         const user = await usersRepository.getById(payload.userId)
-       
         const passwordsMatch = bcrypt.compareSync(body.currentPassword, user.password)
  
         if (!passwordsMatch){
@@ -51,5 +48,3 @@ module.exports = {
     update,
 }
 
-
-//2a$12$pnRk4pz/CjzV10l.p0RkoujnS1Z104wq3ILF8dKY.SioVC0f1qnzy
