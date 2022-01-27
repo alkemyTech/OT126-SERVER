@@ -20,7 +20,7 @@ const isAdmin = async (req, res, next) => {
 
 const isAuth = async (req, res, next) => {
   try {
-    const token = getTokenPayload(req)
+    const token = await getTokenPayload(req)
     const user = await userRepository.getById(token.userId)
     if (!user) {
       return res.status(403).json({ error: 'Not found user with token provided.' })
