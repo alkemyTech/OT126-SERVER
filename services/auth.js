@@ -22,7 +22,13 @@ const login = async (credentials) => {
 }
 
 const getAll = async () => {
-  return await usersRepository.getAll()
+  const data = await usersRepository.getAll()
+  if (!data) {
+    const error = new Error('There are no users in our database')
+    error.status = 400
+    throw error
+  }
+  return data
 }
 
 const create = async (body) => {
