@@ -12,16 +12,17 @@ const create = async (user) => {
 
   return data
 }
-const getById = async (id) => {
-  const user = await Models.Users.findByPk(id, {
-    attributes: {
-      exclude: ['password']
-    }
-  })
+
+// optional "exclude" receives an array with attributes to exclude
+const getById = async (id, exclude) => {
+  const user = await Models.Users.findByPk(id,  {attributes: 
+    { exclude: exclude }
+})
   return user
 }
 
 const findByEmail = async (userEmail) => {
+  
   const data = await Models.Users.findOne({
     where: { email: userEmail },
     raw: true
@@ -34,16 +35,11 @@ const remove = async (id) => {
   return true
 }
 
-const update = async (id, changes) => {
-  const userUpdate = await Models.Users.update(
-    { firstName: changes.firstName, lastName: changes.lastName },
-    {
-      where: {
-        id: id
-      }
-    }
-  )
-  return userUpdate
+const update = async (id, body) => {
+  const rowsUpdated = await Models.Users.update(body ,{ 
+    where: { id } 
+  });
+  return rowsUpdated
 }
 
 module.exports = {
