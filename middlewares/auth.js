@@ -1,5 +1,5 @@
 const userRepository = require('../repositories/users')
-const { verifyToken } = require('../modules/auth')
+/* const { verifyToken } = require('../modules/auth') */
 const rolesRepository = require('../repositories/roles')
 
 const getTokenPayload = async (req) => {

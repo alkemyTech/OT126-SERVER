@@ -48,10 +48,10 @@ module.exports = {
   create
 }
 
-function getToken (user) {
+/* function getToken (user) {
   const tokenPayload = {
     userId: user.id
   }
   const token = authModule.createToken(tokenPayload)
   return token
-}
+} */
