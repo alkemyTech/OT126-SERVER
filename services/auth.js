@@ -33,9 +33,11 @@ const create = async (body) => {
     password: bcrypt.hashSync(body.password, 12)
   }
   const register = await usersRepository.create(user)
+  const usuario = await usersRepository.findByEmail(body.email)
+  const token = getToken(usuario)
 
   if (register) {
-    return register
+    return { register, token }
   }
   const error = new Error('Something went wrong. User registration failed.')
   error.status = 400
