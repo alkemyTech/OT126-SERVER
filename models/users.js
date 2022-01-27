@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       Users.belongsTo(models.Roles, { as: 'role' })
+      Users.hasMany(models.Comments, {
+        as: "Comments",
+        foreignKey: "userId",
+      })
     }
   }
   Users.init(

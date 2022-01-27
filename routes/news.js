@@ -11,5 +11,6 @@ router.delete('/:id', authMiddleware.isAdmin, newsValidations.remove, newsContro
 router.get('/:id', authMiddleware.isAdmin, newsValidations.getById, newsController.getById)
 router.put('/:id', authMiddleware.isAdmin, newsValidations.update, newsController.update)
 router.get('/', authMiddleware.isAuth, newsController.getAll)
+router.get('/:id/comments', authMiddleware.isAuth, newsController.getCommentsByNewId)
 
 module.exports = router
