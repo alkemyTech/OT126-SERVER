@@ -10,21 +10,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       Comments.belongsTo(models.Users, {
         as: 'users',
-        foreignKey: 'userId'
+        foreignKey: 'user_id'
       })
       Comments.belongsTo(models.News, {
         as: 'news',
-        foreignKey: 'noveltyId'
+        foreignKey: 'novelty_id'
       })
     }
   }
   Comments.init(
     {
-      userId: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      noveltyId: {
+      novelty_id: {
         type: DataTypes.INTEGER,
         allowNull: false
       },

@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
@@ -16,7 +16,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      noveltyId: {
+      novelty_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'News',
@@ -24,6 +24,7 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
+      },
       body: {
         type: Sequelize.STRING,
       },
@@ -37,8 +38,8 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      },
-    });
+      }
+    })
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Comments')
