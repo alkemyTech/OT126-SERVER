@@ -56,9 +56,9 @@ const getAll = async () => {
   return news
 }
 
-const getCommentsByNewId = async (id) => {
-  const novelty = await newsRepository.getCommentsByNewId(id)
-  if (novelty <= 0) {
+const getCommentsByNoveltyId = async (id) => {
+  const novelty = await newsRepository.getCommentsByNoveltyId(id)
+  if (!novelty) {
     const error = new Error(`Novelty with id ${id} not found`)
     error.status = 404
     throw error
@@ -72,5 +72,5 @@ module.exports = {
   getById,
   update,
   getAll,
-  getCommentsByNewId
+  getCommentsByNoveltyId
 }

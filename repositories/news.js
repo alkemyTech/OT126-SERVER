@@ -34,18 +34,18 @@ const getAll = async () => {
   return news
 }
 
-const getCommentsByNewId = async (id) => {
+const getCommentsByNoveltyId = async (id) => {
   const response = await db.News.findByPk(id, {
     include: [
       {
-        association: 'Comments',
-        order: [['createdAt', 'DESC']],
-        attributes: ['body']
-      }
-    ]
-  })
-  return response
-}
+        association: "Comments",
+        order: [["createdAt", "DESC"]],
+        attributes: ["body"],
+      },
+    ],
+  });
+  return response;
+};
 
 module.exports = {
   create,
@@ -53,5 +53,5 @@ module.exports = {
   getById,
   update,
   getAll,
-  getCommentsByNewId
+  getCommentsByNoveltyId
 }

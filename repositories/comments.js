@@ -12,10 +12,11 @@ const create = async (data) => {
   return response
 }
 const remove = async (id) => {
-  await db.Comments.destroy({ where: { id } });
+  await db.Comments.destroy({ where: { id } })
 }
 
 module.exports = {
   getAll,
-  create
+  create,
+  remove
 }
