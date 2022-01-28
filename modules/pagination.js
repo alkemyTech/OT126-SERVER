@@ -1,7 +1,7 @@
 
 const getOffset = (page) => {
   let defaultValue = 0
-  if (page && page !== '1' && page !== '0') defaultValue = Math.abs(10 * page) - 10
+  if (page && page !== '1' && page !== '0' && page > 0) defaultValue = Math.abs(10 * page) - 10
   return isNaN(defaultValue) ? 0 : defaultValue
 }
 
