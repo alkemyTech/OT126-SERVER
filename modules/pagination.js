@@ -14,7 +14,8 @@ const getUrl = (req) => {
 const getPreviousPage = (count, offset, limit) => {
   const currentPage = Math.round(offset / limit) + 1
   if (count > offset) return offset === 0 ? null : currentPage - 1
-  return Math.ceil(count / limit)
+  const lastPage = Math.ceil(count / limit)
+  return lastPage === 0 ? null : lastPage
 }
 
 const getNextPage = (count, offset, limit) => {
