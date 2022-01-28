@@ -27,11 +27,9 @@ const getAll = async () => {
 const remove = async (id) => {
   await categoriesRepository.remove(id)
 }
-<<<<<<< HEAD
 
 module.exports = {
   remove
-=======
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id)
@@ -67,5 +65,4 @@ module.exports = {
   getById,
   getAll,
   update
->>>>>>> origin/dev
 }
