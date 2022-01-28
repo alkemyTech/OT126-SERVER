@@ -1,6 +1,4 @@
-
 const emailTemplate = (organization) => {
-  const year = new Date()
   return `
   <!doctype html>
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -289,38 +287,32 @@ const emailTemplate = (organization) => {
 
                     <tr>
                       <td align="left" style="font-size:0px;padding:15px 15px 15px 15px;word-break:break-word;">
-
                         <div
                           style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#000000;">
                           <p style="text-align: center;">
-                          Para mas información puedes comunicarte en nuestros medios de contacto:</p>
-                          <p style="text-align: center;"><span style="font-size: 16px;">Tel:${organization.phone}<span></p>
-                          <p style="text-align: center;"><span style="font-size: 16px;">Email${organization.email}<span></p>
-                          <p style="text-align: center;"><span style="font-size: 16px;">Dirección: ${organization.address}<span></p>                       
+                          Para mas información puedes comunicarte con nosotros en los
+                           medios de contacto y encontrarnos en las redes sociales.</p>
+                           <p style="text-align: center;">Telefono: <span style="font-size: 16px;">${organization.phone}<span></p>
+                        <p style="text-align: center;">Email: <span style="font-size: 16px;">${organization.email}<span></p>
+                        <p style="text-align: center;">Dirección: <span style="font-size: 16px;">${organization.address}<span></p>                                        
                         </div>
-
                       </td>
                     </tr>
-
                     <tr>
                       <td style="font-size:0px;word-break:break-word;">
 
                         <div style="height:30px;">
-                          &nbsp;
+                        &nbsp;
                         </div>
-
                       </td>
                     </tr>
-
                   </table>
-
                 </div>
 
               </td>
             </tr>
           </tbody>
         </table>
-
       </div>
 
       <div style="Margin:0px auto;max-width:600px;">
@@ -338,7 +330,6 @@ const emailTemplate = (organization) => {
                     <tr>
                       <td style="font-size:0px;word-break:break-word;">
                         <div style="height:50px;">
-                        ${year.getFullYear()}
                         </div>
                       </td>
                     </tr>
@@ -357,6 +348,4 @@ const emailTemplate = (organization) => {
 `
 }
 
-module.exports = {
-  emailTemplate
-}
+module.exports = { emailTemplate }
