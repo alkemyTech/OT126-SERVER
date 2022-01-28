@@ -47,4 +47,6 @@ const pagination = async (repository, req, limit) => {
   }
 }
 
-module.exports = pagination
+module.exports = {
+  pagination
+}
