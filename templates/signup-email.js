@@ -1,4 +1,4 @@
-const emailTemplate = (organization) => {
+const signupEmail = (organization) => {
   return `
   <!doctype html>
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -348,4 +348,4 @@ const emailTemplate = (organization) => {
 `
 }
 
-module.exports = { emailTemplate }
+module.exports = { signupEmail }
