@@ -17,19 +17,13 @@ const uploadFile = async (file) => {
   const fileName = file.name + '-' + file.id + '.jpg'
 
   const uploadParams = {
+    ACL: 'public-read',
     Bucket: bucketName,
     Body: fileStream,
     Key: fileName
   }
 
   return storage.upload(uploadParams).promise()
-}
-
-const listFiles = async () => {
-  return storage.listObjects({ Bucket: bucketName }, (err, data) => {
-    if (err) throw err
-    return data
-  }).promise()
 }
 
 const deleteFile = async (keyValue) => {
@@ -42,6 +36,5 @@ const deleteFile = async (keyValue) => {
 
 module.exports = {
   uploadFile,
-  listFiles,
   deleteFile
 }
