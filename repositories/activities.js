@@ -6,6 +6,11 @@ const getAll = async () => {
   })
 }
 
+const create = async (data) => {
+  return await db.Activities.create(data)
+}
+
 module.exports = {
-  getAll
+  getAll,
+  create
 }

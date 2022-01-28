@@ -4,7 +4,13 @@ const update = async (id, body) => {
   return await organizationRepository.update(id, body)
 }
 const getById = async (id) => {
-  return await organizationRepository.getById(id)
+  const organization = await organizationRepository.getById(id)
+  if (!organization) {
+    const error = new Error('Organization not found ')
+    error.status = 404
+    throw error
+  }
+  return organization
 }
 
 module.exports = {
