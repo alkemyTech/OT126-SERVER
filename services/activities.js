@@ -15,9 +15,8 @@ const update = async (id, data) => {
     const error = new Error(`Activity with id ${id} does not exist`)
     error.status = 404
     throw error
-  } else {
-    return await activitiesRepository.update(activity, data)
   }
+  return await activitiesRepository.update(activity, data)
 }
 
 module.exports = {
