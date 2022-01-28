@@ -11,31 +11,37 @@ const getUrl = (req) => {
   return `${protocol}://${host}:${port}${baseUrl}/?page=`
 }
 
-const getPreviusPage = (count, offset, url) => {
+const getPreviousPage = (count, offset) => {
   const currentPage = Math.round(offset / 10) + 1
-  if (count > offset) return offset === 0 ? null : `${url}${currentPage - 1}`
+  if (count > offset) return offset === 0 ? null : currentPage - 1
   return Math.ceil(count / 10)
 }
 
-const getNextPage = (count, offset, url) => {
+const getNextPage = (count, offset) => {
   const totalPages = Math.ceil(count / 10)
   const currentPage = Math.ceil(offset / 10) + 1
   return (totalPages - currentPage) > 0
-    ? `${url}${parseInt(currentPage) + 1}`
+    ? parseInt(currentPage) + 1
     : null
 }
 
-const pagination = async (repositorie, req) => {
+const getUrlPage = (fun, count, offset, url) => {
+  const UrlPage = fun(count, offset)
+  if (UrlPage === null) return null
+  return `${url}${UrlPage}`
+}
+
+const pagination = async (repository, req) => {
   const { page } = req.query
   const offset = getOffset(page)
-  const data = await repositorie(offset)
+  const data = await repository(offset)
   const url = getUrl(req)
 
-  const previusPage = getPreviusPage(data.count, offset, url)
-  const nextPage = getNextPage(data.count, offset, url)
+  const previousPage = getUrlPage(getPreviousPage, data.count, offset, url)
+  const nextPage = getUrlPage(getNextPage, data.count, offset, url)
 
   return {
-    previusPage,
+    previousPage,
     nextPage,
     data: data.rows
   }
