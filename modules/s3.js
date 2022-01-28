@@ -1,5 +1,6 @@
 const S3 = require('aws-sdk/clients/s3')
 const fs = require('fs')
+const { v4: uuidv4 } = require('uuid')
 require('dotenv').config()
 
 const bucketName = process.env.AWS_BUCKETNAME
@@ -11,10 +12,10 @@ const storage = new S3({
   secretAccessKey
 })
 
-// example -> {path: '/temp/123123.jpg', name: 'Categories', id: '2' }
+// example -> {path: '/temp/123123.jpg'}
 const uploadFile = async (file) => {
   const fileStream = fs.createReadStream(file.path)
-  const fileName = file.name + '-' + file.id + '.jpg'
+  const fileName = uuidv4() + '.jpg'
 
   const uploadParams = {
     ACL: 'public-read',
