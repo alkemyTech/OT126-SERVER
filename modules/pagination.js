@@ -1,7 +1,7 @@
-
 const getOffset = (page, limit) => {
-  let defaultValue = 0
-  if (page && page !== '1' && page !== '0' && page > 0) defaultValue = Math.abs(limit * page) - limit
+  if (!page || page === '1' || page === '0' || page < 0) return 0
+
+  const defaultValue = Math.abs(limit * page) - limit
   return isNaN(defaultValue) ? 0 : defaultValue
 }
 
@@ -12,42 +12,42 @@ const getUrl = (req) => {
 }
 
 const getPreviousPage = (count, offset, limit) => {
-  const currentPage = Math.round(offset / limit) + 1
-  if (count > offset) return offset === 0 ? null : currentPage - 1
-  const lastPage = Math.ceil(count / limit)
-  return lastPage === 0 ? null : lastPage
+  if (offset === 0 || count === 0) return null
+  return count > offset
+    ? Math.round(offset / limit)
+    : Math.ceil(count / limit)
 }
 
 const getNextPage = (count, offset, limit) => {
   const totalPages = Math.ceil(count / limit)
-  const currentPage = Math.ceil(offset / limit) + 1
-  return (totalPages - currentPage) > 0
-    ? parseInt(currentPage) + 1
+  const nextPage = Math.round((offset + limit) / limit)
+  return (totalPages - nextPage) > 0
+    ? parseInt(nextPage) + 1
     : null
 }
 
-const getUrlPage = (fun, count, limit, offset, url) => {
-  const UrlPage = fun(count, offset, limit)
+const getUrlPage = (fun, data) => {
+  const UrlPage = fun(data.count, data.offset, data.limit)
   if (UrlPage === null) return null
-  return `${url}${UrlPage}`
+  return `${data.url}${UrlPage}`
 }
 
-const pagination = async (repository, req, limit) => {
+const paginate = async (repository, req, limit) => {
   const { page } = req.query
   const offset = getOffset(page, limit)
-  const data = await repository(offset, limit)
+  const { count, rows } = await repository(offset, limit)
   const url = getUrl(req)
+  const data = { count, limit, offset, url }
 
-  const previousPage = getUrlPage(getPreviousPage, data.count, limit, offset, url)
-  const nextPage = getUrlPage(getNextPage, data.count, limit, offset, url)
+  const previousPage = getUrlPage(getPreviousPage, data)
+  const nextPage = getUrlPage(getNextPage, data)
 
   return {
     previousPage,
     nextPage,
-    data: data.rows
+    data: rows
   }
 }
-
 module.exports = {
-  pagination
+  paginate
 }
