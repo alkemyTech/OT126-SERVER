@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       News.belongsTo(models.Categories, { as: 'category' })
+      News.hasMany(models.Comments, {
+        as: 'Comments',
+        foreignKey: 'novelty_id',
+      })
     }
   }
 
