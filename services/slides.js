@@ -12,8 +12,8 @@ const getById = async (id) => {
   return await slidesRepository.getById(id)
 }
 
-const create = async (imageUrl, text, order, organizationId) => {
-  return await slidesRepository.create(imageUrl, text, order, organizationId)
+const create = async (body) => {
+  return await slidesRepository.create(body)
 }
 
 const update = async (id, body) => {
