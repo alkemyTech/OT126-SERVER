@@ -13,11 +13,8 @@ const create = async (user) => {
   return data
 }
 
-// optional "exclude" receives an array with attributes to exclude
 const getById = async (id, exclude) => {
-  const user = await Models.Users.findByPk(id,  {attributes: 
-    { exclude: exclude }
-})
+  const user = await Models.Users.findByPk(id)
   return user
 }
 
