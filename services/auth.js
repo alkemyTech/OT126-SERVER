@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-/* const authModule = require('../modules/auth') */
+const authModule = require('../modules/auth')
 const usersRepository = require('../repositories/users')
 
 const login = async (credentials) => {
@@ -30,11 +30,11 @@ const create = async (body) => {
     firstName: body.firstName,
     lastName: body.lastName,
     email: body.email,
-    password: bcrypt.hashSync(body.password, 12)
+    password: bcrypt.hashSync(body.password, 12),
+    roleId: body.roleId = 1
   }
   const register = await usersRepository.create(user)
-  const usuario = await usersRepository.findByEmail(body.email)
-  const token = getToken(usuario)
+  const token = getToken(user.email)
 
   if (register) {
     return { register, token }
