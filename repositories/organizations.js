@@ -7,6 +7,17 @@ const update = async (id, body) => {
   return data
 }
 
+const getAll = async () => {
+  const data = await db.Slides.findAll({
+    attributes: ['id', 'imageUrl', 'text', 'order', 'organizationId'],
+    order: [
+      ['order', 'ASC']
+    ]
+  })
+  return data
+}
+
 module.exports = {
-  update
+  update,
+  getAll
 }
