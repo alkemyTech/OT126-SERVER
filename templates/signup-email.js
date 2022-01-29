@@ -292,9 +292,9 @@ const signupEmail = (organization) => {
                           <p style="text-align: center;">
                           Para mas información puedes comunicarte con nosotros en los
                            medios de contacto y encontrarnos en las redes sociales.</p>
-                           <p style="text-align: center;">Telefono: <span style="font-size: 16px;">${organization.phone}<span></p>
-                        <p style="text-align: center;">Email: <span style="font-size: 16px;">${organization.email}<span></p>
-                        <p style="text-align: center;">Dirección: <span style="font-size: 16px;">${organization.address}<span></p>                                        
+                           <p style="text-align: center;">Telefono: ${organization.phone}</p>
+                        <p style="text-align: center;">Email: ${organization.email}</p>
+                        <p style="text-align: center;">Dirección: ${organization.address}</p>                                        
                         </div>
                       </td>
                     </tr>
