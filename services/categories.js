@@ -28,9 +28,6 @@ const remove = async (id) => {
   await categoriesRepository.remove(id)
 }
 
-module.exports = {
-  remove
-
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id)
   if (!category) {
