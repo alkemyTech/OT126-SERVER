@@ -33,24 +33,6 @@ const getById = async (req, res, next) => {
   }
 }
 
-const create = async (req, res, next) => {
-  try {
-    const { imageUrl, text, order, organizationId } = req.body
-
-    const data = await slidesService.create(imageUrl, text, order, organizationId)
-
-    console.log(data)
-
-    if (data) {
-      res.status(200).json({ data: data })
-    } else {
-      res.status(400).json({ msg: 'error' })
-    }
-  } catch (error) {
-    next(error)
-  }
-}
-
 const update = async (req, res, next) => {
   try {
     const data = await slidesService.update(req.params.id, req.body)
@@ -65,6 +47,5 @@ module.exports = {
   remove,
   getAll,
   getById,
-  create,
   update
 }
