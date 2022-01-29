@@ -2,6 +2,9 @@ const bcrypt = require('bcrypt')
 /* const authModule = require('../modules/auth') */
 const usersRepository = require('../repositories/users')
 const organizationRepository = require('../repositories/organizations')
+const { signupEmail } = require('../templates/signup-email')
+const { organizationId } = require('../config/config')
+const { send } = require('../modules/emails')
 const login = async (credentials) => {
   const errorMsg = 'Email and/or Password incorrect'
   const user = await usersRepository.findByEmail(credentials.email)
@@ -35,8 +38,14 @@ const create = async (body) => {
   const register = await usersRepository.create(user)
 
   if (register) {
-    const organization = await organizationRepository.getById(1)
-
+    const organization = await organizationRepository.getById(organizationId)
+    const headersEmail = {
+      to: register.email,
+      subject: `Welcome to ${organization.name}`,
+      html: signupEmail(organization),
+      text: `${organization.welcomeText}`
+    }
+    await send(headersEmail)
     return register
   }
   const error = new Error('Something went wrong. User registration failed.')
