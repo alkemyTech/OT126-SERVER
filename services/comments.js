@@ -18,7 +18,6 @@ const remove = async (id) => {
 };
 
 const update = async (req) => {
-  console.log(req.params.id);
   const comments = await commentsRepository.getById(req.params.id)
   if (!comments) {
     const error = new Error("Comment not found");

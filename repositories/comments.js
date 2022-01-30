@@ -5,7 +5,6 @@ const getAll = async () => {
     order: [["createdAt", "DESC"]],
     attributes: ["body"],
   })
-  console.log(response)
   return response
 }
 const create = async (data) => {
@@ -19,17 +18,11 @@ const getById = async (id) => {
   return await db.Comments.findByPk(id)
 }
 const update = async (data, id) => {
-  try {
-     return await db.Comments.update(data, {
-       where: {
-         id,
-       },
-     });
-    
-  } catch (error) {
-    console.log(error);
-  }
- 
+  return await db.Comments.update(data, {
+    where: {
+      id
+    }
+  })
 }
 
 module.exports = {
