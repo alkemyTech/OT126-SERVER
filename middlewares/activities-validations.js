@@ -1,4 +1,4 @@
-const { body } = require('express-validator')
+const { body, param } = require('express-validator')
 const { executeValidation } = require('./validation-index')
 
 const create = [
@@ -17,6 +17,13 @@ const create = [
   executeValidation
 ]
 
+const update = [
+  param('id')
+    .isInt().withMessage('must be an integer'),
+  ...create
+]
+
 module.exports = {
-  create
+  create,
+  update
 }
