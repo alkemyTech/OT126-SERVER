@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-/* const authModule = require('../modules/auth') */
+const authModule = require('../modules/auth')
 const usersRepository = require('../repositories/users')
 
 const login = async (credentials) => {
@@ -48,10 +48,10 @@ module.exports = {
   create
 }
 
-/* function getToken (user) {
+function getToken (user) {
   const tokenPayload = {
     userId: user.id
   }
   const token = authModule.createToken(tokenPayload)
   return token
-} */
+}

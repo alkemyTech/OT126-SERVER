@@ -6,7 +6,6 @@ const getAll = async () => {
 }
 const create = async (data) => {
   const response = await commentsRepository.create(data)
- 
   if (!response) {
     const error = new Error("there was an error in comment creation")
     error.status = 403
@@ -14,14 +13,12 @@ const create = async (data) => {
   }
   return response
 }
-/* const remove = async (id) => {
+const remove = async (id) => {
   await commentsRepository.remove(id);
-}; */
-/* const getById = async (id) => {
-  const response = await db.Comment.findByPk(id)
-  return response
-} */
+};
+
 const update = async (req) => {
+  console.log(req.params.id);
   const comments = await commentsRepository.getById(req.params.id)
   if (!comments) {
     const error = new Error("Comment not found");
@@ -30,12 +27,12 @@ const update = async (req) => {
   }
   await commentsRepository.update(req.body, req.params.id)
 
-  return await commentsRepository.getById(req.params.id)
+  return await commentsRepository.getById(req.params.id) 
 }
 
 module.exports = {
   getAll,
   create,
- /*  getById, */
-  update
+  update,
+  remove
 }

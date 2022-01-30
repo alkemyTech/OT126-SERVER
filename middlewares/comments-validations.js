@@ -1,9 +1,9 @@
 const { body } = require('express-validator')
 const { executeValidation } = require('./validation-index')
-/* const usersService = require("../services/users")
+/* const userRepository = require("../repositories/users")
 const rolesService = require("../services/roles")
 const commentsRepository = require("../repositories/comments")
-const { tokenId } = require("./auth") */
+const { getTokenPayload } = require("./auth") */
 
 const validateComments = [
   body('user_id')
@@ -24,11 +24,30 @@ const validateComments = [
   executeValidation
 ]
 
-/* const isOwnComment = async (req, res, next) => {
+/* const tokenId = (req) => {
+  const token = req.headers["authorization"];
+  if (!token) {
+    const error = new Error("No token provided!");
+    error.status = 401;
+    throw error;
+  }
+  const decodedUser = securityService.verifyToken(token);
+  if (!decodedUser) {
+    const error = new Error(
+      "Unauthorized! Please enter a valid token provided at login"
+    );
+    error.status = 403;
+    throw error;
+  }
+  return decodedUser.id;
+};  */
+
+ const isOwnComment = async (req, res, next) => {
   try {
-    const userId = tokenId(req)
+    const userTokenId = getTokenPayload(req)
+    const userId = userTokenId.id
     const { id } = req.params
-    const userFound = await usersService.getById(userId)
+    const userFound = await userRepository.getById(userId)
     if (!userFound) {
       const error = new Error("no user found");
       error.status = 404
@@ -49,6 +68,6 @@ const validateComments = [
   } catch (error) {
     next(error)
   }
-} */
+}
 
 module.exports = { validateComments }

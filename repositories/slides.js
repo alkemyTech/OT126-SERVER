@@ -21,8 +21,14 @@ const getById = async (id) => {
   return data
 }
 
+const create = async (body) => {
+  const data = await db.Slides.create(body)
+  return data
+}
+
 module.exports = {
   remove,
   getAll,
-  getById
+  getById,
+  create
 }
