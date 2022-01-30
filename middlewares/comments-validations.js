@@ -1,9 +1,9 @@
 const { body } = require('express-validator')
 const { executeValidation } = require('./validation-index')
-/* const userRepository = require("../repositories/users")
-const rolesService = require("../services/roles")
+const userRepository = require("../repositories/users")
+const rolesRepository = require("../repositories/roles")
 const commentsRepository = require("../repositories/comments")
-const { getTokenPayload } = require("./auth") */
+const { getTokenPayload } = require("./auth")
 
 const validateComments = [
   body('user_id')
@@ -24,45 +24,27 @@ const validateComments = [
   executeValidation
 ]
 
-/* const tokenId = (req) => {
-  const token = req.headers["authorization"];
-  if (!token) {
-    const error = new Error("No token provided!");
-    error.status = 401;
-    throw error;
-  }
-  const decodedUser = securityService.verifyToken(token);
-  if (!decodedUser) {
-    const error = new Error(
-      "Unauthorized! Please enter a valid token provided at login"
-    );
-    error.status = 403;
-    throw error;
-  }
-  return decodedUser.id;
-};  */
-
- const isOwnComment = async (req, res, next) => {
+const isOwnComment = async (req, res, next) => {
   try {
-    const userTokenId = getTokenPayload(req)
-    const userId = userTokenId.id
+    const payload = await getTokenPayload(req)
     const { id } = req.params
-    const userFound = await userRepository.getById(userId)
+    const userFound = await userRepository.getById(payload.userId)
     if (!userFound) {
-      const error = new Error("no user found");
+      const error = new Error('user not found')
       error.status = 404
       throw error
     }
-    const role = await rolesService.getByName("Admin")
-
-    if (userFound.roleId === role.id) {
-      return next()
-    }
     const comment = await commentsRepository.getById(id)
-    if (comment.UserId === userFound.id) {
+
+    if (comment.user_id === userFound.id) {
       return next()
     }
-    const error = new Error("it isnt your comment or you are not an admin")
+    const { roleId } = userFound.dataValues
+    const roleUser = await rolesRepository.getRoleById(roleId)
+
+    if (roleUser.name === 'Admin') return next()
+
+    const error = new Error('it isnt your comment or you are not an admin')
     error.status = 403
     throw error
   } catch (error) {
@@ -70,4 +52,4 @@ const validateComments = [
   }
 }
 
-module.exports = { validateComments }
+module.exports = { validateComments, isOwnComment }
