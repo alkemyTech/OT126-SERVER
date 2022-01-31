@@ -1,5 +1,10 @@
 const db = require('../models')
 
+const create = async (body) => {
+  const data = await db.Testimonials.create(body)
+  return data
+}
+
 const remove = async (id) => {
   const data = await db.Testimonials.destroy({
     where: { id }
@@ -25,6 +30,7 @@ const getById = async (id) => {
 }
 
 module.exports = {
+  create,
   update,
   remove,
   getById,

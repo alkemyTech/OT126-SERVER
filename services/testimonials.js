@@ -4,6 +4,11 @@ const remove = async (id) => {
   await testimonialsRepo.remove(id)
 }
 
+const create = async (body) => {
+  const testimonial = await testimonialsRepo.create(body)
+  return testimonial
+}
+  
 const update = async (id, body) => {
   const rowsCount = await testimonialsRepo.update(id, body)
 
@@ -13,6 +18,7 @@ const update = async (id, body) => {
 
   const testimonialUpdated = await testimonialsRepo.getById(id)
   return testimonialUpdated
+
 }
 
 const getAll = async () => {
@@ -22,6 +28,7 @@ const getAll = async () => {
 
 module.exports = {
   remove,
+  create,
   getAll,
   update
 }

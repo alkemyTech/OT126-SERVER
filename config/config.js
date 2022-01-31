@@ -29,4 +29,5 @@ module.exports = {
         secret: process.env.JWT_PASS,
         expiresIn: '1d'
     }
+
 }
