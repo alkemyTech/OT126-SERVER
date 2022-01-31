@@ -12,8 +12,10 @@ const content = body('content')
 const image = body('image')
   .isString().withMessage('the field must be string')
 
+const createReqValidation = [name, content, image, executeValidation]
 const updateReqValidation = [name, content, image, executeValidation]
 
 module.exports = {
-  updateReqValidation
+  updateReqValidation,
+  createReqValidation
 }
