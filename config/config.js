@@ -2,6 +2,7 @@ require('dotenv').config()
 
 module.exports = {
   organizationId: 1,
+  adminRoleName: 'Admin',
   development: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -28,4 +29,5 @@ module.exports = {
         secret: process.env.JWT_PASS,
         expiresIn: '1d'
     }
+
 }

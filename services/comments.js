@@ -6,7 +6,6 @@ const getAll = async () => {
 }
 const create = async (data) => {
   const response = await commentsRepository.create(data)
-
   if (!response) {
     const error = new Error('there was an error in comment creation')
     error.status = 403
