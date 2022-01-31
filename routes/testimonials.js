@@ -10,4 +10,3 @@ router.get('/', authMiddleware.isAuth, testimonialsController.getAll )
 router.put('/:id', authMiddleware.isAdmin, updateReqValidation, testimonialsController.update )
 
 module.exports = router
-

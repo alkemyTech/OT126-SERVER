@@ -10,9 +10,9 @@ const create = async (body) => {
 }
   
 const update = async (id, body) => {
-  const rowsCount = await testimonialsRepo.update(id, body);
+  const rowsCount = await testimonialsRepo.update(id, body)
 
-  if(rowsCount[0] == 0){
+  if (rowsCount[0] == 0) {
     throw new Error(`Testimonial ${id} don't exist`)
   };
 
@@ -30,6 +30,5 @@ module.exports = {
   remove,
   create,
   getAll,
-  update,
-
+  update
 }
