@@ -1,3 +1,4 @@
+const { paginate } = require('../modules/pagination')
 const newsRepository = require('../repositories/news')
 const categoriesRepository = require('../repositories/categories')
 
@@ -51,9 +52,9 @@ const update = async (id, noveltyToUpdate) => {
   return noveltyUpdated
 }
 
-const getAll = async () => {
-  const news = await newsRepository.getAll()
-  return news
+const getAll = async (req) => {
+  const resObj = paginate(newsRepository.getAll, req, 10)
+  return resObj
 }
 
 const getCommentsByNoveltyId = async (id) => {

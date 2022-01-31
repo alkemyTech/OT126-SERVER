@@ -29,23 +29,27 @@ const update = async (id, novelty) => {
   return rowsUpdatedCount
 }
 
-const getAll = async () => {
-  const news = await db.News.findAll({ attributes: ['id', 'name'] })
-  return news
+const getAll = async (offset, limit) => {
+  const countAndRows = await db.News.findAndCountAll({
+    attributes: ['id', 'name'],
+    offset,
+    limit
+  })
+  return countAndRows
 }
 
 const getCommentsByNoveltyId = async (id) => {
   const response = await db.News.findByPk(id, {
     include: [
       {
-        association: "Comments",
-        order: [["createdAt", "DESC"]],
-        attributes: ["body"],
-      },
-    ],
-  });
-  return response;
-};
+        association: 'Comments',
+        order: [['createdAt', 'DESC']],
+        attributes: ['body']
+      }
+    ]
+  })
+  return response
+}
 
 module.exports = {
   create,
