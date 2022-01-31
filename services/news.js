@@ -56,10 +56,21 @@ const getAll = async () => {
   return news
 }
 
+const getCommentsByNoveltyId = async (id) => {
+  const novelty = await newsRepository.getCommentsByNoveltyId(id)
+  if (!novelty) {
+    const error = new Error(`Novelty with id ${id} not found`)
+    error.status = 404
+    throw error
+  }
+  return novelty.Comments
+}
+
 module.exports = {
   create,
   remove,
   getById,
   update,
-  getAll
+  getAll,
+  getCommentsByNoveltyId
 }

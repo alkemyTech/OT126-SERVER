@@ -24,7 +24,8 @@
     "mysql2": "^2.3.3",
     "node-pre-gyp": "^0.17.0",
     "nodemon": "^2.0.15",
-    "sequelize": "^6.11.0"
+    "sequelize": "^6.11.0",
+    "standard": "^16.0.4"
   },
   "devDependencies": {
     "sequelize-cli": "^6.3.0",

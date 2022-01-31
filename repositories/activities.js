@@ -10,7 +10,13 @@ const create = async (data) => {
   return await db.Activities.create(data)
 }
 
+const update = async (activity, data) => {
+  const updatedActivity = await activity.update(data)
+  return updatedActivity.get()
+}
+
 module.exports = {
   getAll,
-  create
+  create,
+  update
 }
