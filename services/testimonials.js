@@ -5,7 +5,8 @@ const remove = async (id) => {
 }
 
 const create = async (body) => {
-  await testimonialsRepo.create(body)
+  const testimonial = await testimonialsRepo.create(body)
+  return testimonial
 }
   
 const update = async (id, body) => {
