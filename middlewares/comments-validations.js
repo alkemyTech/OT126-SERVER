@@ -4,6 +4,7 @@ const userRepository = require("../repositories/users")
 const rolesRepository = require("../repositories/roles")
 const commentsRepository = require("../repositories/comments")
 const { getTokenPayload } = require("./auth")
+const { adminRoleName } = require('../config/config')
 
 const validateComments = [
   body('user_id')
@@ -42,7 +43,7 @@ const isOwnComment = async (req, res, next) => {
     const { roleId } = userFound.dataValues
     const roleUser = await rolesRepository.getRoleById(roleId)
 
-    if (roleUser.name === 'Admin') return next()
+    if (roleUser.name === adminRoleName) return next()
 
     const error = new Error('it isnt your comment or you are not an admin')
     error.status = 403

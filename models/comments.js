@@ -16,10 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       })
       Comments.belongsTo(models.News, {
         as: 'news',
-        foreignKey: 'novelty_id',
-        onDelete: "cascade",
-        onUpdate: "cascade",
-      });
+        foreignKey: 'novelty_id'
+      })
     }
   }
   Comments.init(
