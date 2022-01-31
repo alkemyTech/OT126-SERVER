@@ -5,8 +5,7 @@ const authMiddleware = require('../middlewares/auth')
 const testimonialsController = require('../controllers/testimonials')
 
 router.delete('/:id', authMiddleware.isAdmin, testimonialsController.remove)
-router.put('/:id', authMiddleware.isAdmin, updateReqValidation, testimonialsController.update );
+router.put('/:id', authMiddleware.isAdmin, updateReqValidation, testimonialsController.update)
 router.get('/', authMiddleware.isAuth, testimonialsController.getAll)
 
 module.exports = router
-
