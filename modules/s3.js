@@ -6,16 +6,18 @@ require('dotenv').config()
 const bucketName = process.env.AWS_BUCKETNAME
 const accessKeyId = process.env.AWS_ACCESS_KEY
 const secretAccessKey = process.env.AWS_SECRET_KEY
+const region = process.env.AWS_REGION
 
 const storage = new S3({
   accessKeyId,
-  secretAccessKey
+  secretAccessKey,
+  region
 })
 
-// example -> {path: '/temp/123123.jpg'}
+// example -> {path: '/temp/123123.jpg', ext: '.jgp'}
 const uploadFile = async (file) => {
   const fileStream = fs.createReadStream(file.path)
-  const fileName = uuidv4() + '.jpg'
+  const fileName = uuidv4() + file.ext
 
   const uploadParams = {
     ACL: 'public-read',
