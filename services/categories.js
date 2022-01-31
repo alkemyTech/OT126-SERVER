@@ -39,14 +39,6 @@ const getById = async (id) => {
 }
 
 const update = async ({ id }, category) => {
-  const { name = null, description = null, image = null } = category
-
-  if (name === null && description === null && image === null) {
-    const error = new Error('If name or image or description is required')
-    error.status = 400
-    throw error
-  }
-
   const findCategory = await categoriesRepository.getById(id)
 
   if (!findCategory) {
@@ -56,7 +48,7 @@ const update = async ({ id }, category) => {
   }
 
   // every name must be unique
-  const error = await uniqueName(name)
+  const error = await uniqueName(category.name)
   if (error) throw error
 
   await categoriesRepository.update(id, category)
