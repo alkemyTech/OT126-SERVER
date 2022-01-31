@@ -9,7 +9,7 @@ const update = async (id, body) => {
 
 const getById = async (id) => {
   const data = await db.Organization.findByPk(id, {
-    attributes: ['name', 'image', 'phone', 'address']
+    attributes: ['name', 'image', 'phone', 'address', 'urlFacebook', 'urlLinkedin', 'urlInstagram']
   })
   return data
 }
