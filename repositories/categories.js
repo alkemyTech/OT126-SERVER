@@ -8,8 +8,12 @@ const findByName = async (name) => {
   return await db.Categories.findOne({ where: { name } })
 }
 
-const getAll = async () => {
-  return await db.Categories.findAll(({ attributes: ['id', 'name'] }))
+const getAll = async (offset, limit) => {
+  return await db.Categories.findAndCountAll({
+    attributes: ['id', 'name'],
+    offset: offset || 0,
+    limit: limit || 10
+  })
 }
 
 const getById = async (id) => {
