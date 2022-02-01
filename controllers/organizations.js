@@ -10,7 +10,17 @@ const update = async (req, res, next) => {
     next(e)
   }
 }
+const getById = async (req, res, next) => {
+  try {
+    const id = configuration.organizationId
+    const data = await organizationService.getById(id)
+    res.status(200).json(data)
+  } catch (e) {
+    next(e)
+  }
+}
 
 module.exports = {
-  update
+  update,
+  getById
 }

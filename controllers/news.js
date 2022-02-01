@@ -45,10 +45,21 @@ const getAll = async (req, res, next) => {
   }
 }
 
+const getCommentsByNoveltyId = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const comments = await newsService.getCommentsByNoveltyId(id)
+    res.status(200).json({ data: comments })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   create,
   remove,
   getById,
   update,
-  getAll
+  getAll,
+  getCommentsByNoveltyId
 }

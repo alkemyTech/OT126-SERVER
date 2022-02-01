@@ -1,17 +1,15 @@
 const { body, validationResult } = require('express-validator')
 const { executeValidation } = require('./validation-index')
 
-// Common params
-
 const email = body('email')
-  .isEmail().withMessage('must be a valid email')
-  .exists().withMessage('param required')
+  .exists().withMessage('param required').bail()
+  .isEmail().withMessage('must be a valid email').bail()
   .normalizeEmail()
 
 const password = body('password')
-  .isString().withMessage('must be a string')
-  .notEmpty().withMessage('cannot be empty')
-  .exists().withMessage('param required')
+  .exists().withMessage('param required').bail()
+  .isString().withMessage('must be a string').bail()
+  .notEmpty().withMessage('cannot be empty').bail()
 
 const firstName = body('firstName')
   .notEmpty()
@@ -24,8 +22,6 @@ const lastName = body('lastName')
   .matches(/^[A-Z]+$/i)
   .withMessage('Please enter your lastname correctly')
   .bail()
-
-// Validations
 
 const login = [email, password, executeValidationLogin]
 const register = [firstName, lastName, email, password, executeValidation]
