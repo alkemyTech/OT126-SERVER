@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       News.belongsTo(models.Categories, { as: 'category' })
       News.hasMany(models.Comments, {
         as: 'Comments',
-        foreignKey: 'novelty_id',
+        foreignKey: 'novelty_id'
       })
     }
   }

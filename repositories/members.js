@@ -11,8 +11,11 @@ const update = async (id, body) => {
   return await db.Members.update(body, { where: { id } })
 }
 
-const getAll = async () => {
-  return await db.Members.findAll()
+const getAll = async (offset = 0, limit = 10) => {
+  return await db.Members.findAndCountAll({
+    offset: offset,
+    limit: limit
+  })
 }
 module.exports = {
   remove,
