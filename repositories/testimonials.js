@@ -21,7 +21,7 @@ const update = async (id, body) => {
 
 const getAll = async (offset, limit) => {
   const data = await db.Testimonials.findAndCountAll({
-    attributes: ['id', 'name'],
+    attributes: ['id', 'name', 'content', 'image'],
     offset,
     limit
   })
