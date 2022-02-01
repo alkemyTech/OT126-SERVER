@@ -75,4 +75,5 @@ module.exports = {
   isAuth,
   isOwnUser,
   getTokenPayload,
-};
+}
+
