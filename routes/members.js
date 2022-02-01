@@ -8,6 +8,6 @@ const { updateReqValidation, createReqValidation } = require('../middlewares/mem
 router.delete('/:id', authMiddleware.isAuth, membersController.remove)
 router.put('/:id', authMiddleware.isAuth, updateReqValidation, membersController.update)
 router.post('/', authMiddleware.isAuth, createReqValidation, membersController.create)
-router.get('/', membersController.getAll)
+router.get('/', authMiddleware.isAdmin, membersController.getAll)
 
 module.exports = router

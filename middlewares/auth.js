@@ -1,8 +1,9 @@
 const userRepository = require('../repositories/users')
 const { verifyToken } = require('../modules/auth')
 const rolesRepository = require('../repositories/roles')
+const { adminRoleName } = require('../config/config')
 
-const getTokenPayload = async (req) => {
+const getTokenPayload = (req) => {
   const authToken = req.headers.authorization
   const token = authToken && authToken.startsWith('Bearer ') && authToken.split(' ')[1]
   if (!token) {
@@ -14,8 +15,19 @@ const getTokenPayload = async (req) => {
 }
 
 const isAdmin = async (req, res, next) => {
-  // not implemented
-  next()
+  try {
+    const token = getTokenPayload(req)
+    const user = await userRepository.getById(token.userId)
+    const roleUser = await rolesRepository.getRoleById(user.roleId)
+    if (roleUser.name !== adminRoleName) {
+      const error = new Error('Role admin required')
+      error.status = 403
+      throw error
+    }
+    next()
+  } catch (error) {
+    next(error)
+  }
 }
 
 const isAuth = async (req, res, next) => {
@@ -48,7 +60,7 @@ const isOwnUser = async (req, res, next) => {
     const { roleId } = user.dataValues
     const roleUser = await rolesRepository.getRoleById(roleId)
 
-    if (roleUser.name === 'Admin') return next()
+    if (roleUser.name === adminRoleName) return next()
 
     const error = new Error('Its not authorized')
     error.status = 403
@@ -61,5 +73,7 @@ const isOwnUser = async (req, res, next) => {
 module.exports = {
   isAdmin,
   isAuth,
-  isOwnUser
+  isOwnUser,
+  getTokenPayload,
 }
+

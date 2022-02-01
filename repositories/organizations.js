@@ -7,17 +7,13 @@ const update = async (id, body) => {
   return data
 }
 
-const getAll = async () => {
-  const data = await db.Slides.findAll({
-    attributes: ['id', 'imageUrl', 'text', 'order', 'organizationId'],
-    order: [
-      ['order', 'ASC']
-    ]
+const getById = async (id) => {
+  const data = await db.Organization.findByPk(id, {
+    attributes: ['name', 'image', 'phone', 'address', 'urlFacebook', 'urlLinkedin', 'urlInstagram']
   })
   return data
 }
-
 module.exports = {
   update,
-  getAll
+  getById
 }
