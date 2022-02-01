@@ -1,4 +1,5 @@
 const categoriesRepository = require('../repositories/categories')
+const { paginate } = require('../modules/pagination')
 
 // general function to verify the name
 const uniqueName = async (name) => {
@@ -20,8 +21,8 @@ const create = async (category) => {
   return await categoriesRepository.create(category)
 }
 
-const getAll = async () => {
-  return await categoriesRepository.getAll()
+const getAll = async (req) => {
+  return paginate(categoriesRepository.getAll, req, 10)
 }
 
 const remove = async (id) => {

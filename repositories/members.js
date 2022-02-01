@@ -8,7 +8,7 @@ const remove = async (id) => {
 }
 
 const update = async (id, body) => {
-  return await db.Members.update(body, { where: { id }})
+  return await db.Members.update(body, { where: { id } })
 }
 
 const getAll = async () => {
@@ -17,8 +17,6 @@ const getAll = async () => {
 module.exports = {
   remove,
   create,
-
   getAll,
-  update 
-
+  update
 }

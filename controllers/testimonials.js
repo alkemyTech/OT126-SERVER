@@ -9,6 +9,23 @@ const remove = async (req, res, next) => {
   }
 }
 
+const create = async (req, res, next) => {
+  try {
+    const data = await testimonialsService.create(req.body)
+    res.status(200).json({ msg: 'Testimonial created succesfully', data: data })
+  } catch (e) {
+    next(e)
+  }
+}
+const update = async (req, res, next) => {
+  try {
+    const testimonialUpdated = await testimonialsService.update(req.params.id, req.body)
+    res.status(200).json({ msg: `Testimonial ${testimonialUpdated.id} updated succesfully`, data: testimonialUpdated })
+  } catch (error) {
+    next(error)
+  }
+}
+
 const getAll = async (req, res, next) => {
   const pageNumber = Number.parseInt(req.query.page)
   const size = 2
@@ -27,6 +44,8 @@ const getAll = async (req, res, next) => {
 }
 
 module.exports = {
+  update,
   remove,
-  getAll
+  getAll,
+  create
 }

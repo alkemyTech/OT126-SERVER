@@ -29,9 +29,21 @@ const create = async (req, res, next) => {
     next(error)
   }
 }
+const update = async (req, res, next) => {
+  try {
+    const response = await commentsServices.update(req)
+    res.status(200).json({
+      msg: `comment: ${response.id} has been updated`,
+      data: response
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports = {
   getAll,
   create,
-  remove
+  remove,
+  update
 }
