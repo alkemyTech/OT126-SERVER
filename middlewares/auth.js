@@ -73,5 +73,6 @@ const isOwnUser = async (req, res, next) => {
 module.exports = {
   isAdmin,
   isAuth,
-  isOwnUser
-}
+  isOwnUser,
+  getTokenPayload,
+};
