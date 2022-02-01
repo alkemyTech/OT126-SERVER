@@ -1,6 +1,13 @@
 const { body, param } = require('express-validator')
 const { executeValidation } = require('./validation-index')
 
+const isStringOrNull = value => {
+  if (typeof value !== 'string' && value !== null) throw new Error('Has to be a string or null')
+  if (value !== null && value.length <= 0) throw new Error('Must have content')
+
+  return true
+}
+
 exports.createValidationCategory = [
   body('name')
     .exists().withMessage('Name is required').bail()
@@ -24,10 +31,8 @@ exports.updateValidationCategory = [
     .isString().withMessage('Name has to be a string').bail()
     .isLength({ min: 1, max: 200 }).withMessage('Must have content').bail(),
   body('description')
-    .exists().withMessage('Description is required').bail()
-    .isString().withMessage('Description has to be a string').bail(),
+    .custom(isStringOrNull),
   body('image')
-    .exists().withMessage('Image is required').bail()
-    .isString().withMessage('Image has to be a string').bail()
-    .isLength({ min: 1, max: 200 }).withMessage('Must have content').bail(), executeValidation
+    .custom(isStringOrNull),
+  executeValidation
 ]
