@@ -240,9 +240,9 @@
                         <tbody>
                           <tr>
                             <td style="width:312px;">
-                              <img height="auto" src=<%=organization.image %>
-                              style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;"
-                              width="312">
+                              <img height="auto" src="<%= image %>"
+                                style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;"
+                                width="312">
                             </td>
                           </tr>
                         </tbody>
@@ -253,7 +253,7 @@
                   <tr>
                     <td style="font-size:0px;word-break:break-word;">
                       <div style="height:50px;">
-                        <%= organization.name %>
+                        <%= name %>
                       </div>
                     </td>
                   </tr>
@@ -264,11 +264,11 @@
                       <div
                         style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#000000;">
                         <p style="text-align: center;"><span style="font-size: 24px;"><strong>
-                              <%= organization.name %>
+                              <%= name %>
                             </strong></span></p>
                         <p style="text-align: center;">&nbsp;</p>
                         <p style="text-align: center;"><span style="font-size: 16px;">
-                            <%= organization.welcomeText %>
+                            <%= welcomeText %>
                           </span>
                         </p>
                       </div>
@@ -294,13 +294,13 @@
                           Para mas información puedes comunicarte con nosotros en los
                           medios de contacto y encontrarnos en las redes sociales.</p>
                         <p style="text-align: center;">
-                          Telefono: <%= organization.phone %>
+                          Telefono: <%= phone %>
                         </p>
                         <p style="text-align: center;">
-                          Email: <%= organization.email %>
+                          Email: <%= email %>
                         </p>
                         <p style="text-align: center;">
-                          Dirección: <%= organization.address %>
+                          Dirección: <%= address %>
                         </p>
                       </div>
                     </td>
