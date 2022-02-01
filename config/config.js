@@ -28,5 +28,10 @@ module.exports = {
   token: {
     secret: process.env.JWT_PASS,
     expiresIn: '1d'
+  },
+  sendGrid: {
+    apiKey: process.env.SENDGRID_API_KEY,
+    email: process.env.SENDGRID_EMAIL,
+    sendEmails: process.env.SENDGRID_SEND_EMAILS === 'true'
   }
 }
