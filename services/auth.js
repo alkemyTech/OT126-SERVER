@@ -31,19 +31,16 @@ const getAll = async () => {
   return data
 }
 
-const create = async (body) => {
+const create = async (body, id) => {
   const user = {
-    firstName: body.firstName,
-    lastName: body.lastName,
-    email: body.email,
-    password: bcrypt.hashSync(body.password, 12),
-    roleId: body.roleId = 1
+    ...body,
+    password: bcrypt.hashSync(body.password, 12)
   }
-  const register = await usersRepository.create(user)
-  const token = getToken(user.email)
+  const createdUser = await usersRepository.create(user)
+  const token = getToken(body.email)
 
-  if (register) {
-    return { register, token }
+  if (createdUser) {
+    return { createdUser, token }
   }
   const error = new Error('Something went wrong. User registration failed.')
   error.status = 400
