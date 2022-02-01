@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 /* const authModule = require('../modules/auth') */
 const usersRepository = require('../repositories/users')
 const organizationRepository = require('../repositories/organizations')
-const { signupEmail } = require('../templates/signup-email')
+const { createTemplateWelcome } = require('../modules/welcome-signup')
 const { organizationId } = require('../config/config')
 const { send } = require('../modules/emails')
 const login = async (credentials) => {
@@ -38,15 +38,20 @@ const create = async (body) => {
   const register = await usersRepository.create(user)
 
   if (register) {
-    const organization = await organizationRepository.getById(organizationId)
-    const headersEmail = {
-      to: register.email,
-      subject: `Welcome to ${organization.name}`,
-      html: signupEmail(organization),
-      text: `${organization.welcomeText}`
+    try {
+      const organization = await organizationRepository.getById(organizationId)
+      const headersEmail = {
+        to: register.email,
+        subject: 'Bienvenido',
+        html: await createTemplateWelcome(organization)
+      }
+      await send(headersEmail)
+      return register
+    } catch (err) {
+      const error = new Error('Can\'t email to client')
+      error.status = 404
+      throw error
     }
-    await send(headersEmail)
-    return register
   }
   const error = new Error('Something went wrong. User registration failed.')
   error.status = 400
