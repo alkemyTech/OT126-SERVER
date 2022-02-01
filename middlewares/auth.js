@@ -37,6 +37,7 @@ const isAuth = async (req, res, next) => {
     if (!user) {
       return res.status(403).json({ error: 'Not found user with token provided.' })
     }
+    req.authUser = user.dataValues
     next()
   } catch (error) {
     next(error)

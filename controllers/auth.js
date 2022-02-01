@@ -42,9 +42,7 @@ const create = async (req, res, next) => {
 
 const getByToken = async (req, res, next) => {
   try {
-    const data = await authService.getByToken(req.headers.authorization)
-
-    res.status(200).json({ data: data })
+    res.status(200).json({ data: req.authUser })
   } catch (error) {
     next(error)
   }

@@ -42,18 +42,10 @@ const create = async (body) => {
   throw error
 }
 
-const getByToken = async (authorization) => {
-  const token = authorization.split(' ')[1]
-  const payLoad = authModule.verifyToken(token)
-
-  return await usersRepository.getById(payLoad.userId)
-}
-
 module.exports = {
   login,
   getAll,
-  create,
-  getByToken
+  create
 }
 
 function getToken (user) {
