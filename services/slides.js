@@ -16,9 +16,21 @@ const create = async (body) => {
   return await slidesRepository.create(body)
 }
 
+const update = async (id, body) => {
+  const data = await slidesRepository.update(id, body)
+  const updates = await slidesRepository.getById(id)
+  if (!data[0]) {
+    const error = new Error('ID not found')
+    error.status = 400
+    throw error
+  }
+  return { data, updates }
+}
+
 module.exports = {
   remove,
   getAll,
   getById,
-  create
+  create,
+  update
 }
