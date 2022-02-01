@@ -1,4 +1,5 @@
 const testimonialsRepo = require('../repositories/testimonials')
+const { paginate } = require('../modules/pagination')
 
 const remove = async (id) => {
   await testimonialsRepo.remove(id)
@@ -20,14 +21,8 @@ const update = async (id, body) => {
   return testimonialUpdated
 }
 
-const getAll = async () => {
-  const testimonials = await testimonialsRepo.getAll()
-  return testimonials
-}
-
-const getAllWithPagination = async (page, size) => {
-  const testimonials = await testimonialsRepo.getAllWithPagination(page, size)
-  return testimonials
+const getAll = async (req) => {
+  return paginate(testimonialsRepo.getAll, req, 10)
 }
 
 module.exports = {
