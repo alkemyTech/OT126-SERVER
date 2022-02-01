@@ -20,6 +20,25 @@ npx sequelize-cli db:migrate
 ``` bash
 npx sequelize-cli db:seed:all
 ```
+generates 10 standard account users and 10 administrator account users with the credentials:
+
+| Email | Password | Name | roleId |
+| ------------- | ------------- | ------------- | ----------- |
+| standard-test-@test.com  | TestPassword123!  | Standard Test | 1 |
+| standard-test-Eduardo@Corgniali.com  | TestPassword123!  | Eduardo Corgniale | 1 |
+| standard-test-Ezequiel@Baruer.com  | TestPassword123!  | Ezequiel Baruer | 1 |
+| standard-test-@test.com  | TestPassword123!  | Standard Test | 1 |
+| standard-test-Eduardo@Corgniali.com  | TestPassword123!  | Eduardo Corgniale | 1 |
+| standard-test-Ezequiel@Baruer.com  | TestPassword123!  | Ezequiel Baruer | 1 |
+| standard-test-@test.com  | TestPassword123!  | Standard Test | 1 |
+| standard-test-Eduardo@Corgniali.com  | TestPassword123!  | Eduardo Corgniale | 1 |
+| standard-test-Ezequiel@Baruer.com  | TestPassword123!  | Ezequiel Baruer | 1 |
+| standard-test-@test.com  | TestPassword123!  | Standard Test | 1 |
+| standard-test-Eduardo@Corgniali.com  | TestPassword123!  | Eduardo Corgniale | 1 |
+| standard-test-Ezequiel@Baruer.com  | TestPassword123!  | Ezequiel Baruer | 1 |
+
+
+
 
 ## Start local server
 
