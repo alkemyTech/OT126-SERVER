@@ -4,7 +4,9 @@ const bcrypt = require('bcrypt')
 
 const update = async (id, body, token) => {
   const payload = await getTokenPayload(token)
-  body.password = await checkPasswords(body, payload)
+  const user = await usersRepository.getById(payload.userId)
+  body.password = await checkPasswords(body,user)
+  
   const rowCounts = await usersRepository.update(id, body)
 
   if (rowCounts <= 0) {
@@ -16,7 +18,7 @@ const update = async (id, body, token) => {
   return await usersRepository.getById(id)
 }
 
-const checkPasswords = async (body, payload) => {
+const checkPasswords = async (body, user) => {
   if (body.password) {
     if (!body.currentPassword) {
       const error = new Error('Insert current password')
@@ -24,12 +26,11 @@ const checkPasswords = async (body, payload) => {
       throw error
     }
 
-    return comparePasswords(body, payload)
+    return comparePasswords(body, user)
   }
 }
 
-const comparePasswords = async (body, payload) => {
-  const user = await usersRepository.getById(payload.userId)
+const comparePasswords = async (body, user) => {
   const passwordsMatch = bcrypt.compareSync(body.currentPassword, user.password)
 
   if (!passwordsMatch) {
