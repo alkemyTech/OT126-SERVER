@@ -48,9 +48,7 @@ const create = async (body) => {
       await send(headersEmail)
       return register
     } catch (err) {
-      const error = new Error('Can\'t email to client')
-      error.status = 404
-      throw error
+      // implement a service for catch this error
     }
   }
   const error = new Error('Something went wrong. User registration failed.')
