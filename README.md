@@ -22,7 +22,7 @@ npx sequelize-cli db:seed:all
 ```
 Generates 10 standard account users and 10 administrator account users with the credentials:
 
-| Email | Password | Name | roleId |
+| Email | Password | Name | RoleId |
 | ------------- | ------------- | ------------- | ----------- |
 | standard-test-@test.com  | TestPassword123!  | Standard Test | 1 |
 | standard-test-Eduardo@Corgniali.com  | TestPassword123!  | Eduardo Corgniale | 1 |
