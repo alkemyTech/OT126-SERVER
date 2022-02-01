@@ -13,7 +13,7 @@ const create = async (user) => {
   return data
 }
 
-const getById = async (id, exclude) => {
+const getById = async (id) => {
   const user = await Models.Users.findByPk(id)
   return user
 }
@@ -34,7 +34,8 @@ const remove = async (id) => {
 
 const update = async (id, body) => {
   const rowsUpdated = await Models.Users.update(body ,{ 
-    where: { id } 
+    fields: ['firstName', 'lastName', 'email', 'image', 'password'],
+    where: { id },
   });
   return rowsUpdated
 }
