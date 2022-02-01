@@ -20,11 +20,7 @@ const getAll = async (req, res, next) => {
   try {
     const data = await authService.getAll()
 
-    if (data) {
-      res.status(200).json({ data: data })
-    } else {
-      res.status(400).json({ msg: 'Something went wrong. Please try again later.' })
-    }
+    res.status(200).json({ data: data })
   } catch (error) {
     next(error)
   }

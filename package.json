@@ -9,6 +9,8 @@
     "lint": "npx standard --fix"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
+    "aws-sdk": "^2.1064.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -23,7 +25,8 @@
     "mysql2": "^2.3.3",
     "node-pre-gyp": "^0.17.0",
     "nodemon": "^2.0.15",
-    "sequelize": "^6.11.0"
+    "sequelize": "^6.11.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "sequelize-cli": "^6.3.0",

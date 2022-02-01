@@ -29,8 +29,8 @@ const getById = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const category = await categoriesService.getAll()
-    res.status(200).json({ data: category })
+    const categoriesPagination = await categoriesService.getAll(req)
+    res.status(200).json(categoriesPagination)
   } catch (error) {
     next(error)
   }
