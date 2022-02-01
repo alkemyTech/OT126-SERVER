@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt')
 const update = async (id, body, token) => {
   const payload = await getTokenPayload(token)
   const user = await usersRepository.getById(payload.userId)
-  body.password = await checkPasswords(body,user)
-  
+  body.password = await checkPasswords(body, user)
+
   const rowCounts = await usersRepository.update(id, body)
 
   if (rowCounts <= 0) {
@@ -42,7 +42,16 @@ const comparePasswords = async (body, user) => {
   return bcrypt.hashSync(body.password, 12)
 }
 
+const remove = async (id) => {
+  const user = await usersRepository.remove(id)
+  if (!user) {
+    const error = new Error('Can\'t remove the user with id provided.')
+    error.status = 400
+    throw error
+  }
+  return user
+}
 module.exports = {
   update,
+  remove
 }
-
