@@ -27,8 +27,8 @@ const update = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const data = await membersService.getAll()
-    res.status(200).json({ data })
+    const data = await membersService.getAll(req)
+    res.status(200).json(data)
   } catch (error) {
     next(error)
   }
