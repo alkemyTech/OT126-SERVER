@@ -64,7 +64,7 @@ const create = async (body) => {
       await send(headersEmail)
       return { createdUser, token }
     } catch (err) {
-      const error = new Error('There are no users in our database')
+      const error = new Error('There are some problems. Try again later.')
       error.status = 400
       throw err
     }
