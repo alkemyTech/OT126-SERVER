@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const authModule = require('../modules/auth')
 const usersRepository = require('../repositories/users')
+const rolesRepository = require('../repositories/roles')
 
 const login = async (credentials) => {
   const errorMsg = 'Email and/or Password incorrect'
@@ -31,9 +32,11 @@ const getAll = async () => {
   return data
 }
 
-const create = async (body, id) => {
+const create = async (body) => {
+  const standardRole = await rolesRepository.getRoleById(body.roleId)
   const user = {
     ...body,
+    roleId: standardRole.id,
     password: bcrypt.hashSync(body.password, 12)
   }
   const createdUser = await usersRepository.create(user)
