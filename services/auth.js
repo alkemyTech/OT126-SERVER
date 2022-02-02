@@ -45,7 +45,7 @@ const create = async (body) => {
 
   if (register) {
     try {
-      const organization = await organizationRepository.getById(organizationId)
+      const organization = await organizationRepository.getByIdReduced(organizationId)
       const headersEmail = {
         to: register.email,
         subject: 'Bienvenido',
