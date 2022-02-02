@@ -42,7 +42,18 @@ const comparePasswords = async (body, pass) => {
   return bcrypt.hashSync(body.password, 12)
 }
 
+const remove = async (id) => {
+  const user = await usersRepository.remove(id)
+  if (!user) {
+    const error = new Error('Can\'t remove the user with id provided.')
+    error.status = 400
+    throw error
+  }
+  return user
+}
+
 module.exports = {
-  update
+  update,
+  remove
 
 }
