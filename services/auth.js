@@ -39,15 +39,19 @@ const create = async (body) => {
     roleId: standardRole.id,
     password: bcrypt.hashSync(body.password, 12)
   }
+
+  const checkEmail = await usersRepository.findByEmail(body.email)
+  if (checkEmail) {
+    const error = new Error('Something went wrong. User registration failed.')
+    error.status = 400
+    throw error
+  }
   const createdUser = await usersRepository.create(newUser)
   const token = getToken(body.email)
 
   if (createdUser) {
     return { createdUser, token }
   }
-  const error = new Error('Something went wrong. User registration failed.')
-  error.status = 400
-  throw error
 }
 
 module.exports = {
