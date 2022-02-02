@@ -34,12 +34,12 @@ const getAll = async () => {
 
 const create = async (body) => {
   const standardRole = await rolesRepository.getRoleById(body.roleId)
-  const user = {
+  const newUser = {
     ...body,
     roleId: standardRole.id,
     password: bcrypt.hashSync(body.password, 12)
   }
-  const createdUser = await usersRepository.create(user)
+  const createdUser = await usersRepository.create(newUser)
   const token = getToken(body.email)
 
   if (createdUser) {
