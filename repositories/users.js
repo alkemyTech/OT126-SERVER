@@ -1,48 +1,59 @@
-const usersRepository = require('../repositories/users')
-const { getTokenPayload } = require('../middlewares/auth')
-const bcrypt = require('bcrypt')
+const Models = require('../models/index')
 
-const update = async (id, body, token) => {
-  const payload = await getTokenPayload(token)
-  const pass = await usersRepository.getPass(payload.userId)
-
-  body.password = await checkPasswords(body, pass)
-
-  const rowCounts = await usersRepository.update(id, body)
-
-  if (rowCounts <= 0) {
-    const error = new Error('The user dont exist')
-    error.status = 404
-    throw error
-  }
-
-  return await usersRepository.getById(id)
+const getAll = async () => {
+  const data = await Models.Users.findAll({
+    attributes: ['firstName', 'email', 'image']
+  })
+  return data
 }
 
-const checkPasswords = async (body, pass) => {
-  if (body.password) {
-    if (!body.currentPassword) {
-      const error = new Error('Insert current password')
-      error.status = 400
-      throw error
+const create = async (user) => {
+  const data = await Models.Users.create(user)
+
+  return data
+}
+
+const getById = async (id) => {
+  return await Models.Users.findByPk(id, {
+    attributes: {
+      exclude: ['password']
     }
-
-    return comparePasswords(body, pass)
-  }
+  })
 }
 
-const comparePasswords = async (body, pass) => {
-  const passwordsMatch = bcrypt.compareSync(body.currentPassword, pass.password)
-  if (!passwordsMatch) {
-    const error = new Error('The current password is incorrect')
-    error.status = 400
-    throw error
-  }
+const getPass = async (id) => {
+  const pass = await Models.Users.findByPk(id, { attributes: ['password'] })
+  return pass
+}
 
-  return bcrypt.hashSync(body.password, 12)
+const findByEmail = async (userEmail) => {
+  const data = await Models.Users.findOne({
+    where: { email: userEmail },
+    raw: true
+  })
+  return data
+}
+
+const remove = async id => {
+  return await Models.Users.destroy({ where: { id } })
+}
+
+const update = async (id, body) => {
+  const rowsUpdated = await Models.Users.update(body, {
+    fields: ['firstName', 'lastName', 'email', 'image', 'password'],
+    where: { id }
+  })
+  return rowsUpdated
 }
 
 module.exports = {
+  getAll,
+  getById,
+  findByEmail,
+  create,
+  remove,
+  getPass,
   update
 
 }
+
