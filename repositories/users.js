@@ -14,8 +14,16 @@ const create = async (user) => {
 }
 
 const getById = async (id) => {
-  const user = await Models.Users.findByPk(id)
-  return user
+  return await Models.Users.findByPk(id, {
+    attributes: {
+      exclude: ['password']
+    }
+  })
+}
+
+const getPass = async (id) => {
+  const pass = await Models.Users.findByPk(id, { attributes: ['password'] })
+  return pass
 }
 
 const findByEmail = async (userEmail) => {
@@ -44,5 +52,8 @@ module.exports = {
   findByEmail,
   create,
   remove,
+  getPass,
   update
+
 }
+
