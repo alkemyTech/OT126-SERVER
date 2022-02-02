@@ -19,8 +19,12 @@ const update = async (id, body) => {
   return rowsUpdated
 }
 
-const getAll = async () => {
-  const data = await db.Testimonials.findAll()
+const getAll = async (offset, limit) => {
+  const data = await db.Testimonials.findAndCountAll({
+    attributes: ['id', 'name', 'content', 'image'],
+    offset,
+    limit
+  })
   return data
 }
 
@@ -36,4 +40,3 @@ module.exports = {
   getById,
   getAll
 }
-

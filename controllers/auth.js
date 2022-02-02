@@ -36,10 +36,19 @@ const create = async (req, res, next) => {
   }
 }
 
+const getByToken = async (req, res, next) => {
+  try {
+    res.status(200).json({ data: req.authUser })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   login,
   getAll,
-  create
+  create,
+  getByToken
 }
 
 function normalizeError (error) {

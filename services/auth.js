@@ -3,6 +3,10 @@ const authModule = require('../modules/auth')
 const usersRepository = require('../repositories/users')
 const rolesRepository = require('../repositories/roles')
 
+const organizationRepository = require('../repositories/organizations')
+const { createTemplateWelcome } = require('../modules/welcome-signup')
+const { organizationId } = require('../config/config')
+const { send } = require('../modules/emails')
 const login = async (credentials) => {
   const errorMsg = 'Email and/or Password incorrect'
   const user = await usersRepository.findByEmail(credentials.email)
@@ -50,7 +54,18 @@ const create = async (body) => {
   const token = getToken(body.email)
 
   if (createdUser) {
-    return { createdUser, token }
+    try {
+      const organization = await organizationRepository.getById(organizationId)
+      const headersEmail = {
+        to: body.email,
+        subject: 'Bienvenido',
+        html: await createTemplateWelcome(organization)
+      }
+      await send(headersEmail)
+      return { createdUser, token }
+    } catch (err) {
+      // implement a service for catch this error
+    }
   }
 }
 
