@@ -11,4 +11,5 @@ router.get('/:id', slidesController.getById)
 router.put('/:id', slideValidations.updateSlide, authMiddleware.isAdmin, slidesController.update)
 router.post('/create', slideValidations.createSlide, slidesController.create)
 
+
 module.exports = router
