@@ -1,8 +1,13 @@
-const getOffset = (page, limit) => {
-  if (!page || page === '1' || page === '0' || page < 0) return 0
 
-  const defaultValue = Math.abs(limit * page) - limit
-  return isNaN(defaultValue) ? 0 : defaultValue
+const getPageValidate = ({ page }) => {
+  if (page === undefined) return true
+  const reg = /^[0-9]*$/
+  return reg.exec(page) !== null
+}
+
+const getOffset = ({ page }, limit) => {
+  if (page === undefined) return 0
+  return page === '0' ? 0 : (page * limit) - limit
 }
 
 const getUrl = (req) => {
@@ -33,8 +38,25 @@ const getUrlPage = (fun, data) => {
 }
 
 const paginate = async (repository, req, limit) => {
-  const { page } = req.query
-  const offset = getOffset(page, limit)
+  const validPage = getPageValidate(req.query)
+
+  if (!validPage) {
+    const error = new Error()
+    error.status = 400
+    error.validationError = {
+      errors: [
+        {
+          value: req.query.page,
+          msg: 'invalid number',
+          param: 'page',
+          location: 'query'
+        }
+      ]
+    }
+    throw error
+  }
+
+  const offset = getOffset(req.query, limit)
   const { count, rows } = await repository(offset, limit)
   const url = getUrl(req)
   const data = { count, limit, offset, url }
@@ -42,9 +64,15 @@ const paginate = async (repository, req, limit) => {
   const previousPage = getUrlPage(getPreviousPage, data)
   const nextPage = getUrlPage(getNextPage, data)
 
+  const totalPage = Math.ceil(count / limit)
+
   return {
-    previousPage,
-    nextPage,
+    pagesUrl: {
+      previous: previousPage,
+      next: nextPage
+    },
+    itemsCount: count,
+    totalPages: totalPage,
     data: rows
   }
 }
