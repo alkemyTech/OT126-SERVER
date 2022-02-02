@@ -4,8 +4,9 @@ const bcrypt = require('bcrypt')
 
 const update = async (id, body, token) => {
   const payload = await getTokenPayload(token)
-  const user = await usersRepository.getById(payload.userId)
-  body.password = await checkPasswords(body, user)
+  const pass = await usersRepository.getPass(payload.userId)
+
+  body.password = await checkPasswords(body, pass)
 
   const rowCounts = await usersRepository.update(id, body)
 
@@ -18,7 +19,7 @@ const update = async (id, body, token) => {
   return await usersRepository.getById(id)
 }
 
-const checkPasswords = async (body, user) => {
+const checkPasswords = async (body, pass) => {
   if (body.password) {
     if (!body.currentPassword) {
       const error = new Error('Insert current password')
@@ -26,13 +27,12 @@ const checkPasswords = async (body, user) => {
       throw error
     }
 
-    return comparePasswords(body, user)
+    return comparePasswords(body, pass)
   }
 }
 
-const comparePasswords = async (body, user) => {
-  const passwordsMatch = bcrypt.compareSync(body.currentPassword, user.password)
-
+const comparePasswords = async (body, pass) => {
+  const passwordsMatch = bcrypt.compareSync(body.currentPassword, pass.password)
   if (!passwordsMatch) {
     const error = new Error('The current password is incorrect')
     error.status = 400
@@ -42,16 +42,7 @@ const comparePasswords = async (body, user) => {
   return bcrypt.hashSync(body.password, 12)
 }
 
-const remove = async (id) => {
-  const user = await usersRepository.remove(id)
-  if (!user) {
-    const error = new Error('Can\'t remove the user with id provided.')
-    error.status = 400
-    throw error
-  }
-  return user
-}
 module.exports = {
-  update,
-  remove
+  update
+
 }
