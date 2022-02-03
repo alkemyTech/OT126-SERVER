@@ -14,16 +14,19 @@ const storage = new S3({
   region
 })
 
-// example -> {path: '/temp/123123.jpg', ext: '.jgp'}
+// file param example -> { path: '/temp/123123.jpg', ext: '.jgp', contentType: 'image/jpeg' }
+// return { Location: 'file url', otherProps }
 const uploadFile = async (file) => {
   const fileStream = fs.createReadStream(file.path)
   const fileName = uuidv4() + file.ext
+  const fileContentType = file.contentType
 
   const uploadParams = {
     ACL: 'public-read',
     Bucket: bucketName,
     Body: fileStream,
-    Key: fileName
+    Key: fileName,
+    ContentType: fileContentType
   }
 
   return storage.upload(uploadParams).promise()

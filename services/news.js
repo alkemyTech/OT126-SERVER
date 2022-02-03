@@ -1,8 +1,9 @@
 const { paginate } = require('../modules/pagination')
 const newsRepository = require('../repositories/news')
 const categoriesRepository = require('../repositories/categories')
+const filesModule = require('../modules/files')
 
-const create = async (noveltyToCreate) => {
+const create = async (noveltyToCreate, imageFile) => {
   const newsCategory = await categoriesRepository.findByName('news')
   if (newsCategory && newsCategory.id) {
     noveltyToCreate.categoryId = newsCategory.id
@@ -10,17 +11,20 @@ const create = async (noveltyToCreate) => {
     // @TODO LOG TO DEVS. category 'news' not found
     noveltyToCreate.categoryId = null
   }
+  noveltyToCreate.image = await filesModule.uploadFile(imageFile)
   const noveltyCreated = await newsRepository.create(noveltyToCreate)
   return noveltyCreated
 }
 
 const remove = async (id) => {
-  const newsRemovedCount = await newsRepository.remove(id)
-  if (newsRemovedCount <= 0) {
+  const currentNovelty = await newsRepository.getById(id)
+  if (currentNovelty === null) {
     const error = new Error(`Novelty with id ${id} not found`)
     error.status = 404
     throw error
   }
+  await filesModule.deleteFile(currentNovelty.image)
+  await newsRepository.remove(id)
 }
 
 const getById = async (id) => {
@@ -33,7 +37,7 @@ const getById = async (id) => {
   return novelty
 }
 
-const update = async (id, noveltyToUpdate) => {
+const update = async (id, noveltyToUpdate, imageFile) => {
   if (noveltyToUpdate.categoryId) {
     const categorySelected = await categoriesRepository.getById(noveltyToUpdate.categoryId)
     if (categorySelected === null) {
@@ -42,12 +46,14 @@ const update = async (id, noveltyToUpdate) => {
       throw error
     }
   }
-  const newsUpdatedCount = await newsRepository.update(id, noveltyToUpdate)
-  if (newsUpdatedCount <= 0) {
+  const currentNovelty = await newsRepository.getById(id)
+  if (currentNovelty === null) {
     const error = new Error(`Novelty with id ${id} not found`)
     error.status = 404
     throw error
   }
+  noveltyToUpdate.image = await filesModule.updateImageHandler(imageFile || noveltyToUpdate.image, currentNovelty.image)
+  await newsRepository.update(id, noveltyToUpdate)
   const noveltyUpdated = await newsRepository.getById(id)
   return noveltyUpdated
 }

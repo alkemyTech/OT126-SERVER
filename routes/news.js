@@ -4,13 +4,14 @@ const router = express.Router()
 
 const newsController = require('../controllers/news')
 const newsValidations = require('../middlewares/news-validations')
-const authMiddleware = require('../middlewares/auth')
+const authMidd = require('../middlewares/auth')
+const filesMidd = require('../middlewares/files')
 
-router.post('/', authMiddleware.isAdmin, newsValidations.create, newsController.create)
-router.delete('/:id', authMiddleware.isAdmin, newsValidations.remove, newsController.remove)
-router.get('/:id', authMiddleware.isAdmin, newsValidations.getById, newsController.getById)
-router.put('/:id', authMiddleware.isAdmin, newsValidations.update, newsController.update)
-router.get('/', authMiddleware.isAuth, newsController.getAll)
-router.get('/:id/comments', authMiddleware.isAuth, newsController.getCommentsByNoveltyId)
+router.post('/', authMidd.isAdmin, filesMidd.validateImage({ required: true }), newsValidations.create, newsController.create)
+router.delete('/:id', authMidd.isAdmin, newsValidations.remove, newsController.remove)
+router.get('/:id', authMidd.isAdmin, newsValidations.getById, newsController.getById)
+router.put('/:id', authMidd.isAdmin, filesMidd.validateImage(), newsValidations.update, newsController.update)
+router.get('/', authMidd.isAuth, newsController.getAll)
+router.get('/:id/comments', authMidd.isAuth, newsController.getCommentsByNoveltyId)
 
 module.exports = router

@@ -12,7 +12,7 @@ const content = body('content')
   .notEmpty().withMessage('cannot be empty').bail()
 
 const image = body('image')
-  .exists().withMessage('param required').bail()
+  .if((value, { req }) => !req.file)
   .isString().withMessage('must be a string').bail()
   .isLength({ min: 1, max: 1234 }).withMessage('length range: 1-1234').bail()
 
@@ -21,6 +21,7 @@ const idParam = param('id')
   .isInt().withMessage('must be an integer').bail()
 
 const categoryId = body('categoryId')
+  .toInt()
   .custom(value => {
     if ((typeof value === 'number' && value > 0) || value === null) {
       return true
@@ -28,7 +29,7 @@ const categoryId = body('categoryId')
     throw new Error('must be an integer greater than 0 or null')
   })
 
-const create = [name, content, image, executeValidation]
+const create = [name, content, executeValidation]
 
 const remove = [idParam, executeValidation]
 
