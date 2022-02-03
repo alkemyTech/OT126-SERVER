@@ -37,24 +37,26 @@ const getUrlPage = (fun, data) => {
   return `${data.url}${UrlPage}`
 }
 
+const errorMessage = (value, msg) => {
+  const error = new Error()
+  error.status = 400
+  error.validationError = {
+    errors: [
+      {
+        value,
+        msg: msg,
+        param: 'page',
+        location: 'query'
+      }
+    ]
+  }
+  return error
+}
+
 const paginate = async (repository, req, limit) => {
   const validPage = getPageValidate(req.query)
 
-  if (!validPage) {
-    const error = new Error()
-    error.status = 400
-    error.validationError = {
-      errors: [
-        {
-          value: req.query.page,
-          msg: 'invalid number',
-          param: 'page',
-          location: 'query'
-        }
-      ]
-    }
-    throw error
-  }
+  if (!validPage) throw errorMessage(req.query.page, 'invalid number')
 
   const offset = getOffset(req.query, limit)
   const { count, rows } = await repository(offset, limit)
@@ -65,6 +67,8 @@ const paginate = async (repository, req, limit) => {
   const nextPage = getUrlPage(getNextPage, data)
 
   const totalPage = Math.ceil(count / limit)
+
+  if (rows.length === 0) throw errorMessage(req.query.page, 'the page does not exist')
 
   return {
     pagesUrl: {
