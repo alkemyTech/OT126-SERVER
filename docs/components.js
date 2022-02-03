@@ -10,27 +10,27 @@ module.exports = {
     schemas: {
       Id: {
         type: 'number',
-        description: 'An id of a categorie',
+        description: 'ID',
         example: '1'
       },
       Image: {
-        type: ''
+        type: 'string',
+        description: 'Save Url String',
+        example: 'www.google.com'
       },
-      ErrorValidateJWT: {
+      ErrorJWT: {
         type: 'object',
-        description: 'Something went wrong with the token',
         properties: {
           message: {
             type: 'string',
-            description: 'Message of error',
+            description: 'Jwt expired or Bearer Token Invalid',
             example:
-            'Internal Server Error'
+            'Jwt expired or Bearer Token Invalid'
           }
         }
       },
       ErrorNoFoundJWT: {
         type: 'object',
-        description: 'Token Authorization not found',
         properties: {
           message: {
             type: 'string',

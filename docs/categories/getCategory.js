@@ -26,25 +26,12 @@ module.exports = {
           }
         }
       },
-      404: {
-        description: 'Didn\'t find any Categories',
+      401: {
+        description: 'The token has expired or Token Error',
         content: {
           'application/json': {
             schema: {
-              type: 'object',
-              properties: {
-                ErrorCharacters: {
-                  type: 'object',
-                  description: '',
-                  properties: {
-                    message: {
-                      type: 'string',
-                      description: 'Message of error',
-                      example: 'Did\'t find any Categories'
-                    }
-                  }
-                }
-              }
+              $ref: '#/components/schemas/ErrorJWT'
             }
           }
         }
@@ -55,16 +42,6 @@ module.exports = {
           'application/json': {
             schema: {
               $ref: '#/components/schemas/ErrorNoFoundJWT'
-            }
-          }
-        }
-      },
-      500: {
-        description: 'Token Error',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorValidateJWT'
             }
           }
         }
