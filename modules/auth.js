@@ -8,8 +8,13 @@ function createToken (payload) {
 /* verifyToken return a payload object with userId,
     creation time "iat" and expiry time "exp" */
 function verifyToken (tokenUser) {
-  const payload = jwt.verify(tokenUser, token.secret)
-  return payload
+  try {
+    return jwt.verify(tokenUser, token.secret)
+  } catch (err) {
+    if (err.message !== 'jwt expired') err.message = 'Bearer Token Invalid'
+    err.status = 401
+    throw err
+  }
 }
 
 module.exports = {
