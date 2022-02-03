@@ -2,33 +2,32 @@ module.exports = {
   get: {
     security: [{ bearerAuth: [] }],
     tags: ['Categories'],
-    description: 'Get one categorie',
+    description: 'Get one Categories',
     operationId: 'getById',
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/CategorieId'
+          $ref: '#/components/schemas/Id'
         },
         required: true,
-        description: 'A categorie id'
+        description: 'A Categories id'
       }
     ],
     responses: {
       200: {
-        description: 'Get one categorie',
+        description: 'Get one Categories',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/Categorie'
+              $ref: '#/components/schemas/Categories'
             }
           }
         }
       },
-
       404: {
-        description: 'Didn\'t find any categorie',
+        description: 'Didn\'t find any Categories',
         content: {
           'application/json': {
             schema: {
@@ -41,16 +40,31 @@ module.exports = {
                     message: {
                       type: 'string',
                       description: 'Message of error',
-                      example: 'Did\'t find any categorie'
-                    },
-                    status: {
-                      type: 'number',
-                      description: 'Number of error',
-                      example: '404'
+                      example: 'Did\'t find any Categories'
                     }
                   }
                 }
               }
+            }
+          }
+        }
+      },
+      403: {
+        description: 'Token Error not found',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/ErrorNoFoundJWT'
+            }
+          }
+        }
+      },
+      500: {
+        description: 'Token Error',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/ErrorValidateJWT'
             }
           }
         }

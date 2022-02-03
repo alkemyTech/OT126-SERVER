@@ -1,7 +1,7 @@
-const getCategories = require('./getCategories')
+const getCategory = require('./getCategory')
 module.exports = {
   '/categories/{id}': {
-    ...getCategories
+    ...getCategory
   }
 
 }
