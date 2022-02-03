@@ -7,7 +7,7 @@ const testimonialsController = require('../controllers/testimonials')
 
 router.delete('/:id', authMiddleware.isAdmin, testimonialsController.remove)
 router.post('/', authMiddleware.isAdmin, createReqValidation, testimonialsController.create)
-router.get('/', authMiddleware.isAuth, testimonialsController.getAll)
+router.get('/', testimonialsController.getAll)
 router.put('/:id', authMiddleware.isAdmin, updateReqValidation, testimonialsController.update)
 
 module.exports = router

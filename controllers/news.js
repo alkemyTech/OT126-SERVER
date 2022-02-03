@@ -38,8 +38,8 @@ const update = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const news = await newsService.getAll()
-    res.status(200).json({ data: news })
+    const resObj = await newsService.getAll(req)
+    res.status(200).json(resObj)
   } catch (error) {
     next(error)
   }

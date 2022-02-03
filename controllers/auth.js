@@ -30,7 +30,15 @@ const create = async (req, res, next) => {
   try {
     const data = await authService.create(req.body)
 
-    res.status(200).json({ msg: 'User registration successfully. Please login.', data: data/* , token: token */ })
+    res.status(200).json({ msg: 'User registration successfully. Please login.', data: data })
+  } catch (error) {
+    next(error)
+  }
+}
+
+const getByToken = async (req, res, next) => {
+  try {
+    res.status(200).json({ data: req.authUser })
   } catch (error) {
     next(error)
   }
@@ -39,7 +47,8 @@ const create = async (req, res, next) => {
 module.exports = {
   login,
   getAll,
-  create
+  create,
+  getByToken
 }
 
 function normalizeError (error) {
