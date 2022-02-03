@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt')
 const authModule = require('../modules/auth')
 const usersRepository = require('../repositories/users')
+const rolesRepository = require('../repositories/roles')
+
 const organizationRepository = require('../repositories/organizations')
 const { createTemplateWelcome } = require('../modules/welcome-signup')
 const { organizationId } = require('../config/config')
@@ -35,31 +37,38 @@ const getAll = async () => {
 }
 
 const create = async (body) => {
-  const user = {
-    firstName: body.firstName,
-    lastName: body.lastName,
-    email: body.email,
+  const standardRole = await rolesRepository.getRoleById(body.roleId)
+  const newUser = {
+    ...body,
+    roleId: standardRole.id,
     password: bcrypt.hashSync(body.password, 12)
   }
-  const register = await usersRepository.create(user)
 
-  if (register) {
+  const checkEmail = await usersRepository.findByEmail(body.email)
+  if (checkEmail) {
+    const error = new Error('Something went wrong. User registration failed.')
+    error.status = 400
+    throw error
+  }
+  const createdUser = await usersRepository.create(newUser)
+  const token = getToken(body.email)
+
+  if (createdUser) {
     try {
-      const organization = await organizationRepository.getById(organizationId)
+      const organization = await organizationRepository.getByIdReduced(organizationId)
       const headersEmail = {
-        to: register.email,
+        to: body.email,
         subject: 'Bienvenido',
         html: await createTemplateWelcome(organization)
       }
       await send(headersEmail)
-      return register
+      return { createdUser, token }
     } catch (err) {
-      // implement a service for catch this error
+      const error = new Error('There are some problems. Try again later.')
+      error.status = 400
+      throw err
     }
   }
-  const error = new Error('Something went wrong. User registration failed.')
-  error.status = 400
-  throw error
 }
 
 module.exports = {
