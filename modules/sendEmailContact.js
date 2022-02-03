@@ -10,8 +10,9 @@ const templateContact = async (organization, newContact) => {
     name: newContact.name,
     email: newContact.email
   }
-  const ruteTemplate = await ejs.renderFile(path.join(process.cwd(), 'templates', 'emailContact.ejs'), data)
-  return ruteTemplate
+
+  const ruteTemplate = path.join(process.cwd(), 'templates', 'emailContact.ejs')
+  return await ejs.renderFile(ruteTemplate, data)
 }
 
 module.exports = {
