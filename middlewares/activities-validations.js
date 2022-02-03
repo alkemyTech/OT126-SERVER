@@ -11,13 +11,14 @@ const create = [
     .isString().withMessage('must be a string').bail()
     .notEmpty().withMessage('cannot be empty'),
   body('image')
-    .exists().withMessage('required parameter').bail()
+    .optional()
     .isString().withMessage('must be a string'),
   executeValidation
 ]
 
 const update = [
   param('id')
+    .toInt()
     .isInt().withMessage('must be an integer'),
   ...create
 ]
