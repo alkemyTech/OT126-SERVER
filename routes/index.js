@@ -1,4 +1,5 @@
 const express = require('express')
+const swaggerUi = require('swagger-ui-express')
 
 const router = express.Router()
 
@@ -14,7 +15,10 @@ const backofficeRoute = require('./backoffice')
 const newsRoutes = require('./news')
 const authRoutes = require('./auth')
 const usersRoute = require('./users')
+const docs = require('../docs')
 
+router.use('/api/docs', swaggerUi.serve)
+router.get('/api/docs', swaggerUi.setup(docs))
 router.use('/categories', categoriesRoutes)
 router.use('/organizations', organizationRoutes)
 router.use('/testimonials', testimonialsRoutes)
