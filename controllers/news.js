@@ -2,7 +2,7 @@ const newsService = require('../services/news')
 
 const create = async (req, res, next) => {
   try {
-    const noveltyCreated = await newsService.create(req.body)
+    const noveltyCreated = await newsService.create(req.body, req.file)
     res.status(201).json({ msg: 'Novelty created succesfully', data: noveltyCreated })
   } catch (error) {
     next(error)
@@ -29,7 +29,7 @@ const getById = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const noveltyUpdated = await newsService.update(req.params.id, req.body)
+    const noveltyUpdated = await newsService.update(req.params.id, req.body, req.file)
     res.status(200).json({ msg: 'Novelty updated succesfully', data: noveltyUpdated })
   } catch (error) {
     next(error)
