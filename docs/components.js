@@ -10,7 +10,6 @@ module.exports = {
     schemas: {
       Id: {
         type: 'number',
-        description: 'An id of a categorie',
         example: '1'
       },
       Image: {

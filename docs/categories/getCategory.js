@@ -2,7 +2,7 @@ module.exports = {
   get: {
     security: [{ bearerAuth: [] }],
     tags: ['Categories'],
-    description: 'Get one Categories',
+    description: 'Get one Category',
     operationId: 'getById',
     parameters: [
       {
@@ -12,12 +12,12 @@ module.exports = {
           $ref: '#/components/schemas/Id'
         },
         required: true,
-        description: 'A Categories id'
+        description: 'A Category id'
       }
     ],
     responses: {
       200: {
-        description: 'Get one Categories',
+        description: 'Get one category',
         content: {
           'application/json': {
             schema: {
@@ -27,7 +27,7 @@ module.exports = {
         }
       },
       404: {
-        description: 'Didn\'t find any Categories',
+        description: 'Didn\'t find any Category',
         content: {
           'application/json': {
             schema: {
@@ -40,7 +40,7 @@ module.exports = {
                     message: {
                       type: 'string',
                       description: 'Message of error',
-                      example: 'Did\'t find any Categories'
+                      example: 'Not Found'
                     }
                   }
                 }
