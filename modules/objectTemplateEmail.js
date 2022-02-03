@@ -14,9 +14,8 @@ const sendDataTemplate = async (newContact) => {
     }
     await send(headersEmail)
     console.log({ msg: 'Email sent successfully!' })
-  } catch (err) {
-    const error = new Error('Email sent failed')
-    throw error
+  } catch (error) {
+    console.error({ error: error, msg: 'Email sent failed' })
   }
 }
 
