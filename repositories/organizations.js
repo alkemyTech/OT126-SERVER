@@ -1,3 +1,4 @@
+const { organizationId } = require('../config/config')
 const db = require('../models')
 
 const update = async (id, body) => {
@@ -9,7 +10,9 @@ const update = async (id, body) => {
 
 const getById = async (id) => {
   const data = await db.Organization.findByPk(id, {
-    attributes: ['name', 'image', 'phone', 'address', 'urlFacebook', 'urlLinkedin', 'urlInstagram']
+    attributes: ['name', 'image', 'phone', 'address', 'urlFacebook', 'urlLinkedin', 'urlInstagram'],
+    include: ['Slides'],
+    where: { id: organizationId }
   })
   return data
 }
