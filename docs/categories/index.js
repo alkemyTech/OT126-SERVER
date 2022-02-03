@@ -1,6 +1,6 @@
 const getCategories = require('./getCategories')
 module.exports = {
-  '/:id': {
+  '/categories/{id}': {
     ...getCategories
   }
 
