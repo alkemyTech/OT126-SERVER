@@ -53,6 +53,28 @@ module.exports = {
             example: 'news'
           }
         }
+      },
+      Members: {
+        type: 'object',
+        description: 'This represent a member of organization',
+        properties: {
+          id: {
+            $ref: '#/components/schemas/Id'
+          },
+          name: {
+            type: 'string',
+            description: 'The name of member',
+            example: 'Tamara'
+          },
+          description: {
+            type: 'string',
+            description: 'Some description about member',
+            example: 'Tamara is ....'
+          },
+          image: {
+            $ref: '#/components/schemas/Image'
+          }
+        }
       }
     }
   }
