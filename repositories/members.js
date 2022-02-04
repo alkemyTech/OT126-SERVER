@@ -17,9 +17,13 @@ const getAll = async (offset = 0, limit = 10) => {
     limit: limit
   })
 }
+const getById = async id => {
+  return await db.Members.findByPk(id)
+}
 module.exports = {
   remove,
   create,
   getAll,
-  update
+  update,
+  getById
 }
