@@ -9,7 +9,7 @@ const filesMiddleware = require('../middlewares/files')
 router.get('/', authMiddleware.isAuth, activitiesController.getAll)
 router.post('/',
   authMiddleware.isAdmin,
-  filesMiddleware.validateImage(),
+  filesMiddleware.validateImage({ required: true }),
   activitiesValidations.create,
   activitiesController.create)
 router.put('/:id',
