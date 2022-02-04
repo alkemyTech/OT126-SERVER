@@ -61,7 +61,7 @@ const paginate = async (repository, req, limit) => {
   const offset = getOffset(req.query, limit)
   const { count, rows } = await repository(offset, limit)
 
-  if (rows.length === 0) throw errorMessage(req.query.page, 'the page does not exist')
+  if (rows.length === 0 && offset !== 0) throw errorMessage(req.query.page, 'the page does not exist')
 
   const url = getUrl(req)
   const data = { count, limit, offset, url }
