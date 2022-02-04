@@ -21,7 +21,7 @@ const remove = async (id) => {
     error.status = 404
     throw error
   }
-  await filesModule.deleteFile(member.image)
+  // await filesModule.deleteFile(member.image)
   await membersRepository.remove(id)
 }
 
