@@ -1,16 +1,21 @@
 const testimonialsRepo = require('../repositories/testimonials')
 const { paginate } = require('../modules/pagination')
+const filesModule = require('../modules/files')
 
 const remove = async (id) => {
+  filesModule.remove(testimonialsRepo.getImage(id))
   await testimonialsRepo.remove(id)
 }
 
-const create = async (body) => {
+const create = async (body, imageFile) => {
+  body.image = await filesModule.uploadFile(imageFile)
   const testimonial = await testimonialsRepo.create(body)
   return testimonial
 }
 
 const update = async (id, body) => {
+  const actualImage = await testimonialsRepo.getImage(id)
+  body.image = await filesModule.updateImageHandler(body.image, actualImage)
   const rowsCount = await testimonialsRepo.update(id, body)
 
   if (rowsCount[0] == 0) {
