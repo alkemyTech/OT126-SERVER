@@ -40,6 +40,17 @@ module.exports = {
           }
         }
       },
+      ErrorIsAdmin: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Message of error',
+            example:
+            'Role admin required'
+          }
+        }
+      },
       Categories: {
         type: 'object',
         description: 'Movie data',
@@ -51,6 +62,27 @@ module.exports = {
             type: 'string',
             description: 'name of the categorie',
             example: 'news'
+          }
+        }
+      },
+      Testimonials: {
+        type: 'object',
+        description: 'Representation of testimonial ',
+        properties: {
+          name: {
+            type: 'String',
+            description: 'Testimonial name',
+            example: 'Rodrigo Velazquez'
+          },
+          content: {
+            type: 'string',
+            description: 'Testimonial content',
+            example: 'Soy Licenciado en Relaciones Institucionales y trabajo vinculando a la fundación...'
+          },
+          Image: {
+            type: 'string',
+            description: 'Save Url String',
+            example: 'www.google.com'
           }
         }
       }
