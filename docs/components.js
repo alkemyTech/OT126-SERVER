@@ -78,6 +78,26 @@ module.exports = {
             example: 'contraseña123'
           }
         }
+      },
+      Users: {
+        type: 'object',
+        properties: {
+          firstName: {
+            type: 'string',
+            description: 'The user name',
+            example: 'Marcelo'
+          },
+          email: {
+            type: 'string',
+            description: 'The user email',
+            example: 'MarceloPerez@gmail.com'
+          },
+          image: {
+            type: 'string',
+            description: 'The user password',
+            example: 'https://i.pinimg.com/280x280_RS/6a/77/98/loremimpsuum45215loreml812lorem.jpg'
+          }
+        }
       }
     }
   }
