@@ -4,13 +4,27 @@ module.exports = {
     tags: ['Members'],
     description: 'Get all Members',
     operationId: 'getAll',
+    produces: ['application/json'],
+    parameters: [
+      {
+        name: 'page',
+        type: 'integer',
+        in: 'path',
+        description: 'Number of page to find. Default 1. Integer',
+        summary: '10 members by page',
+        required: false
+      }
+    ],
     responses: {
       200: {
         description: 'Get all members',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/Members'
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/Members'
+              }
             }
           }
         }
