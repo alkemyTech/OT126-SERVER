@@ -36,8 +36,13 @@ const isOwnComment = async (req, res, next) => {
       throw error
     }
     const comment = await commentsRepository.getById(id)
+    if (!comment) {
+      const error = new Error('comment not found')
+      error.status = 404
+      throw error
+    }
 
-    if (comment.user_id === userFound.id) {
+    if (comment && comment.user_id === userFound.id) {
       return next()
     }
     const { roleId } = userFound.dataValues
