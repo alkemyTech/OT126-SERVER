@@ -1,3 +1,4 @@
+const register = require('./register')
 module.exports = {
   '/auth': {
 
@@ -6,7 +7,7 @@ module.exports = {
 
   },
   '/auth/register': {
-
+    ...register
   },
   '/auth/me': {
 

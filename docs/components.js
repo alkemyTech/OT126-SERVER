@@ -53,6 +53,31 @@ module.exports = {
             example: 'news'
           }
         }
+      },
+      Register: {
+        type: 'object',
+        properties: {
+          firstName: {
+            type: 'string',
+            description: 'The user name',
+            example: 'Marcelo'
+          },
+          lastName: {
+            type: 'string',
+            description: 'The user lastName',
+            example: 'Perez'
+          },
+          email: {
+            type: 'string',
+            description: 'The user email',
+            example: 'MarceloPerez@gmail.com'
+          },
+          password: {
+            type: 'string',
+            description: 'The user password',
+            example: 'contraseña123'
+          }
+        }
       }
     }
   }
