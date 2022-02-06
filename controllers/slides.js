@@ -35,7 +35,7 @@ const getById = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const data = await slidesService.update(req.params.id, req.body)
+    const data = await slidesService.update(req.params.id, req.body, req.files)
 
     res.status(200).json({ msg: `Slide ${req.params.id} updated succesfully`, data: data.updates })
   } catch (error) {
@@ -45,7 +45,7 @@ const update = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const data = await slidesService.create(req.body)
+    const data = await slidesService.create(req.body, req.files)
 
     res.status(200).json({ msg: 'Slide successfully created', data: data })
   } catch (error) {
