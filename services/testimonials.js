@@ -3,7 +3,7 @@ const { paginate } = require('../modules/pagination')
 const filesModule = require('../modules/files')
 
 const remove = async (id) => {
-  filesModule.remove(testimonialsRepo.getImage(id))
+  filesModule.deleteFile(testimonialsRepo.getImage(id))
   await testimonialsRepo.remove(id)
 }
 
@@ -13,12 +13,12 @@ const create = async (body, imageFile) => {
   return testimonial
 }
 
-const update = async (id, body) => {
+const update = async (id, body, imageFile) => {
   const actualImage = await testimonialsRepo.getImage(id)
-  body.image = await filesModule.updateImageHandler(body.image, actualImage)
+  body.image = await filesModule.updateImageHandler(imageFile || body.image, actualImage)
   const rowsCount = await testimonialsRepo.update(id, body)
 
-  if (rowsCount[0] == 0) {
+  if (rowsCount[0] === 0) {
     throw new Error(`Testimonial ${id} don't exist`)
   };
 
