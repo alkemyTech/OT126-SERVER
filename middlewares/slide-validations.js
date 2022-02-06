@@ -7,15 +7,15 @@ const image = body('image')
 
 const createSlide = [
   check('imageUrl').notEmpty().withMessage('This camp is required and has to be a string'),
-  check('text').notEmpty().matches(/^[A-Z]+$/i).withMessage('This camp is required and has to be a string'),
+  check('text').notEmpty().withMessage('This camp is required and has to be a string'),
   check('order').notEmpty().isNumeric().withMessage('This camp is required and has to be a number'),
   check('organizationId').notEmpty().isNumeric().withMessage('This camp is required and has to be a number'),
   image, executeValidation
 ]
 
 const updateSlide = [
-  check('imageUrl').optional().withMessage('This camp has to be a string'),
-  check('text').matches(/^[A-Z]+$/i).optional().withMessage('This camp has to be a string'),
+  check('imageUrl').isString().optional().withMessage('This camp has to be a string'),
+  check('text').isString().optional().withMessage('This camp has to be a string'),
   check('order').isNumeric().optional().withMessage('This camp has to be a number'),
   check('organizationId').isNumeric().optional().withMessage('This camp has to be a number'),
   image, executeValidation
