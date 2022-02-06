@@ -40,6 +40,10 @@ app.use((err, req, res, next) => {
     err.message = 'Internal Server Error'
   }
 
+  if (err.validationError) {
+    return res.status(err.status).json(err.validationError)
+  }
+
   res.status(err.status).json({ error: err.message })
 })
 

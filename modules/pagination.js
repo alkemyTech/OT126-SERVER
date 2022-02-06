@@ -1,8 +1,13 @@
-const getOffset = (page, limit) => {
-  if (!page || page === '1' || page === '0' || page < 0) return 0
 
-  const defaultValue = Math.abs(limit * page) - limit
-  return isNaN(defaultValue) ? 0 : defaultValue
+const getPageValidate = ({ page }) => {
+  if (page === undefined) return true
+  const reg = /^[0-9]*$/
+  return reg.exec(page) !== null
+}
+
+const getOffset = ({ page }, limit) => {
+  if (page === undefined) return 0
+  return page === '0' ? 0 : (page * limit) - limit
 }
 
 const getUrl = (req) => {
@@ -32,19 +37,47 @@ const getUrlPage = (fun, data) => {
   return `${data.url}${UrlPage}`
 }
 
+const errorMessage = (value, msg) => {
+  const error = new Error()
+  error.status = 400
+  error.validationError = {
+    errors: [
+      {
+        value,
+        msg: msg,
+        param: 'page',
+        location: 'query'
+      }
+    ]
+  }
+  return error
+}
+
 const paginate = async (repository, req, limit) => {
-  const { page } = req.query
-  const offset = getOffset(page, limit)
+  const validPage = getPageValidate(req.query)
+
+  if (!validPage) throw errorMessage(req.query.page, 'invalid number')
+
+  const offset = getOffset(req.query, limit)
   const { count, rows } = await repository(offset, limit)
+
+  if (rows.length === 0 && offset !== 0) throw errorMessage(req.query.page, 'the page does not exist')
+
   const url = getUrl(req)
   const data = { count, limit, offset, url }
 
   const previousPage = getUrlPage(getPreviousPage, data)
   const nextPage = getUrlPage(getNextPage, data)
 
+  const totalPage = Math.ceil(count / limit)
+
   return {
-    previousPage,
-    nextPage,
+    pagesUrl: {
+      previous: previousPage,
+      next: nextPage
+    },
+    itemsCount: count,
+    totalPages: totalPage,
     data: rows
   }
 }
