@@ -40,6 +40,17 @@ module.exports = {
           }
         }
       },
+      ErrorIsOwnComment: {
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Message of error',
+            example:
+            'it isnt your comment or you are not an admin'
+          }
+        }
+      },
       Categories: {
         type: 'object',
         description: 'Movie data',
@@ -51,6 +62,28 @@ module.exports = {
             type: 'string',
             description: 'name of the categorie',
             example: 'news'
+          }
+        }
+      },
+      Comments: {
+        type: 'object',
+        description: 'comments data',
+        required: true,
+        properties: {
+          user_id: {
+            type: 'integer',
+            description: 'id of author',
+            example: '1'
+          },
+          novelty_id: {
+            type: 'integer',
+            description: 'id of new',
+            example: '2'
+          },
+          body: {
+            type: 'string',
+            description: 'user typed message',
+            example: 'my messagge'
           }
         }
       }

@@ -1,9 +1,9 @@
 const { body } = require('express-validator')
 const { executeValidation } = require('./validation-index')
-const userRepository = require("../repositories/users")
-const rolesRepository = require("../repositories/roles")
-const commentsRepository = require("../repositories/comments")
-const { getTokenPayload } = require("./auth")
+const userRepository = require('../repositories/users')
+const rolesRepository = require('../repositories/roles')
+const commentsRepository = require('../repositories/comments')
+const { getTokenPayload } = require('./auth')
 const { adminRoleName } = require('../config/config')
 
 const validateComments = [
