@@ -98,6 +98,21 @@ module.exports = {
             example: 'https://i.pinimg.com/280x280_RS/6a/77/98/loremimpsuum45215loreml812lorem.jpg'
           }
         }
+      },
+      Login: {
+        type: 'object',
+        properties: {
+          email: {
+            type: 'string',
+            description: 'The user email',
+            example: 'MarceloPerez@gmail.com'
+          },
+          password: {
+            type: 'string',
+            description: 'The user password',
+            example: 'contraseña123'
+          }
+        }
       }
     }
   }
