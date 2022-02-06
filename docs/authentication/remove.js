@@ -1,8 +1,8 @@
 module.exports = {
-  put: {
+  delete: {
     security: [{ bearerAuth: [] }],
     tags: ['Authentication'],
-    description: 'Update of users',
+    description: 'Remove of users',
     parameters: [
       {
         name: 'id',
@@ -12,20 +12,11 @@ module.exports = {
         },
         required: true,
         description: 'A user id'
-      },
-      {
-        name: 'user',
-        in: 'body',
-        schema: {
-          $ref: '#/components/schemas/Register'
-        },
-        required: false,
-        description: 'Data needed to update a user'
       }
     ],
     responses: {
       200: {
-        description: 'New user updated',
+        description: 'New user removed',
         content: {
           'application/json': {
             schema: {
@@ -33,13 +24,8 @@ module.exports = {
               properties: {
                 msg: {
                   type: 'string',
-                  description: 'The user update confirmation',
-                  example: 'User {id} updated succesfully'
-                },
-                email: {
-                  type: 'string',
-                  description: 'The user email',
-                  example: 'MarceloNewEmail@gmail.com'
+                  description: 'The user remove confirmation',
+                  example: 'User {id} was removed succesfully'
                 }
               }
             }
@@ -47,7 +33,7 @@ module.exports = {
         }
       },
       404: {
-        description: 'Missing or invalid data',
+        description: 'Missing or invalid ID',
         content: {
           'application/json': {
             schema: {
@@ -56,7 +42,7 @@ module.exports = {
                 msg: {
                   type: 'string',
                   description: 'Message of error',
-                  example: 'The user dont exist'
+                  example: 'Can\'t remove the user with id provided.'
                 }
               }
             }

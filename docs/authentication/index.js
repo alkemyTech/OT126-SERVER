@@ -2,6 +2,7 @@ const getAll = require('./getAll')
 const register = require('./register')
 const login = require('./login')
 const update = require('./update')
+const remove = require('./remove')
 module.exports = {
   '/auth': {
     ...getAll
@@ -13,7 +14,7 @@ module.exports = {
     ...register
   },
   '/users/{id}': {
-    ...update
+    ...update,
+    ...remove
   }
-
 }
