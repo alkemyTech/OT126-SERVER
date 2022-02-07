@@ -1,3 +1,5 @@
+const responses = require('./responses')
+
 module.exports = {
   components: {
     securitySchemes: {
@@ -15,30 +17,8 @@ module.exports = {
       },
       Image: {
         type: 'string',
-        description: 'Save Url String',
-        example: 'www.google.com'
-      },
-      ErrorJWT: {
-        type: 'object',
-        properties: {
-          message: {
-            type: 'string',
-            description: 'Jwt expired or Bearer Token Invalid',
-            example:
-            'Jwt expired or Bearer Token Invalid'
-          }
-        }
-      },
-      ErrorNoFoundJWT: {
-        type: 'object',
-        properties: {
-          message: {
-            type: 'string',
-            description: 'Message of error',
-            example:
-            'Please provided a token Bearer in authorization'
-          }
-        }
+        description: 'image url',
+        example: 'https://cohorte-enero-835eb560.s3.amazonaws.com/df112830-8691-4c65-bf79-a80749cebd0c.jpg'
       },
       Categories: {
         type: 'object',
@@ -53,7 +33,42 @@ module.exports = {
             example: 'news'
           }
         }
+      },
+      ValidationError: {
+        type: 'object',
+        properties: {
+          errors: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                msg: {
+                  type: 'string',
+                  example: 'param required'
+                },
+                param: {
+                  type: 'string',
+                  example: 'name'
+                },
+                location: {
+                  type: 'string',
+                  example: 'body'
+                }
+              }
+            }
+          }
+        }
+      },
+      BadRequest: {
+        type: 'object',
+        properties: {
+          error: {
+            type: 'string',
+            example: 'Related entity with id 500 not found. Not updated'
+          }
+        }
       }
-    }
+    },
+    ...responses
   }
 }
