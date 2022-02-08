@@ -16,8 +16,10 @@ const getById = async (id) => {
 }
 
 const create = async (body, imageFile) => {
-  body.image = await filesModule.uploadFile(imageFile)
-  return await slidesRepository.create(body)
+  const imageUrl = await filesModule.uploadFile(imageFile)
+  body.imageUrl = imageUrl
+  const createSlide = await slidesRepository.create(body)
+  return createSlide
 }
 
 const update = async (id, body, imageFile) => {
@@ -28,7 +30,7 @@ const update = async (id, body, imageFile) => {
     error.status = 400
     throw error
   }
-  body.image = await filesModule.updateImageHandler(imageFile || body.image, updates.image)
+  body.imageUrl = await filesModule.updateImageHandler(imageFile || body.imageUrl, updates.imageUrl)
   return { data, updates }
 }
 
