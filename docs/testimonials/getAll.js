@@ -1,3 +1,5 @@
+const testimonialSchemas = require('./schemas')
+
 module.exports = {
   get: {
     security: [{ bearerAuth: [] }],
@@ -9,9 +11,7 @@ module.exports = {
         description: 'Get all testimonials',
         content: {
           'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Testimonials'
-            }
+            schema: testimonialSchemas.testimonialsGetAll
           }
         }
       }

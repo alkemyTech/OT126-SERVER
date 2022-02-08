@@ -1,22 +1,21 @@
+const testimonialsSchemas = require('./schemas')
+
 module.exports = {
   post: {
     security: [{ bearerAuth: [] }],
+    tags: ['Testimonial'],
     description: 'Create a testimonial',
     operationId: 'create',
-    tags: ['Testimonials'],
     requestBody: {
-      required: true,
       content: {
-        'application/json': {
-          schema: {
-            $ref: '#/components/schemas/Testimonials'
-          }
+        'multipart/form-data': {
+          schema: testimonialsSchemas.testimonialsCreate
         }
       }
     },
     responses: {
-      200: {
-        description: 'Testimonial created',
+      201: {
+        description: 'Detail of created testimonial (Multiple schemas)',
         content: {
           'application/json': {
             schema: {
@@ -24,43 +23,28 @@ module.exports = {
               properties: {
                 msg: {
                   type: 'string',
-                  description: 'The message of response',
-                  example: 'Testimonial created successfully'
+                  example: 'Entity created succesfully'
                 },
-                data: {
-                  $ref: '#/components/schemas/Testimonials'
-                }
+                data: testimonialsSchemas.testimonialsCreate
               }
             }
           }
         }
       },
-      422: {
-        description: 'Validation Error',
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              properties: {
-                msg: {
-                  type: 'string',
-                  description: 'Describe the validation error',
-                  example: 'the field must be string'
-                }
-              }
-            }
-          }
-        }
+      400: {
+        $ref: '#/components/responses/ValidationOrBadRequest'
+      },
+      401: {
+        $ref: '#/components/responses/Unauthorized'
       },
       403: {
-        description: 'Admin role is required',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorIsAdmin'
-            }
-          }
-        }
+        $ref: '#/components/responses/Forbidden'
+      },
+      404: {
+        $ref: '#/components/responses/NotFound'
+      },
+      500: {
+        $ref: '#/components/responses/InternalServerError'
       }
     }
   }

@@ -1,64 +1,35 @@
 module.exports = {
   delete: {
     security: [{ bearerAuth: [] }],
-    description: 'Remove a testimonial by ID',
-    operationId: 'remove',
     tags: ['Testimonials'],
+    description: 'Remove one testimonial',
+    operationId: 'remove',
     parameters: [
       {
         name: 'id',
         in: 'path',
-        description: 'The ID of a testimonial',
-        required: true,
         schema: {
           $ref: '#/components/schemas/Id'
-        }
+        },
+        required: true,
+        description: 'Entity Id'
       }
     ],
     responses: {
       200: {
-        description: 'Testimonial removed succesfully',
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              properties: {
-                msg: {
-                  type: 'string',
-                  description: 'The message of response',
-                  example: 'Testimonial ID removed successfully'
-                }
-              }
-            }
-          }
-        }
+        $ref: '#/components/responses/Removed'
       },
-      404: {
-        description: 'Testimonial not found',
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              properties: {
-                msg: {
-                  type: 'string',
-                  description: 'The message of response',
-                  example: 'Not Found'
-                }
-              }
-            }
-          }
-        }
+      401: {
+        $ref: '#/components/responses/Unauthorized'
       },
       403: {
-        description: 'Admin role is required',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorIsAdmin'
-            }
-          }
-        }
+        $ref: '#/components/responses/Forbidden'
+      },
+      404: {
+        $ref: '#/components/responses/NotFound'
+      },
+      500: {
+        $ref: '#/components/responses/InternalServerError'
       }
     }
   }
