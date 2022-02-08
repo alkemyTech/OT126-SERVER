@@ -1,10 +1,10 @@
+const memberSchema = require('./schema')
 module.exports = {
   get: {
     security: [{ bearerAuth: [] }],
     tags: ['Members'],
     description: 'Get all Members',
     operationId: 'getAll',
-    produces: ['application/json'],
     parameters: [
       {
         name: 'page',
@@ -23,31 +23,20 @@ module.exports = {
             schema: {
               type: 'array',
               items: {
-                $ref: '#/components/schemas/Members'
+                schema: memberSchema.Members
               }
             }
           }
         }
       },
       401: {
-        description: 'The token has expired or Token Error',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorJWT'
-            }
-          }
-        }
+        $ref: '#/components/responses/Unauthorized'
       },
       403: {
-        description: 'Token Error not found',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorNoFoundJWT'
-            }
-          }
-        }
+        $ref: '#/components/responses/Forbidden'
+      },
+      500: {
+        $ref: '#/components/responses/InternalServerError'
       }
     }
   }

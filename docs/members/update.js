@@ -1,11 +1,11 @@
+const memberSchema = require('./schema')
+
 module.exports = {
   put: {
     security: [{ bearerAuth: [] }],
     tags: ['Members'],
     description: 'Update a member by ID',
     operationId: 'update',
-    consumes: ['multipart/form-data'],
-    produces: ['application/json'],
     parameters: [
       {
         name: 'id',
@@ -13,31 +13,20 @@ module.exports = {
           $ref: '#/components/schemas/Id'
         },
         in: 'path',
-        description: 'The ID of member to update',
-        required: true
-      },
-      {
-        name: 'name',
-        type: 'string',
-        in: 'formData',
-        description: 'The name of member',
-        required: true
-      },
-      {
-        name: 'description',
-        type: 'string',
-        in: 'formData',
-        description: 'Some description of a member',
-        required: true
-      },
-      {
-        name: 'image',
-        type: 'file',
-        in: 'formData',
-        description: 'The image of member to update',
         required: true
       }
     ],
+    requestBody: {
+      content: {
+        'multipart/form-data': {
+          schema:
+            memberSchema.Members
+        },
+        'application/json': {
+          schema: memberSchema.Members
+        }
+      }
+    },
     responses: {
       201: {
         description: 'Update a member by ID',
@@ -56,39 +45,20 @@ module.exports = {
           }
         }
       },
+      400: {
+        $ref: '#/components/responses/ValidationOrBadRequest'
+      },
       401: {
-        description: 'The token has expired or Token Error',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorJWT'
-            }
-          }
-        }
+        $ref: '#/components/responses/Unauthorized'
       },
       403: {
-        description: 'Token Error not found',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorNoFoundJWT'
-            }
-          }
-        }
+        $ref: '#/components/responses/Forbidden'
       },
       404: {
-        description: 'Not found the ID input',
-        content: {
-          'application/json': {
-            schema: {
-              msg: {
-                description: 'Message of response error',
-                type: 'string',
-                example: 'Not found the ID input.'
-              }
-            }
-          }
-        }
+        $ref: '#/components/responses/NotFound'
+      },
+      500: {
+        $ref: '#/components/respones/InternalServerError'
       }
     }
   }

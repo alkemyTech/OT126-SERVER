@@ -17,34 +17,20 @@ module.exports = {
     ],
     responses: {
       200: {
-        description: 'The user was removed successfully from server',
-        content: {
-          'application/json': {
-
-            schema: {
-              type: 'object',
-              properties: {
-                msg: {
-                  type: 'string',
-                  description: 'The message of response',
-                  example: 'The ID input was removed successfully'
-                }
-              }
-            }
-          }
-        }
+        $ref: '#/components/responses/Removed'
       },
       401: {
-        description: 'The token has expired or isn\'t valid',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorJWT'
-            }
-          }
-        }
+        $ref: '#/components/responses/Unauthorized'
       },
-      403: {}
+      403: {
+        $ref: '#/components/responses/Forbidden'
+      },
+      404: {
+        $ref: '#/components/responses/NotFound'
+      },
+      500: {
+        $ref: '#/components/responses/InternalServerError'
+      }
     }
   }
 }
