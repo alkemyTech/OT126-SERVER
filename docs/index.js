@@ -4,15 +4,14 @@ const components = require('./components')
 const categories = require('./categories/index')
 const servers = require('./servers')
 
-const members = require('./members/index')
 module.exports = {
   ...basicInfo,
   ...servers,
   ...tags,
   ...components,
   paths: {
-    ...categories,
-    ...members
+    ...categories
+
   }
 
 }
