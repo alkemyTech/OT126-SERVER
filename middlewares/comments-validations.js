@@ -2,6 +2,8 @@ const { body } = require('express-validator')
 const { executeValidation } = require('./validation-index')
 const userRepository = require('../repositories/users')
 const rolesRepository = require('../repositories/roles')
+const newsRepository = require('../repositories/news')
+const usersRepository = require('../repositories/users')
 const commentsRepository = require('../repositories/comments')
 const { getTokenPayload } = require('./auth')
 const { adminRoleName } = require('../config/config')
@@ -25,6 +27,25 @@ const validateComments = [
   executeValidation
 ]
 
+const noveltyAndUserExisting = async (req, res, next) => {
+  try {
+    const newId = req.body.novelty_id
+    const userId = req.body.user_id
+    const news = await newsRepository.getById(newId)
+    const user = await usersRepository.getById(userId)
+    if (!news || !user) {
+      const error = new Error('non-existent news or user')
+      error.status = 400
+      throw error
+    }
+    if (news && user) {
+      return next()
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 const isOwnComment = async (req, res, next) => {
   try {
     const payload = await getTokenPayload(req)
@@ -32,7 +53,7 @@ const isOwnComment = async (req, res, next) => {
     const userFound = await userRepository.getById(payload.userId)
     if (!userFound) {
       const error = new Error('user not found')
-      error.status = 404
+      error.status = 400
       throw error
     }
     const comment = await commentsRepository.getById(id)
@@ -58,4 +79,4 @@ const isOwnComment = async (req, res, next) => {
   }
 }
 
-module.exports = { validateComments, isOwnComment }
+module.exports = { validateComments, isOwnComment, noveltyAndUserExisting }

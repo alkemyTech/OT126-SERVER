@@ -18,12 +18,6 @@ const remove = async (id) => {
 }
 
 const update = async (req) => {
-  const comments = await commentsRepository.getById(req.params.id)
-  if (!comments) {
-    const error = new Error('Comment not found')
-    error.status = 404
-    throw error
-  }
   await commentsRepository.update(req.body, req.params.id)
 
   return await commentsRepository.getById(req.params.id)

@@ -1,3 +1,5 @@
+const schemaComment = require('./schema')
+
 module.exports = {
   put: {
     security: [{ bearerAuth: [] }],
@@ -20,10 +22,7 @@ module.exports = {
       required: true,
       content: {
         'application/json': {
-          schema: {
-            type: 'object',
-            $ref: '#/components/schemas/Comments'
-          }
+          schema: schemaComment.Comments
         }
       }
     },
@@ -32,52 +31,29 @@ module.exports = {
         description: 'The comment has been updated',
         content: {
           'application/json': {
-            schema: {
-              type: 'object',
-              $ref: '#/components/schemas/Comments'
-            }
+            schema: schemaComment.Comments
           }
         }
+      },
+      400: {
+        description: 'Bad request or Validation',
+        $ref: '#/components/responses/ValidationOrBadRequest'
       },
       401: {
         description: 'Token Error not found',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorNoFoundJWT'
-            }
-          }
-        }
+        $ref: '#/components/responses/Unauthorized'
       },
       403: {
         description: 'it isnt your comment or you are not an admin',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/ErrorIsOwnComment'
-            }
-          }
-        }
+        $ref: '#/components/responses/Forbidden'
       },
       404: {
         description: 'Comment not found',
-        content: {
-          'application/json': {
-            schema: {
-              type: 'object',
-              properties: {
-                msg: {
-                  type: 'string',
-                  description: 'The message of response',
-                  example: 'Commnet ID dont exist'
-                }
-              }
-            }
-          }
-        }
+        $ref: '#/components/responses/NotFound'
       },
       500: {
-        description: 'Some server error'
+        description: 'Some server error',
+        $ref: '#/components/responses/InternalServerError'
       }
     }
   }

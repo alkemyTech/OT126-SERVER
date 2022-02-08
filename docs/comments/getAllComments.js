@@ -1,8 +1,11 @@
+const schemaComment = require('./schema')
+
 module.exports = {
   get: {
     security: [{ bearerAuth: [] }],
     tags: ['Comments'],
-    description: 'return all comments',
+    description: 'Return all comments',
+    operationId: 'getAll',
     responses: {
       200: {
         description: 'All comments',
@@ -10,15 +13,14 @@ module.exports = {
           'application/json': {
             schema: {
               type: 'array',
-              items: {
-                $ref: '#/components/schemas/Comments'
-              }
+              items: schemaComment.Comments
             }
           }
         }
       },
       500: {
-        description: 'Some server Error'
+        description: 'Some server Error',
+        $ref: '#/components/responses/InternalServerError'
       }
     }
   }
