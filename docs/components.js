@@ -20,20 +20,6 @@ module.exports = {
         description: 'image url',
         example: 'https://cohorte-enero-835eb560.s3.amazonaws.com/df112830-8691-4c65-bf79-a80749cebd0c.jpg'
       },
-      Categories: {
-        type: 'object',
-        description: 'Movie data',
-        properties: {
-          id: {
-            $ref: '#/components/schemas/Id'
-          },
-          name: {
-            type: 'string',
-            description: 'name of the categorie',
-            example: 'news'
-          }
-        }
-      },
       ValidationError: {
         type: 'object',
         properties: {
@@ -42,9 +28,13 @@ module.exports = {
             items: {
               type: 'object',
               properties: {
+                value: {
+                  description: 'value provided',
+                  example: 4
+                },
                 msg: {
                   type: 'string',
-                  example: 'param required'
+                  example: 'must be a string'
                 },
                 param: {
                   type: 'string',
