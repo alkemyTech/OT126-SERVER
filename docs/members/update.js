@@ -19,8 +19,7 @@ module.exports = {
     requestBody: {
       content: {
         'multipart/form-data': {
-          schema:
-            memberSchema.Members
+          schema: memberSchema.Members
         },
         'application/json': {
           schema: memberSchema.Members
@@ -51,14 +50,11 @@ module.exports = {
       401: {
         $ref: '#/components/responses/Unauthorized'
       },
-      403: {
-        $ref: '#/components/responses/Forbidden'
-      },
       404: {
         $ref: '#/components/responses/NotFound'
       },
       500: {
-        $ref: '#/components/respones/InternalServerError'
+        $ref: '#/components/responses/InternalServerError'
       }
     }
   }

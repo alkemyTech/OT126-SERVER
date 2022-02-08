@@ -22,9 +22,6 @@ module.exports = {
       401: {
         $ref: '#/components/responses/Unauthorized'
       },
-      403: {
-        $ref: '#/components/responses/Forbidden'
-      },
       404: {
         $ref: '#/components/responses/NotFound'
       },
