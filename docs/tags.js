@@ -14,6 +14,9 @@ module.exports = {
     },
     {
       name: 'Authentication'
+    },
+    {
+      name: 'Users'
     }
 
   ]

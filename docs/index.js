@@ -3,14 +3,17 @@ const basicInfo = require('./basicInfo')
 const components = require('./components')
 const categories = require('./categories/index')
 const servers = require('./servers')
-
+const auth = require('./authentication/index')
+const users = require('./users/index')
 module.exports = {
   ...basicInfo,
   ...servers,
   ...tags,
   ...components,
   paths: {
-    ...categories
+    ...categories,
+    ...auth,
+    ...users
   }
 
 }
