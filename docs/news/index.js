@@ -3,6 +3,7 @@ const update = require('./update')
 const remove = require('./remove')
 const getAll = require('./getAll')
 const getById = require('./getById')
+const getCommentsByNoveltyId = require('./getCommentsByNoveltyId')
 
 module.exports = {
   '/news': {
@@ -15,7 +16,7 @@ module.exports = {
     ...getById
   },
   '/news/{id}/comments': {
-
+    ...getCommentsByNoveltyId
   }
 
 }
