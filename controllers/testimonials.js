@@ -11,7 +11,7 @@ const remove = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const data = await testimonialsService.create(req.body)
+    const data = await testimonialsService.create(req.body, req.file)
     res.status(200).json({ msg: 'Testimonial created succesfully', data: data })
   } catch (e) {
     next(e)
@@ -19,7 +19,7 @@ const create = async (req, res, next) => {
 }
 const update = async (req, res, next) => {
   try {
-    const testimonialUpdated = await testimonialsService.update(req.params.id, req.body)
+    const testimonialUpdated = await testimonialsService.update(req.params.id, req.body, req.file)
     res.status(200).json({ msg: `Testimonial ${testimonialUpdated.id} updated succesfully`, data: testimonialUpdated })
   } catch (error) {
     next(error)
