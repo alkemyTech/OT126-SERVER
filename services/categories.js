@@ -1,6 +1,5 @@
 const categoriesRepository = require('../repositories/categories')
 const { paginate } = require('../modules/pagination')
-const filesModule = require('../modules/files')
 
 // general function to verify the name
 const uniqueName = async (name) => {
@@ -14,13 +13,22 @@ const uniqueName = async (name) => {
   return false
 }
 
-const create = async (data, fileImage) => {
-  // every name must be unique
-  const error = await uniqueName(data.name)
-  if (error) throw error
-  if (fileImage) data.image = await filesModule.uploadFile(fileImage)
+const categoryNotExist = async (id) => {
+  const category = await categoriesRepository.getById(id)
+  if (!category) {
+    const error = new Error(`Resource with id ${id} not found`)
+    error.status = 404
+    throw error
+  }
+  return false
+}
 
-  return await categoriesRepository.create(data)
+const create = async (category) => {
+  // every name must be unique
+  const error = await uniqueName(category.name)
+  if (error) throw error
+
+  return await categoriesRepository.create(category)
 }
 
 const getAll = async (req) => {
@@ -28,41 +36,30 @@ const getAll = async (req) => {
 }
 
 const remove = async (id) => {
-  const currentCategory = await categoriesRepository.getById(id)
-  if (currentCategory === null) {
-    const error = new Error(`Category with id ${id} not found`)
-    error.status = 404
-    throw error
-  }
-  await filesModule.deleteFile(currentCategory.image)
+  const errorId = await categoryNotExist(id)
+  if (errorId) throw errorId
   await categoriesRepository.remove(id)
 }
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id)
   if (!category) {
-    const error = new Error('The category does not exist')
+    const error = new Error(`Resource with id ${id} not found`)
     error.status = 404
     throw error
   }
   return category
 }
 
-const update = async ({ id }, categoryData, imageFile) => {
-  const findCategory = await categoriesRepository.getById(id)
-
-  if (!findCategory) {
-    const error = new Error(`Id: ${id}, has not been assigned any category`)
-    error.status = 400
-    throw error
-  }
+const update = async ({ id }, category) => {
+  const errorId = await categoryNotExist(id)
+  if (errorId) throw errorId
 
   // every name must be unique
-  const error = await uniqueName(categoryData.name)
-  if (error) throw error
+  const errorName = await uniqueName(category.name)
+  if (errorName) throw errorName
 
-  categoryData.image = await filesModule.updateImageHandler(imageFile || categoryData.image, findCategory.image)
-  await categoriesRepository.update(id, categoryData)
+  await categoriesRepository.update(id, category)
 
   return await categoriesRepository.getById(id)
 }
