@@ -2,8 +2,13 @@ const tags = require('./tags')
 const basicInfo = require('./basicInfo')
 const components = require('./components')
 const categories = require('./categories/index')
+const activities = require('./activities/index')
+const news = require('./news')
 const servers = require('./servers')
 const testimonials = require('./testimonials/index')
+const auth = require('./authentication/index')
+const users = require('./users/index')
+
 
 module.exports = {
   ...basicInfo,
@@ -12,7 +17,10 @@ module.exports = {
   ...components,
   paths: {
     ...categories,
-    ...testimonials
+    ...testimonials,
+    ...activities,
+    ...news,
+    ...auth,
+    ...users
   }
-
 }

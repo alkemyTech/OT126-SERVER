@@ -34,6 +34,13 @@ const findByEmail = async (userEmail) => {
   return data
 }
 
+const getImage = async (id) => {
+  const image = Models.Testimonials.findByPk(id, {
+    attributes: ['image']
+  })
+  return image
+}
+
 const remove = async id => {
   return await Models.Users.destroy({ where: { id } })
 }
@@ -53,7 +60,7 @@ module.exports = {
   create,
   remove,
   getPass,
+  getImage,
   update
 
 }
-

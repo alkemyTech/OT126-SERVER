@@ -1,11 +1,14 @@
 const usersRepository = require('../repositories/users')
 const { getTokenPayload } = require('../middlewares/auth')
 const bcrypt = require('bcrypt')
+const filesModule = require('../modules/files')
 
-const update = async (id, body, token) => {
+const update = async (id, body, token, imageFile) => {
   const payload = await getTokenPayload(token)
   const pass = await usersRepository.getPass(payload.userId)
+  const actualImage = await usersRepository.getImage(id)
 
+  body.image = await filesModule.updateImageHandler(imageFile || body.image, actualImage)
   body.password = await checkPasswords(body, pass)
 
   const rowCounts = await usersRepository.update(id, body)

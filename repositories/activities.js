@@ -10,9 +10,9 @@ const create = async (data) => {
   return await db.Activities.create(data)
 }
 
-const update = async (activity, data) => {
-  const updatedActivity = await activity.update(data)
-  return updatedActivity.get()
+const update = async (id, data) => {
+  const [affectedRows] = await db.Activities.update(data, { where: { id: id } })
+  return affectedRows
 }
 
 module.exports = {
