@@ -1,5 +1,6 @@
 const categoriesRepository = require('../repositories/categories')
 const { paginate } = require('../modules/pagination')
+const filesModule = require('../modules/files')
 
 // general function to verify the name
 const uniqueName = async (name) => {
@@ -13,12 +14,13 @@ const uniqueName = async (name) => {
   return false
 }
 
-const create = async (category) => {
+const create = async (data, fileImage) => {
   // every name must be unique
-  const error = await uniqueName(category.name)
+  const error = await uniqueName(data.name)
   if (error) throw error
+  if (fileImage) data.image = await filesModule.uploadFile(fileImage)
 
-  return await categoriesRepository.create(category)
+  return await categoriesRepository.create(data)
 }
 
 const getAll = async (req) => {
@@ -26,6 +28,13 @@ const getAll = async (req) => {
 }
 
 const remove = async (id) => {
+  const currentCategory = await categoriesRepository.getById(id)
+  if (currentCategory === null) {
+    const error = new Error(`Category with id ${id} not found`)
+    error.status = 404
+    throw error
+  }
+  await filesModule.deleteFile(currentCategory.image)
   await categoriesRepository.remove(id)
 }
 
@@ -39,7 +48,7 @@ const getById = async (id) => {
   return category
 }
 
-const update = async ({ id }, category) => {
+const update = async ({ id }, categoryData, imageFile) => {
   const findCategory = await categoriesRepository.getById(id)
 
   if (!findCategory) {
@@ -49,10 +58,11 @@ const update = async ({ id }, category) => {
   }
 
   // every name must be unique
-  const error = await uniqueName(category.name)
+  const error = await uniqueName(categoryData.name)
   if (error) throw error
 
-  await categoriesRepository.update(id, category)
+  categoryData.image = await filesModule.updateImageHandler(imageFile || categoryData.image, findCategory.image)
+  await categoriesRepository.update(id, categoryData)
 
   return await categoriesRepository.getById(id)
 }

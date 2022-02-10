@@ -20,8 +20,14 @@ const uploadFile = async (file, deleteTempFile = true) => {
 }
 
 const deleteFile = async (fileUrl) => {
-  const fileS3Key = getS3KeyFromUrl(fileUrl)
-  await s3.deleteFile(fileS3Key)
+  try {
+    const fileS3Key = getS3KeyFromUrl(fileUrl)
+    await s3.deleteFile(fileS3Key)
+  } catch (err) {
+    err.message = 'Error deleting the image'
+    err.status = 500
+    throw err
+  }
 }
 
 const deleteLocalFile = async (filePath) => {
