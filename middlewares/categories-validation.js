@@ -33,6 +33,8 @@ exports.updateValidationCategory = [
   body('description')
     .custom(isStringOrNull),
   body('image')
-    .custom(isStringOrNull),
+    .if((value, { req }) => !req.file)
+    .isString().withMessage('must be a string').bail()
+    .isLength({ min: 1, max: 200 }).withMessage('Must have content').bail(),
   executeValidation
 ]

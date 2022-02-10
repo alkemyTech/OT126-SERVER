@@ -11,6 +11,7 @@ module.exports = {
   ...components,
   paths: {
     ...categories
+
   }
 
 }
