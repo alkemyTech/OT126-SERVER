@@ -6,6 +6,7 @@ const activities = require('./activities/index')
 const news = require('./news')
 const servers = require('./servers')
 const comments = require('./comments/index')
+const testimonials = require('./testimonials/index')
 const auth = require('./authentication/index')
 const users = require('./users/index')
 
@@ -17,6 +18,7 @@ module.exports = {
   paths: {
     ...categories,
     ...comments,
+    ...testimonials,
     ...activities,
     ...news,
     ...auth,

@@ -58,6 +58,7 @@ module.exports = {
           }
         }
       },
+
       Members: {
         type: 'object',
         description: 'This represent a member of organization',
@@ -77,6 +78,27 @@ module.exports = {
           },
           image: {
             $ref: '#/components/schemas/Image'
+          }
+        }
+      },
+      Testimonials: {
+        type: 'object',
+        description: 'Representation of testimonial ',
+        properties: {
+          name: {
+            type: 'String',
+            description: 'Testimonial name',
+            example: 'Rodrigo Velazquez'
+          },
+          content: {
+            type: 'string',
+            description: 'Testimonial content',
+            example: 'Soy Licenciado en Relaciones Institucionales y trabajo vinculando a la fundación...'
+          },
+          Image: {
+            type: 'string',
+            description: 'Save Url String',
+            example: 'www.google.com'
           }
         }
       }
