@@ -1,3 +1,5 @@
+const responses = require('./responses')
+
 module.exports = {
   components: {
     securitySchemes: {
@@ -15,45 +17,70 @@ module.exports = {
       },
       Image: {
         type: 'string',
-        description: 'Save Url String',
-        example: 'www.google.com'
+        description: 'image url',
+        example: 'https://cohorte-enero-835eb560.s3.amazonaws.com/df112830-8691-4c65-bf79-a80749cebd0c.jpg'
       },
-      ErrorJWT: {
+      ValidationError: {
         type: 'object',
         properties: {
-          message: {
-            type: 'string',
-            description: 'Jwt expired or Bearer Token Invalid',
-            example:
-            'Jwt expired or Bearer Token Invalid'
+          errors: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                value: {
+                  description: 'value provided',
+                  example: 4
+                },
+                msg: {
+                  type: 'string',
+                  example: 'must be a string'
+                },
+                param: {
+                  type: 'string',
+                  example: 'name'
+                },
+                location: {
+                  type: 'string',
+                  example: 'body'
+                }
+              }
+            }
           }
         }
       },
-      ErrorNoFoundJWT: {
+      BadRequest: {
         type: 'object',
         properties: {
-          message: {
+          error: {
             type: 'string',
-            description: 'Message of error',
-            example:
-            'Please provided a token Bearer in authorization'
+            example: 'Related entity with id 500 not found. Not updated'
           }
         }
       },
-      Categories: {
+      Members: {
         type: 'object',
-        description: 'Movie data',
+        description: 'This represent a member of organization',
         properties: {
           id: {
             $ref: '#/components/schemas/Id'
           },
           name: {
             type: 'string',
-            description: 'name of the categorie',
-            example: 'news'
+            description: 'The name of member',
+            example: 'Tamara'
+          },
+          description: {
+            type: 'string',
+            description: 'Some description about member',
+            example: 'Tamara is ....'
+          },
+          image: {
+            $ref: '#/components/schemas/Image'
           }
         }
       }
-    }
+    },
+    ...responses
   }
 }

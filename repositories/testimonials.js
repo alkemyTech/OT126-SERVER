@@ -33,10 +33,18 @@ const getById = async (id) => {
   return testimonial
 }
 
+const getImage = async (id) => {
+  const image = db.Testimonials.findByPk(id, {
+    attributes: ['image']
+  })
+  return image.image
+}
+
 module.exports = {
   create,
   update,
   remove,
   getById,
+  getImage,
   getAll
 }
