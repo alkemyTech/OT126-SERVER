@@ -13,6 +13,16 @@ const uniqueName = async (name) => {
   return false
 }
 
+const categoryNotExist = async (id) => {
+  const category = await categoriesRepository.getById(id)
+  if (!category) {
+    const error = new Error(`Resource with id ${id} not found`)
+    error.status = 404
+    throw error
+  }
+  return false
+}
+
 const create = async (category) => {
   // every name must be unique
   const error = await uniqueName(category.name)
@@ -26,13 +36,15 @@ const getAll = async (req) => {
 }
 
 const remove = async (id) => {
+  const errorId = await categoryNotExist(id)
+  if (errorId) throw errorId
   await categoriesRepository.remove(id)
 }
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id)
   if (!category) {
-    const error = new Error('The category does not exist')
+    const error = new Error(`Resource with id ${id} not found`)
     error.status = 404
     throw error
   }
@@ -40,17 +52,12 @@ const getById = async (id) => {
 }
 
 const update = async ({ id }, category) => {
-  const findCategory = await categoriesRepository.getById(id)
-
-  if (!findCategory) {
-    const error = new Error(`Id: ${id}, has not been assigned any category`)
-    error.status = 400
-    throw error
-  }
+  const errorId = await categoryNotExist(id)
+  if (errorId) throw errorId
 
   // every name must be unique
-  const error = await uniqueName(category.name)
-  if (error) throw error
+  const errorName = await uniqueName(category.name)
+  if (errorName) throw errorName
 
   await categoriesRepository.update(id, category)
 

@@ -32,6 +32,7 @@ const update = async (id, novelty) => {
 const getAll = async (offset, limit) => {
   const countAndRows = await db.News.findAndCountAll({
     attributes: ['id', 'name'],
+    order: [['createdAt', 'DESC']],
     offset,
     limit
   })

@@ -53,7 +53,8 @@ function errorAsValidationError (msg, fieldName) {
     errors: [
       {
         msg,
-        param: fieldName
+        param: fieldName,
+        location: 'body'
       }
     ]
   }

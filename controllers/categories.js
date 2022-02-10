@@ -11,7 +11,7 @@ const remove = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const category = await categoriesService.create(req.body)
+    const category = await categoriesService.create(req.body, req.file)
     res.status(200).json({ msg: `Category ${req.body.name} create succesfully`, data: category })
   } catch (error) {
     next(error)
@@ -38,7 +38,7 @@ const getAll = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const category = await categoriesService.update(req.params, req.body)
+    const category = await categoriesService.update(req.params, req.body, req.file)
     res.status(200).json({ msg: `The member ${req.params.id} was updated succesfully`, data: category })
   } catch (error) {
     next(error)

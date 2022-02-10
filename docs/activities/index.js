@@ -1,15 +1,13 @@
 const getAll = require('./getAll')
-const remove = require('./remove')
 const create = require('./create')
 const update = require('./update')
+
 module.exports = {
-  '/members': {
+  '/activities': {
     ...getAll,
     ...create
   },
-  '/members/{id}': {
-    ...remove,
+  '/activities/{id}': {
     ...update
   }
-
 }
