@@ -8,7 +8,7 @@ const getTokenPayload = (req) => {
   const token = authToken && authToken.startsWith('Bearer ') && authToken.split(' ')[1]
   if (!token) {
     const error = new Error('Please provided a token Bearer in authorization')
-    error.status = 403
+    error.status = 401
     throw error
   }
   return verifyToken(token)
@@ -35,7 +35,7 @@ const isAuth = async (req, res, next) => {
     const token = getTokenPayload(req)
     const user = await userRepository.getById(token.userId)
     if (!user) {
-      return res.status(403).json({ error: 'Not found user with token provided.' })
+      return res.status(401).json({ error: 'Not found user with token provided.' })
     }
     req.authUser = user.dataValues
     next()
@@ -52,7 +52,7 @@ const isOwnUser = async (req, res, next) => {
 
     if (!user) {
       const error = new Error('Not found user with token provided.')
-      error.status = 403
+      error.status = 401
       throw error
     }
 

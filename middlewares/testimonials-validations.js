@@ -10,6 +10,7 @@ const content = body('content')
   .notEmpty().withMessage('the field must not be empty')
 
 const image = body('image')
+  .if((value, { req }) => !req.file)
   .isString().withMessage('the field must be string')
 
 const createReqValidation = [name, content, image, executeValidation]
