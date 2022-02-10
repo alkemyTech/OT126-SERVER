@@ -1,6 +1,9 @@
 module.exports = {
   tags: [
     {
+      name: 'Activities'
+    },
+    {
       name: 'Categories'
     },
     {
