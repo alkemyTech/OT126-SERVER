@@ -25,7 +25,7 @@ module.exports = {
     },
     responses: {
       200: {
-        description: 'The comment has been updated',
+        description: 'The user has been updated',
         content: {
           'application/json': {
             schema: {
