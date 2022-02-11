@@ -19,6 +19,9 @@ module.exports = {
       name: 'Authentication'
     },
     {
+      name: 'Comments'
+    },
+    {
       name: 'Users'
     }
 
