@@ -3,7 +3,7 @@ const testimonialsSchemas = require('./schemas')
 module.exports = {
   post: {
     security: [{ bearerAuth: [] }],
-    tags: ['Testimonial'],
+    tags: ['Testimonials'],
     description: 'Create a testimonial',
     operationId: 'create',
     requestBody: {
