@@ -19,6 +19,14 @@ const imageFile = {
   example: 'https://cohorte-enero-835eb560.s3.amazonaws.com/df112830-8691-4c65-bf79-a80749cebd0c.jpg',
   format: 'binary'
 }
+const createdAt = {
+  type: 'string',
+  example: '2022-02-07T11:05:33.000Z'
+}
+const updatedAt = {
+  type: 'string',
+  example: '2022-02-07T11:05:33.000Z'
+}
 const categoryId = {
   oneOf: [
     {
@@ -33,6 +41,13 @@ const categoryId = {
     }
   ]
 }
+const paginationExample = []
+for (let i = 10; i > 0; i--) {
+  paginationExample.push({
+    id: i,
+    name: 'Novedad ' + i
+  })
+}
 
 module.exports = {
   resNewsGetAll: {
@@ -44,28 +59,28 @@ module.exports = {
           previous: {
             oneOf: [
               {
-                type: 'string',
-                description: 'url to previous page',
-                example: 'http://localhost:3000/news/?page=1'
-              },
-              {
                 type: 'null',
                 description: 'previous page does not exist',
                 example: null
+              },
+              {
+                type: 'string',
+                description: 'url to previous page',
+                example: 'http://localhost:3000/news/?page=1'
               }
             ]
           },
           next: {
             oneOf: [
               {
+                type: 'string',
+                description: 'url to next page',
+                example: 'http://localhost:3000/news/?page=2'
+              },
+              {
                 type: 'null',
                 description: 'next page does not exist',
                 example: null
-              },
-              {
-                type: 'string',
-                description: 'url to next page',
-                example: 'http://localhost:3000/news/?page=3'
               }
             ]
           }
@@ -89,7 +104,8 @@ module.exports = {
             id,
             name
           }
-        }
+        },
+        example: paginationExample
       }
     }
   },
@@ -99,8 +115,10 @@ module.exports = {
       id,
       name,
       content,
+      categoryId,
       image: imageUrl,
-      categoryId
+      createdAt,
+      updatedAt
     }
   },
   newsCreate: {
