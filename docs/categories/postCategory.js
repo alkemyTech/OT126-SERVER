@@ -14,7 +14,7 @@ module.exports = {
       }
     },
     responses: {
-      200: {
+      201: {
         description: 'Post one category',
         content: {
           'application/json': {

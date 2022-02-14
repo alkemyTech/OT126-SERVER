@@ -12,7 +12,7 @@ const remove = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const data = await testimonialsService.create(req.body, req.file)
-    res.status(200).json({ msg: 'Testimonial created succesfully', data: data })
+    res.status(201).json({ msg: 'Testimonial created succesfully', data: data })
   } catch (e) {
     next(e)
   }

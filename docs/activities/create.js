@@ -14,7 +14,7 @@ module.exports = {
       }
     },
     responses: {
-      200: {
+      201: {
         content: {
           'application/json': {
             schema: {

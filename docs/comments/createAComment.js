@@ -15,7 +15,7 @@ module.exports = {
       }
     },
     responses: {
-      200: {
+      201: {
         description: 'Comment has been created',
         content: {
           'application/json': {

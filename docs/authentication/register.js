@@ -13,7 +13,7 @@ module.exports = {
       }
     },
     responses: {
-      200: {
+      201: {
         description: 'New user created',
         content: {
           'application/json': {
