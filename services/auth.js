@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const authModule = require('../modules/auth')
 const usersRepository = require('../repositories/users')
 const rolesRepository = require('../repositories/roles')
+const { standardRoleName } = require('../config/config')
 
 const organizationRepository = require('../repositories/organizations')
 const { createTemplateWelcome } = require('../modules/welcome-signup')
@@ -37,7 +38,7 @@ const getAll = async () => {
 }
 
 const create = async (body) => {
-  const standardRole = await rolesRepository.getRoleById(body.roleId)
+  const standardRole = await rolesRepository.getIdByName(standardRoleName)
   const newUser = {
     ...body,
     roleId: standardRole.id,
@@ -47,7 +48,7 @@ const create = async (body) => {
   const checkEmail = await usersRepository.findByEmail(body.email)
   if (checkEmail) {
     const error = new Error('Something went wrong. User registration failed.')
-    error.status = 400
+    error.status = 404
     throw error
   }
   const createdUser = await usersRepository.create(newUser)

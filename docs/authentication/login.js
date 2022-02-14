@@ -5,20 +5,13 @@ module.exports = {
     security: [{ bearerAuth: [] }],
     tags: ['Authentication'],
     description: 'Sing in of users',
-    parameters: [
-      {
-        name: 'user',
-        in: 'body',
-        schema: {
-          type: 'object',
-          properties: {
-            data: authSchema.Login
-          }
-        },
-        required: true,
-        description: 'User login'
+    requestBody: {
+      content: {
+        'application/json': {
+          schema: authSchema.Login
+        }
       }
-    ],
+    },
     responses: {
       200: {
         description: 'New user logged in',
@@ -52,9 +45,6 @@ module.exports = {
             }
           }
         }
-      },
-      401: {
-        $ref: '#/components/responses/Unauthorized'
       }
     }
   }

@@ -5,20 +5,13 @@ module.exports = {
     security: [{ bearerAuth: [] }],
     tags: ['Authentication'],
     description: 'Create a new user',
-    parameters: [
-      {
-        name: 'user',
-        in: 'body',
-        schema: {
-          type: 'object',
-          properties: {
-            data: authSchema.Register
-          }
-        },
-        required: true,
-        description: 'Registering for an account to makes the user experiences most satisfying'
+    requestBody: {
+      content: {
+        'application/json': {
+          schema: authSchema.Register
+        }
       }
-    ],
+    },
     responses: {
       200: {
         description: 'New user created',
