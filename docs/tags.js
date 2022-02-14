@@ -1,6 +1,9 @@
 module.exports = {
   tags: [
     {
+      name: 'Authentication'
+    },
+    {
       name: 'Activities'
     },
     {
@@ -14,9 +17,6 @@ module.exports = {
     },
     {
       name: 'Testimonials'
-    },
-    {
-      name: 'Authentication'
     },
     {
       name: 'Comments'
