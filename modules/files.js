@@ -21,8 +21,9 @@ const uploadFile = async (file, deleteTempFile = true) => {
 
 const deleteFile = async (fileUrl) => {
   try {
-    const fileS3Key = getS3KeyFromUrl(fileUrl)
-    await s3.deleteFile(fileS3Key)
+    // Temporary comment. AWS access denied error
+    /* const fileS3Key = getS3KeyFromUrl(fileUrl)
+    await s3.deleteFile(fileS3Key) */
   } catch (err) {
     err.message = 'Error deleting the image'
     err.status = 500
