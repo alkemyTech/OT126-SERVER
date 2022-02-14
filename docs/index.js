@@ -9,6 +9,7 @@ const comments = require('./comments/index')
 const testimonials = require('./testimonials/index')
 const auth = require('./authentication/index')
 const users = require('./users/index')
+const members = require('./members/index')
 
 module.exports = {
   ...basicInfo,
@@ -22,6 +23,7 @@ module.exports = {
     ...activities,
     ...news,
     ...auth,
-    ...users
+    ...users,
+    ...members
   }
 }
